@@ -30,7 +30,11 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">No.</th>
+                                            <th scope="col">Tugas</th>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Dinas</th>
                                             <th scope="col">Sub Bagian</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
@@ -41,7 +45,17 @@
                                         @foreach ($tugas as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
-                                                <td><?= $d->tugas ?></td>
+                                                <td>{{ $d->tugas }}</td>
+                                                <td>{{ $d->created_at }}</td>
+                                                <td>{{ $d->dinas }}</td>
+                                                <td>{{ $d->sub_bagian }}</td>
+                                                <td>
+                                                    @if ($d->status == 1)
+                                                        <button class="btn btn-outline-success">Sudah Dikerjakan</button>
+                                                    @else
+                                                        <button class="btn btn-outline-secondary">Belum Dikerjakan</button>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <button class="btn btn-outline-warning" type="button"
                                                         data-toggle="modal" data-target="#editdata<?= $x ?>"><i
@@ -50,7 +64,7 @@
                                                                 <path fill="currentColor"
                                                                     d="m29.663 482.25l.087.087a24.847 24.847 0 0 0 17.612 7.342a25.178 25.178 0 0 0 8.1-1.345l142.006-48.172l272.5-272.5A88.832 88.832 0 0 0 344.334 42.039l-272.5 272.5l-48.168 142.002a24.844 24.844 0 0 0 5.997 25.709m337.3-417.584a56.832 56.832 0 0 1 80.371 80.373L411.5 180.873L331.127 100.5ZM99.744 331.884L308.5 123.127l80.373 80.373l-208.757 208.756l-121.634 41.262Z" />
                                                             </svg></i>Edit</button>
-                                                    <form action="/subbagian/{{ $d->id }}" method="POST"
+                                                    <form action="/tugas/{{ $d->id }}" method="POST"
                                                         class="d-inline">
                                                         {{ csrf_field() }}
                                                         @method('delete')
@@ -79,7 +93,7 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="/subbagian/update/{{ $d->id }}" method="POST">
+                                                        <form action="tugas/{{ $d->id }}" method="POST">
                                                             @method('put')
                                                             {{ csrf_field() }}
                                                             <div class="modal-body">
@@ -89,6 +103,61 @@
                                                                     <input type="text" class="form-control"
                                                                         id="subbagian" name="tugas"
                                                                         value="{{ $d->tugas }}">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="tugas"
+                                                                        class="col-form-label">Dinas</label>
+                                                                    <select
+                                                                        class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
+                                                                        data-dropdown-css-class="select2-purple"
+                                                                        style="width: 100%;" name="dinas" id="dinas">
+                                                                        <option selected disabled>Pilih Sub Bagian</option>
+                                                                        @foreach ($dinas as $option)
+                                                                            <option value="{{ $option->dinas }}" {{ $option->dinas  ? 'selected' : '' }}>
+                                                                                {{ $option->dinas }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error('dinas')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="tugas" class="col-form-label">Sub
+                                                                        Bagian</label>
+                                                                    <select
+                                                                        class="form-control select2 select2-purple p @error('sub_bagian') is-invalid @enderror"
+                                                                        data-dropdown-css-class="select2-purple"
+                                                                        style="width: 100%;" name="sub_bagian"
+                                                                        id="sub_bagian">
+                                                                        <option selected disabled>Pilih Sub Bagian</option>
+                                                                        @foreach ($sub_bagian as $option)
+                                                                            <option value="{{ $option->sub_bagian }}" {{ $option->sub_bagian == $option->sub_bagian ? 'selected' : '' }}>
+                                                                                {{ $option->sub_bagian }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error('sub_bagian')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="status"
+                                                                        class="col-form-label">status</label>
+                                                                    <select class="form-control select2bs4"
+                                                                        style="width: 100%;" name="status"
+                                                                        id="status">
+                                                                        <option value="1"
+                                                                            {{ $d->status == 1 ? 'selected' : '' }}>Aktif
+                                                                        </option>
+                                                                        <option value="0"
+                                                                            {{ $d->status == 0 ? 'selected' : '' }}>Tidak
+                                                                            Aktif</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <div class=" modal-footer justify-content-between">
@@ -136,11 +205,11 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/tugas/store" method="POST">
+                    <form action="/tugas" method="POST">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="tugas" class="col-form-label">Tugas:</label>
+                                <label for="tugas" class="col-form-label">Tugas</label>
                                 <input type="text" class="form-control @error('tugas') is-invalid @enderror"
                                     id="tugas" name="tugas" required placeholder="Isi judul tugas"
                                     value="{{ old('tugas') }}">
@@ -150,41 +219,44 @@
                                     </div>
                                 @enderror
                             </div>
-{{-- 
                             <div class="mb-3">
-                                <label for="deskripsi" class="col-form-label">Deskripsi:</label>
-                                <input type="text" class="form-control @error('deskripsi') is-invalid @enderror"
-                                    id="deskripsi" name="deskripsi" required placeholder="Isi nama Sub Bagian"
-                                    value="{{ old('deskripsi') }}">
-                                @error('deskripsi')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> --}}
-
-                            <div class="mb-3">
-                                <label>Deskripsi</label>
-                                <textarea class="form-control @error('deskripsi') is-invalid @enderror" rows="3"
-                                    placeholder="Isi deskripsi tugas..." value="{{ old('deskripsi') }}"></textarea>
-                                @error('deskripsi')
+                                <label for="tugas" class="col-form-label">Dinas</label>
+                                <select class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
+                                    data-dropdown-css-class="select2-purple" style="width: 100%;" name="dinas"
+                                    id="dinas">
+                                    <option selected disabled>Pilih Sub Bagian</option>
+                                    @foreach ($dinas as $option)
+                                        <option value="{{ $option->dinas }}">
+                                            {{ $option->dinas }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('dinas')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-
                             <div class="mb-3">
-                                <label for="tgl_diberi" class="col-form-label">Tanggal mulai:</label>
-                                <input type="date" class="form-control @error('tgl_diberi') is-invalid @enderror"
-                                    id="tgl_diberi" name="tgl_diberi" required placeholder="Isi nama Sub Bagian"
-                                    value="{{ old('tgl_diberi') }}">
-                                @error('tgl_diberi')
+                                <label for="tugas" class="col-form-label">Sub Bagian</label>
+                                <select
+                                    class="form-control select2 select2-purple p @error('sub_bagian') is-invalid @enderror"
+                                    data-dropdown-css-class="select2-purple" style="width: 100%;" name="sub_bagian"
+                                    id="sub_bagian">
+                                    <option selected disabled>Pilih Sub Bagian</option>
+                                    @foreach ($sub_bagian as $option)
+                                        <option value="{{ $option->sub_bagian }}">
+                                            {{ $option->sub_bagian }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('sub_bagian')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
+                            <input type="hidden" name="status" id="status" value="0">
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>

@@ -56,11 +56,13 @@ class MahasiswaController extends Controller
     public function update(Request $request, string $id)
     {
         $user = User::findOrFail($id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = $request->input('password');
-        $user->status = $request->input('status');
-        $user->save();
+        $userData = $request->only([
+            'name',
+            'email',
+            'password',
+            'status',
+        ]);
+        $user->update($userData);
         return redirect('/mahasiswa');
     }
 

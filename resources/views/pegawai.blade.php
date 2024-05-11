@@ -27,7 +27,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body table-responsive p-0">
-                                <table class="table table-hover table-responsive">
+                                <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th scope="col">No.</th>

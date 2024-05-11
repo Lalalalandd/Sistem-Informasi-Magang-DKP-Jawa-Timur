@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('tugas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->string('tugas');
-            $table->string('deskripsi');
-            $table->date('tgl_diberi');
+            $table->string('dinas');
+            $table->string('sub_bagian');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

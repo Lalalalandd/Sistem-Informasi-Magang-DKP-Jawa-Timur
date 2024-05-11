@@ -20,6 +20,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="template/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="template/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="template/dist/css/adminlte.min.css?v=3.2.0">
     <style>
         * {
             font-family: "Ubuntu", sans-serif;
@@ -59,7 +62,7 @@
             border-radius: 18px !important;
         }
 
-        .content-wrapper{
+        .content-wrapper {
             background-color: rgb(252, 252, 252) !important;
         }
     </style>
@@ -230,5 +233,12 @@
 
     <!-- OPTIONAL SCRIPTS -->
     <script src="template/plugins/chart.js/Chart.min.js"></script>
+    <script src="template/plugins/select2/js/select2.full.min.js"></script>
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+        })
+    </script>
 
 </html>

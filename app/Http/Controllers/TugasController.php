@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Tugas;
 use App\Http\Requests\StoreTugasRequest;
 use App\Http\Requests\UpdateTugasRequest;
+use App\Models\Dinas;
+use App\Models\Sub_Bagian;
+use Illuminate\Http\Request;
 
 class TugasController extends Controller
 {
@@ -15,6 +18,8 @@ class TugasController extends Controller
     {
         return view('tugas', [
             'tittle' => 'Tugas',
+            'dinas' => Dinas::all(),
+            'sub_bagian' => Sub_Bagian::all(),
             'tugas' => Tugas::all()
         ]);
     }
@@ -37,9 +42,17 @@ class TugasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTugasRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'tugas' => 'required|max:255',
+            'dinas' => 'required',
+            'sub_bagian' => 'required',
+            'status' => 'required',
+        ]);
+
+        Tugas::create($validatedData);
+        return redirect('/tugas');
     }
 
     /**
@@ -61,16 +74,26 @@ class TugasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTugasRequest $request, Tugas $tugas)
+    public function update(Request $request, string $id)
     {
-        //
+        $tugas = Tugas::findOrFail($id);
+        $tugasData = $request->only([
+            'tugas',
+            'dinas',
+            'sub_bagian',
+            'status',
+        ]);
+        $tugas->update($tugasData);
+        return redirect('/tugas');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tugas $tugas)
+    public function destroy(string $id)
     {
-        //
+        $tugas = Tugas::findOrFail($id);
+        $tugas->delete();
+        return redirect('/tugas');
     }
 }

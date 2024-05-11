@@ -55,7 +55,13 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->status = $request->input('status');
+        $user->save();
+        return redirect('/mahasiswa');
     }
 
     /**
@@ -63,6 +69,8 @@ class MahasiswaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $dinas = User::findOrFail($id);
+        $dinas->delete();
+        return redirect('/mahasiswa');
     }
 }

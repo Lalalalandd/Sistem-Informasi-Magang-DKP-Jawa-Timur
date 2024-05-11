@@ -58,12 +58,12 @@
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-outline-warning" type="button"
-                                                        data-toggle="modal" data-target="#editdata<?= $x ?>"><i
+                                                        data-toggle="modal" data-target="#editdata{{ $x }}"><i
                                                             class="mr-1"><svg xmlns="http://www.w3.org/2000/svg"
                                                                 width="1em" height="1em" viewBox="0 0 512 512">
                                                                 <path fill="currentColor"
                                                                     d="m29.663 482.25l.087.087a24.847 24.847 0 0 0 17.612 7.342a25.178 25.178 0 0 0 8.1-1.345l142.006-48.172l272.5-272.5A88.832 88.832 0 0 0 344.334 42.039l-272.5 272.5l-48.168 142.002a24.844 24.844 0 0 0 5.997 25.709m337.3-417.584a56.832 56.832 0 0 1 80.371 80.373L411.5 180.873L331.127 100.5ZM99.744 331.884L308.5 123.127l80.373 80.373l-208.757 208.756l-121.634 41.262Z" />
-                                                            </svg></i>Edit</button>
+                                                            </svg></i>Edit</button>&nbsp;
                                                     <form action="/tugas/{{ $d->id }}" method="POST"
                                                         class="d-inline">
                                                         {{ csrf_field() }}
@@ -83,7 +83,7 @@
                                             </tr>
 
                                             <!-- /.modal EDIT data -->
-                                            <div class="modal fade" id="editdata<?= $x ?>">
+                                            <div class="modal fade" id="editdata{{ $x }}">
                                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -110,10 +110,11 @@
                                                                     <select
                                                                         class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
                                                                         data-dropdown-css-class="select2-purple"
-                                                                        style="width: 100%;" name="dinas" id="dinas">
+                                                                        style="width: 100%;" name="dinas" id="select2dinas{{ $x }}">
                                                                         <option selected disabled>Pilih Sub Bagian</option>
                                                                         @foreach ($dinas as $option)
-                                                                            <option value="{{ $option->dinas }}" {{ $option->dinas  ? 'selected' : '' }}>
+                                                                            <option value="{{ $option->dinas }}"
+                                                                                {{ $option->dinas == $d->dinas ? 'selected' : '' }}>
                                                                                 {{ $option->dinas }}
                                                                             </option>
                                                                         @endforeach
@@ -131,10 +132,11 @@
                                                                         class="form-control select2 select2-purple p @error('sub_bagian') is-invalid @enderror"
                                                                         data-dropdown-css-class="select2-purple"
                                                                         style="width: 100%;" name="sub_bagian"
-                                                                        id="sub_bagian">
+                                                                        id="select2subbagian{{ $x }}">
                                                                         <option selected disabled>Pilih Sub Bagian</option>
                                                                         @foreach ($sub_bagian as $option)
-                                                                            <option value="{{ $option->sub_bagian }}" {{ $option->sub_bagian == $option->sub_bagian ? 'selected' : '' }}>
+                                                                            <option value="{{ $option->sub_bagian }}"
+                                                                                {{ $option->sub_bagian == $d->sub_bagian ? 'selected' : '' }}>
                                                                                 {{ $option->sub_bagian }}
                                                                             </option>
                                                                         @endforeach
@@ -152,11 +154,13 @@
                                                                         style="width: 100%;" name="status"
                                                                         id="status">
                                                                         <option value="1"
-                                                                            {{ $d->status == 1 ? 'selected' : '' }}>Aktif
+                                                                            {{ $d->status == 1 ? 'selected' : '' }}>Sudah
+                                                                            Dikerjakan
                                                                         </option>
                                                                         <option value="0"
-                                                                            {{ $d->status == 0 ? 'selected' : '' }}>Tidak
-                                                                            Aktif</option>
+                                                                            {{ $d->status == 0 ? 'selected' : '' }}>Belum
+                                                                            Dikerjakan
+                                                                        </option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -172,6 +176,7 @@
                                                 </div>
                                                 <!-- /.modal-dialog -->
                                             </div>
+
                                             <!-- /.modal EDIT data -->
                                         @endforeach
                                     </tbody>
@@ -270,4 +275,16 @@
         </div>
         <!-- /.modal tambah data -->
     </div>
+
+    <script>
+        $(function() {
+            $('.select2').select2()
+        })
+
+        $(document).ready(function() {
+            $("#select2insidemodal").select2({
+                dropdownParent: $("#myModal")
+            });
+        });
+    </script>
 @endsection

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Penerimaan DKP</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="template/plugins/fontawesome-free/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@300..700&family=Ubuntu&display=swap"
+        rel="stylesheet">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="template/dist/css/adminlte.min.css">
+    <style>
+        * {
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        body {
+            background: url('https://i.ibb.co/hDLS44D/thomas-vimare-IZ01rj-X0-XQA-unsplash.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+        .p {
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 my-4">
+                <img src="template/img/dkp.png" alt="" class="mt-4 mb-2 mx-auto d-block img-fluid">
+            </div>
+            <div class="col-md-12 mt-4">
+                <div class="card card-primary card-outline p">
+                    <div class="card-body">
+                        <h5 class=" mb-4"><b>Penerimaan Magang Dinas Kelautan
+                                Provinsi Jawa Timur</b></h5>
+
+                        <div class="card-text row">
+                            <div class="col-sm-12">
+                                <label for="">Status Penerimaan:</label>
+                                <span class="badge badge-warning">Masih proses pengajuan</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <label for="">Surat Balasan:</label>
+                                @if ($user->detail['surat_balasan'] == null)
+                                <span class="badge badge-danger">Masih proses pengajuan</span>
+                                @else
+                                <div class="spinner-border spinner-border-sm" role="status">
+                                </div>
+                                @endif
+                                
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="">Nama Ketua Kelompok:</label>
+                                <span class="">{{ $user->name }}</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Universitas:</label>
+                                <span class="">{{ $user->detail['universitas'] }}</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Periode Magang:</label>
+                                <span class="">{{ $user->detail['tgl_mulai'] }} sd
+                                    {{ $user->detail['tgl_selesai'] }}</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="">Dinas:</label>
+                                <span class="">{{ $user->detail['dinas'] }}</span>
+                            </div>
+                        </div>
+                        <form action="/logout" method="post">
+                            @csrf
+                            <button class="card-link btn btn-primary float-right p" type="submit"><i
+                                    class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                        viewBox="0 0 24 24">
+                                        <path fill="currentColor" fill-rule="evenodd"
+                                            d="M10.845 8.095a.75.75 0 0 0 0 1.06l1.72 1.72h-8.19a.75.75 0 0 0 0 1.5h8.19l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 0 0-1.06 0"
+                                            clip-rule="evenodd" />
+                                        <path fill="currentColor"
+                                            d="M12.375 5.877c0 .448.274.84.591 1.157l3 3a2.25 2.25 0 0 1 0 3.182l-3 3c-.317.317-.591.709-.591 1.157v2.252a8 8 0 1 0 0-16z" />
+                                    </svg></i>kembali ke halaman Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="template/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="template/dist/js/adminlte.js"></script>
+</body>
+
+</html>

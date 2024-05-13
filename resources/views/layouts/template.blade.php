@@ -68,7 +68,7 @@
     </style>
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -238,6 +238,7 @@
         $(function() {
             $('.select2').select2()
         })
+       
     </script>
 
 </html>

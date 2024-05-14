@@ -24,8 +24,8 @@ class TugasController extends Controller
             'dinas' => Dinas::all(),
             'sub_bagian' => Sub_Bagian::all(),
             'user' => User::where('dinas_id', $user->dinas_id)
-            ->where('role', 'mahasiswa')
-            ->get(),
+                ->where('role', 'mahasiswa')
+                ->get(),
             'tugas' => Tugas::where('dinas_id', $user->dinas_id)->get()
         ]);
     }
@@ -33,10 +33,12 @@ class TugasController extends Controller
     {
         $user = Auth::user();
         $detailUser = $user->detail;
-        
         return view('mahasiswa.tugas_mahasiswa', [
             'tittle' => 'Tugas',
-            'tugas' => Tugas::where('dinas_id', $user->dinas_id)->get()
+            'tugas' => Tugas::where('user_id', $user->id)
+                ->orderBy('id', 'desc')
+                ->get()
+
         ]);
     }
 
@@ -61,7 +63,7 @@ class TugasController extends Controller
             'sub_bagian' => 'required',
             'status' => 'required',
         ]);
-        
+
         $validatedData['dinas_id'] = $user->dinas_id;
         Tugas::create($validatedData);
         return redirect('/tugas');
@@ -97,6 +99,19 @@ class TugasController extends Controller
         ]);
         $tugas->update($tugasData);
         return redirect('/tugas');
+    }
+
+    public function kerjakan(Request $request, string $id)
+    {
+        $tugas = Tugas::findOrFail($id);
+        $tugasData = $request->only([
+            'tugas',
+            'dinas',
+            'sub_bagian',
+            'status',
+        ]);
+        $tugas->update($tugasData);
+        return redirect('/tugas_mahasiswa');
     }
 
     /**

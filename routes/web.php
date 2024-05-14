@@ -37,3 +37,4 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/dinas/store', [DinasController::class, 'store'])->middleware('auth');
 Route::delete('/dinas/{id}', [DinasController::class, 'destroy'])->middleware('auth');
 Route::put('/dinas/update/{id}', [DinasController::class, 'update'])->middleware('auth');
+Route::put('/tugas/kerjakan/{id}', [TugasController::class, 'kerjakan'])->middleware('auth');

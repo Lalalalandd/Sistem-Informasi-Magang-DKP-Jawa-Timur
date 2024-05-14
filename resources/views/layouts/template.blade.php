@@ -59,7 +59,7 @@
         }
 
         .btn {
-            border-radius: 18px !important;
+            border-radius: 11px !important;
         }
 
         .content-wrapper {

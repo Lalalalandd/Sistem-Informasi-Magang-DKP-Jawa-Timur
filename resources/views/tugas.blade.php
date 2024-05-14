@@ -31,10 +31,8 @@
                                         <tr>
                                             <th scope="col">No.</th>
                                             <th scope="col">Tugas</th>
-                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Tanggal Diberikan</th>
                                             <th scope="col">Nama</th>
-                                            <th scope="col">Dinas</th>
-                                            <th scope="col">Sub Bagian</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
@@ -49,38 +47,41 @@
                                                 <td>{{ $d->tugas }}</td>
                                                 <td>{{ $d->created_at }}</td>
                                                 <td>{{ $d->user['name'] }}</td>
-                                                <td>{{ $d->dinas['dinas'] }}</td>
-                                                <td>{{ $d->sub_bagian }}</td>
+
                                                 <td>
                                                     @if ($d->status == 1)
-                                                        <button class="btn btn-outline-success">Sudah Dikerjakan</button>
+                                                        {{-- <p class="btn btn-outline-success">Sudah Dikerjakan</p> --}}
+                                                        <span class="badge badge-success">Selesai</span>
                                                     @else
-                                                        <button class="btn btn-outline-secondary">Belum Dikerjakan</button>
+                                                        <span class="badge badge-warning">Belum</span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-outline-warning" type="button"
-                                                        data-toggle="modal" data-target="#editdata{{ $x }}"><i
-                                                            class="mr-1"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="1em" height="1em" viewBox="0 0 512 512">
-                                                                <path fill="currentColor"
-                                                                    d="m29.663 482.25l.087.087a24.847 24.847 0 0 0 17.612 7.342a25.178 25.178 0 0 0 8.1-1.345l142.006-48.172l272.5-272.5A88.832 88.832 0 0 0 344.334 42.039l-272.5 272.5l-48.168 142.002a24.844 24.844 0 0 0 5.997 25.709m337.3-417.584a56.832 56.832 0 0 1 80.371 80.373L411.5 180.873L331.127 100.5ZM99.744 331.884L308.5 123.127l80.373 80.373l-208.757 208.756l-121.634 41.262Z" />
-                                                            </svg></i>Edit</button>&nbsp;
-                                                    <form action="/tugas/{{ $d->id }}" method="POST"
-                                                        class="d-inline">
-                                                        {{ csrf_field() }}
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button class="btn btn-outline-danger" type="submit"
-                                                            onclick="return confirm('Apakah anda yakin?')"><i
-                                                                class="mr-1"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                    width="1.2em" height="1.2em" viewBox="0 0 24 24">
-                                                                    <path fill="none" stroke="currentColor"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2"
-                                                                        d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
-                                                                </svg></i>Hapus</button>
-                                                    </form>
+                                                    <div class="d-flex d-inline">
+                                                        <button class="btn btn-outline-warning mr-1" title="Edit"
+                                                            type="button" data-toggle="modal"
+                                                            data-target="#editdata{{ $x }}"><i><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="1em"
+                                                                    height="1em" viewBox="0 0 512 512">
+                                                                    <path fill="currentColor"
+                                                                        d="m29.663 482.25l.087.087a24.847 24.847 0 0 0 17.612 7.342a25.178 25.178 0 0 0 8.1-1.345l142.006-48.172l272.5-272.5A88.832 88.832 0 0 0 344.334 42.039l-272.5 272.5l-48.168 142.002a24.844 24.844 0 0 0 5.997 25.709m337.3-417.584a56.832 56.832 0 0 1 80.371 80.373L411.5 180.873L331.127 100.5ZM99.744 331.884L308.5 123.127l80.373 80.373l-208.757 208.756l-121.634 41.262Z" />
+                                                                </svg></i></button>
+                                                        <form action="/tugas/{{ $d->id }}" method="POST">
+                                                            {{ csrf_field() }}
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="btn btn-outline-danger" type="submit"
+                                                                title="Hapus"
+                                                                onclick="return confirm('Apakah anda yakin?')"><i><svg
+                                                                        xmlns="http://www.w3.org/2000/svg" width="1.2em"
+                                                                        height="1.2em" viewBox="0 0 24 24">
+                                                                        <path fill="none" stroke="currentColor"
+                                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                                            stroke-width="2"
+                                                                            d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
+                                                                    </svg></i></button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
 
@@ -112,7 +113,8 @@
                                                                     <select
                                                                         class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
                                                                         data-dropdown-css-class="select2-purple"
-                                                                        style="width: 100%;" name="dinas" id="select2dinas{{ $x }}">
+                                                                        style="width: 100%;" name="dinas"
+                                                                        id="select2dinas{{ $x }}">
                                                                         <option selected disabled>Pilih Sub Bagian</option>
                                                                         @foreach ($dinas as $option)
                                                                             <option value="{{ $option->dinas }}"
@@ -246,7 +248,8 @@
                             </div> --}}
                             <div class="mb-3">
                                 <label for="tugas" class="col-form-label">USer</label>
-                                <select class="form-control select2 select2-purple p @error('user_id') is-invalid @enderror"
+                                <select
+                                    class="form-control select2 select2-purple p @error('user_id') is-invalid @enderror"
                                     data-dropdown-css-class="select2-purple" style="width: 100%;" name="user_id"
                                     id="user">
                                     <option selected disabled>Pilih Sub Bagian</option>
@@ -281,7 +284,8 @@
                                     </div>
                                 @enderror
                             </div>
-                            <input type="hidden" name="dinas_id" id="dinas_id" value="{{ auth()->user()->dinas_id }}">
+                            <input type="hidden" name="dinas_id" id="dinas_id"
+                                value="{{ auth()->user()->dinas_id }}">
                             <input type="hidden" name="status" id="status" value="0">
                         </div>
                         <div class="modal-footer justify-content-between">

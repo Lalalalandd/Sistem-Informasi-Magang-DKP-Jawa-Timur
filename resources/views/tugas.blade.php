@@ -45,7 +45,7 @@
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
                                                 <td>{{ $d->tugas }}</td>
-                                                <td>{{ $d->created_at }}</td>
+                                                <td>{{ $d->created_at->format('d M Y H:i') }}</td>
                                                 <td>{{ $d->user['name'] }}</td>
 
                                                 <td>

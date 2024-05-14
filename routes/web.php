@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\NyuratController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\MagangController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\RegisterController;
@@ -29,6 +30,7 @@ Route::resource('tugas', TugasController::class)->middleware('auth');
 Route::resource('mahasiswa', MahasiswaController::class)->middleware('auth');
 Route::resource('pegawai', PegawaiController::class)->middleware('auth');
 Route::resource('subbagian', SubBagianController::class)->middleware('auth');
+Route::resource('magang', MagangController::class)->middleware('auth');
 
 //Dynamic Custom Route
 Route::post('/login', [LoginController::class, 'authenticate']);

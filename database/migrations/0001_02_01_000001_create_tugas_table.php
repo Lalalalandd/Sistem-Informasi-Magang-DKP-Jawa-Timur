@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('tugas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('dinas_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('tugas');
-            $table->string('dinas');
             $table->string('sub_bagian');
             $table->boolean('status');
             $table->timestamps();
+
+            $table->foreign('dinas_id')->references('id')->on('dinas')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

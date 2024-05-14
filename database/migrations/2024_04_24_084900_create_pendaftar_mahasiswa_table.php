@@ -24,7 +24,6 @@ return new class extends Migration
             $table->date('tgl_selesai');
             $table->string('surat_balasan')->nullable();
             $table->string('sertifkiat')->nullable();
-            $table->string('dinas');
             $table->string('sub_bagian');
             $table->timestamps();
 

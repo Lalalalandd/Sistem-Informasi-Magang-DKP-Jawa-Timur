@@ -25,7 +25,8 @@ class RegisterController extends Controller
         $validatedDataUser = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|unique:users|email:dns',
-            'password' => 'required|max:255|min:5'
+            'password' => 'required|max:255|min:5',
+            'dinas_id' => 'required'
         ]);
 
         $validatedDataPendaftar = $request->validate([
@@ -39,7 +40,6 @@ class RegisterController extends Controller
                 File::types(['pdf', 'doc', 'docx'])
                     ->max(12 * 1024),
             ],
-            'dinas' => 'required',
             'tgl_mulai' => 'required',
             'tgl_selesai' => 'required',
             'sub_bagian' => 'required',

@@ -26,7 +26,7 @@
                                     <p>{{ $user->detail['nama_kelompok_2'] }}</p>
                                     <label for="">Surat Pengantar :</label>
                                     <iframe src="{{ url(Storage::disk('public')->url($user->detail['surat_pengantar'])) }}"
-                                        frameborder="0" style="width:100%;min-height:640px;"></iframe>
+                                        frameborder="0" style="width:100%;min-height:440px;"></iframe>
                                     <label for="">Dinas :</label>
                                     <p>{{ $user->detail['dinas'] }}</p>
                                     <label for="">Sub Bagian :</label>

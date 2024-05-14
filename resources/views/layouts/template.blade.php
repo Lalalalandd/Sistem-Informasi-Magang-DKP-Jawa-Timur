@@ -170,7 +170,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-3">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="" class="brand-link" style="background-color: #212833">
                 <img src="template/dist/img/logo.png" alt="CIIS Logo" class="brand-image gambar">
             </a>
 

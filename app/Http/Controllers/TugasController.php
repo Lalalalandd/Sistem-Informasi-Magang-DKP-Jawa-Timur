@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tugas;
-use App\Http\Requests\StoreTugasRequest;
-use App\Http\Requests\UpdateTugasRequest;
+use App\Models\User;
 use App\Models\Dinas;
+use App\Models\Tugas;
 use App\Models\Sub_Bagian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreTugasRequest;
+use App\Http\Requests\UpdateTugasRequest;
 
 class TugasController extends Controller
 {
@@ -16,18 +18,25 @@ class TugasController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         return view('tugas', [
             'tittle' => 'Tugas',
             'dinas' => Dinas::all(),
             'sub_bagian' => Sub_Bagian::all(),
-            'tugas' => Tugas::all()
+            'user' => User::where('dinas_id', $user->dinas_id)
+            ->where('role', 'mahasiswa')
+            ->get(),
+            'tugas' => Tugas::where('dinas_id', $user->dinas_id)->get()
         ]);
     }
     public function index_mahasiswa()
     {
+        $user = Auth::user();
+        $detailUser = $user->detail;
+        
         return view('mahasiswa.tugas_mahasiswa', [
             'tittle' => 'Tugas',
-            'tugas' => Tugas::all()
+            'tugas' => Tugas::where('dinas_id', $user->dinas_id)->get()
         ]);
     }
 
@@ -44,13 +53,16 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $validatedData = $request->validate([
             'tugas' => 'required|max:255',
-            'dinas' => 'required',
+            'dinas_id' => 'required',
+            'user_id' => 'required',
             'sub_bagian' => 'required',
             'status' => 'required',
         ]);
-
+        
+        $validatedData['dinas_id'] = $user->dinas_id;
         Tugas::create($validatedData);
         return redirect('/tugas');
     }

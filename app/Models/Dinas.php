@@ -13,7 +13,13 @@ class Dinas extends Model
         'alamat',
     ];
 
-    // public static function all()
-    // {
-    // }
+    public function user()
+    {
+        return $this->hasOne(User::class, 'dinas_id', 'id');
+    }
+    
+    public function tugas()
+    {
+        return $this->hasMany(Tugas::class);
+    }
 }

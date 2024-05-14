@@ -20,8 +20,11 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('role');
             $table->boolean('status');
+            $table->unsignedBigInteger('dinas_id');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('dinas_id')->references('id')->on('dinas')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -38,6 +41,8 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        
     }
 
     /**

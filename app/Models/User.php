@@ -24,6 +24,7 @@ class User extends Authenticatable
         'role',
         'password',
         'status',
+        'dinas_id',
     ];
 
     /**
@@ -52,5 +53,15 @@ class User extends Authenticatable
     public function detail()
     {
         return $this->hasOne(PendaftarMahasiswa::class, 'user_id', 'id');
+    }
+
+    public function tugas()
+    {
+        return $this->hasMany(Tugas::class);
+    }
+
+    public function dinas()
+    {
+        return $this->belongsTo(Dinas::class);
     }
 }

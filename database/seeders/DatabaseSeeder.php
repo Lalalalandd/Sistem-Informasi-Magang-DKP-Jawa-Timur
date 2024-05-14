@@ -21,22 +21,6 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'role' => 'admin',
-            'password' => bcrypt('admin'),
-            'status' => 1,
-        ]);
-        User::create([
-            'name' => 'Pegawai',
-            'email' => 'pegawai@gmail.com',
-            'role' => 'pegawai',
-            'password' => bcrypt('pegawai'),
-            'status' => 1,
-        ]);
-
         Dinas::create([
             'dinas' => 'Dinas Kelautan dan Perikanan Provinsi Jawa Timur',
             'alamat' => 'Jl. Ahmad Yani No.152 B, Gayungan, Kec. Gayungan, Surabaya, Jawa Timur 60235'
@@ -61,6 +45,25 @@ class DatabaseSeeder extends Seeder
             'dinas' => 'UPT PPP MUNCAR',
             'alamat' => 'Muncar, Jawa Timur'
         ]);
+
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'role' => 'admin',
+            'dinas_id' => 1,
+            'password' => bcrypt('admin'),
+            'status' => 1,
+        ]);
+        User::create([
+            'name' => 'Pegawai',
+            'email' => 'pegawai@gmail.com',
+            'role' => 'pegawai',
+            'dinas_id' => 2,
+            'password' => bcrypt('pegawai'),
+            'status' => 1,
+        ]);
+
+        
 
         Sub_Bagian::create([
             'sub_bagian' => 'Kesekretariatan'

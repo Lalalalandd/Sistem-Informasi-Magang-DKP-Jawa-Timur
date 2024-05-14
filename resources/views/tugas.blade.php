@@ -32,6 +32,7 @@
                                             <th scope="col">No.</th>
                                             <th scope="col">Tugas</th>
                                             <th scope="col">Tanggal</th>
+                                            <th scope="col">Nama</th>
                                             <th scope="col">Dinas</th>
                                             <th scope="col">Sub Bagian</th>
                                             <th scope="col">Status</th>
@@ -47,7 +48,8 @@
                                                 <th scope="row">{{ $x++ }}</th>
                                                 <td>{{ $d->tugas }}</td>
                                                 <td>{{ $d->created_at }}</td>
-                                                <td>{{ $d->dinas }}</td>
+                                                <td>{{ $d->user['name'] }}</td>
+                                                <td>{{ $d->dinas['dinas'] }}</td>
                                                 <td>{{ $d->sub_bagian }}</td>
                                                 <td>
                                                     @if ($d->status == 1)
@@ -224,19 +226,37 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="tugas" class="col-form-label">Dinas</label>
                                 <select class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
                                     data-dropdown-css-class="select2-purple" style="width: 100%;" name="dinas"
                                     id="dinas">
                                     <option selected disabled>Pilih Sub Bagian</option>
                                     @foreach ($dinas as $option)
-                                        <option value="{{ $option->dinas }}">
+                                        <option value="{{ $option->id }}">
                                             {{ $option->dinas }}
                                         </option>
                                     @endforeach
                                 </select>
                                 @error('dinas')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div> --}}
+                            <div class="mb-3">
+                                <label for="tugas" class="col-form-label">USer</label>
+                                <select class="form-control select2 select2-purple p @error('user_id') is-invalid @enderror"
+                                    data-dropdown-css-class="select2-purple" style="width: 100%;" name="user_id"
+                                    id="user">
+                                    <option selected disabled>Pilih Sub Bagian</option>
+                                    @foreach ($user as $option)
+                                        <option value="{{ $option->id }}">
+                                            {{ $option->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('user_id')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -261,6 +281,7 @@
                                     </div>
                                 @enderror
                             </div>
+                            <input type="hidden" name="dinas_id" id="dinas_id" value="{{ auth()->user()->dinas_id }}">
                             <input type="hidden" name="status" id="status" value="0">
                         </div>
                         <div class="modal-footer justify-content-between">

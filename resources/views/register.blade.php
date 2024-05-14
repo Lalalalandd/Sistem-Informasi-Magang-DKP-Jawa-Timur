@@ -214,10 +214,10 @@
                                             <select
                                                 class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
                                                 data-dropdown-css-class="select2-purple" style="width: 100%;"
-                                                value="{{ old('dinas') }}" name="dinas" id="dinas">
+                                                value="{{ old('dinas') }}" name="dinas_id" id="dinas">
                                                 <option selected="selected" disabled>Pilih Dinas</option>
                                                 @foreach ($dinas as $option)
-                                                    <option value="{{ $option->dinas }}">
+                                                    <option value="{{ $option->id }}">
                                                         {{ $option->dinas }}</option>
                                                 @endforeach
                                             </select>

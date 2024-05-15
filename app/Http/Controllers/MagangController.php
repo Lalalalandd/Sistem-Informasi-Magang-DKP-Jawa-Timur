@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MagangController extends Controller
@@ -11,8 +12,12 @@ class MagangController extends Controller
      */
     public function index()
     {
+        $user = User::where('role', 'mahasiswa')->with('detail')->get();
+        $user->load('dinas');
+       
         return view('magang', [
             'tittle' => 'Magang',
+            'magang' =>  $user
         ]);
     }
 

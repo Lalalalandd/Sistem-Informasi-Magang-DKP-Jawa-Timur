@@ -58,9 +58,9 @@
                                                 <td>{{ $d->dinas['dinas'] }}</td>
                                                 <td>
                                                     @if ($d->status == 1)
-                                                        <button class="btn btn-outline-success">Aktif</button>
+                                                    <span class="badge badge-success">Aktif</span>
                                                     @else
-                                                        <button class="btn btn-outline-secondary">Tidak Aktif</button>
+                                                    <span class="badge badge-warning">Tidak Aktif</span>
                                                     @endif
                                                 </td>
                                                 <td>

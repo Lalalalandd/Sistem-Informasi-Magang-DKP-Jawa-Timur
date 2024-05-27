@@ -104,18 +104,18 @@
                                                                     <div class="col-6">
                                                                         <div class="form-group clearfix">
                                                                             <div class="icheck-primary ">
-                                                                                <input type="radio" id="radioPrimary1"
+                                                                                <input type="radio" id="radioPrimary1{{ $d->id }}"
                                                                                     value="0" name="status"
                                                                                     {{ $d->status == 0 ? 'checked' : '' }}>
-                                                                                <label for="radioPrimary1">
+                                                                                <label for="radioPrimary1{{ $d->id }}">
                                                                                     Belum Dikerjakan
                                                                                 </label>
                                                                             </div>
                                                                             <div class="icheck-primary d-inline">
-                                                                                <input type="radio" id="radioPrimary2"
+                                                                                <input type="radio" id="radioPrimary2{{ $d->id }}"
                                                                                     value="1" name="status"
                                                                                     {{ $d->status == 1 ? 'checked' : '' }}>
-                                                                                <label for="radioPrimary2">
+                                                                                <label for="radioPrimary2{{ $d->id }}">
                                                                                     Sudah Dikerjakan
                                                                                 </label>
                                                                             </div>

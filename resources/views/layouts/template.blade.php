@@ -145,7 +145,8 @@
                             <a href="#" class="btn btn-default">Profile</a>
                             <form action="/logout" method="POST">
                                 {{ csrf_field() }}
-                                <button type="submit" class="btn btn-outline-danger btn-flat" style="margin-left: 88px;">Sign out</button>
+                                <button type="submit" class="btn btn-outline-danger btn-flat"
+                                    style="margin-left: 88px;">Sign out</button>
                             </form>
                         </li>
                     </ul>
@@ -217,7 +218,8 @@
     <script src="template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->
     <script src="template/dist/js/adminlte.js"></script>
-
+    <!-- bs-custom-file-input -->
+    <script src="template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- OPTIONAL SCRIPTS -->
     <script src="template/plugins/chart.js/Chart.min.js"></script>
     <script src="template/plugins/select2/js/select2.full.min.js"></script>
@@ -225,6 +227,9 @@
         $(function() {
             $('.select2').select2()
         })
+        $(function() {
+            bsCustomFileInput.init();
+        });
     </script>
 
 </html>

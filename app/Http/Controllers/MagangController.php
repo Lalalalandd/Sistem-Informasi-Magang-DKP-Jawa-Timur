@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MagangController extends Controller
 {
@@ -58,7 +59,37 @@ class MagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::with('detail')->findOrFail($id);
+        $userData = $request->only([
+            'surat_balasan',
+            'status',
+        ]);
+
+        // dd($request);
+        $user->update($userData);
+        if ($request->hasFile('surat_balasan')) {
+            $detail = $user->detail; // Ambil detail yang terkait
+    
+        
+            if ($detail && $detail->surat_balasan) {
+                Storage::disk('public')->delete($detail->surat_balasan);
+            }
+    
+            // Simpan file baru
+            $file = $request->file('surat_balasan');
+            $path = $file->store('surat_balasan', 'public');
+    
+            // Perbarui path di detail
+            if ($detail) {
+                $detail->update(['surat_balasan' => $path]);
+            } else {
+                // Jika detail belum ada, buat baru
+                $user->detail()->create(['surat_balasan' => $path]);
+            }
+        }
+
+        
+        return redirect('/magang');
     }
 
     /**

@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-12">
-                       <h5>Pendaftar Magang</h5>
+                        <h5>Pendaftar Magang</h5>
                     </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -78,7 +78,8 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="/pegawai/{{ $d->id }}" method="POST">
+                                                        <form action="/magang/{{ $d->id }}" method="POST"
+                                                            enctype="multipart/form-data">
                                                             @method('put')
                                                             {{ csrf_field() }}
                                                             <div class="modal-body">
@@ -125,33 +126,50 @@
                                                                             Bagian</label>
                                                                         <p>{{ $d->detail->sub_bagian }}</p>
                                                                     </div>
-                                                                    <div class="col-lg-12">
-                                                                        {{-- <label for="email"
-                                                                            class="col-form-label">Surat Balasan</label>
-                                                                            <input type="file"
-                                                                                class="custom-file-input @error('surat_balasan') is-invalid @enderror"
-                                                                                id="surat_balasan" name="surat_balasan">
-                                                                            <label for="" class="small text-danger">*) File harus bertipe
-                                                                                .doc/.docx/.pdf/</label> --}}
-
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputFile">File input</label>
-                                                                            <div class="input-group">
-                                                                                <div class="custom-file">
-                                                                                    <input type="file"
-                                                                                        class="custom-file-input"
-                                                                                        id="exampleInputFile">
-                                                                                    <label class="custom-file-label"
-                                                                                        for="exampleInputFile">Choose
-                                                                                        file</label>
-                                                                                </div>
-                                                                                <div class="input-group-append">
-                                                                                    <span
-                                                                                        class="input-group-text">Upload</span>
+                                                                    @if ($d->detail->surat_balasan == null)
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label for="exampleInputFile">Surat
+                                                                                    Balasan</label>
+                                                                                <div class="input-group">
+                                                                                    <div class="custom-file">
+                                                                                        <input type="file"
+                                                                                            class="custom-file-input"
+                                                                                            id="exampleInputFile"
+                                                                                            name="surat_balasan">
+                                                                                        <label class="custom-file-label"
+                                                                                            for="exampleInputFile">Choose
+                                                                                            file</label>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                    @else
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label for="exampleInputFile">Surat
+                                                                                    Balasan</label>
+                                                                                <div class="input-group">
+                                                                                    <div class="custom-file">
+                                                                                        <input type="file"
+                                                                                            class="custom-file-input"
+                                                                                            id="exampleInputFile"
+                                                                                            name="surat_balasan">
+                                                                                        <label class="custom-file-label"
+                                                                                            for="exampleInputFile">Choose
+                                                                                            file</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="float-right">
+                                                                                <a href="{{ Storage::url($d->detail->surat_balasan) }}"
+                                                                                    target="_blank">Lihat Surat
+                                                                                    Balasan</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
 
                                                                     <div class="col-lg-12">
                                                                         <label for="status"

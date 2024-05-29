@@ -24,7 +24,7 @@
         }
 
         body {
-            background: url('https://i.ibb.co/hDLS44D/thomas-vimare-IZ01rj-X0-XQA-unsplash.jpg');
+            background: url('/template/img/bg.jpg');
             background-repeat: no-repeat;
             background-size: cover;
 
@@ -56,12 +56,12 @@
                             <div class="col-sm-12">
                                 <label for="">Surat Balasan:</label>
                                 @if ($user->detail['surat_balasan'] == null)
-                                <span class="badge badge-danger">Masih proses pengajuan</span>
+                                    <span class="badge badge-danger">Masih proses pengajuan</span>
                                 @else
-                                <div class="spinner-border spinner-border-sm" role="status">
-                                </div>
+                                <iframe src="{{ url(Storage::disk('public')->url($user->detail['surat_balasan'])) }}"
+                                    frameborder="0" style="width:100%;min-height:440px;"></iframe>
                                 @endif
-                                
+
                             </div>
 
                             <div class="col-sm-6">
@@ -79,20 +79,17 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="">Dinas:</label>
-                                <span class="">{{ $user->detail['dinas'] }}</span>
+                                <span class="">{{ $dinas->dinas }}</span>
                             </div>
                         </div>
                         <form action="/logout" method="post">
                             @csrf
                             <button class="card-link btn btn-primary float-right p" type="submit"><i
-                                    class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                    class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                                         viewBox="0 0 24 24">
-                                        <path fill="currentColor" fill-rule="evenodd"
-                                            d="M10.845 8.095a.75.75 0 0 0 0 1.06l1.72 1.72h-8.19a.75.75 0 0 0 0 1.5h8.19l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 0 0-1.06 0"
-                                            clip-rule="evenodd" />
                                         <path fill="currentColor"
-                                            d="M12.375 5.877c0 .448.274.84.591 1.157l3 3a2.25 2.25 0 0 1 0 3.182l-3 3c-.317.317-.591.709-.591 1.157v2.252a8 8 0 1 0 0-16z" />
-                                    </svg></i>kembali ke halaman Login</button>
+                                            d="M16.62 2.99a1.25 1.25 0 0 0-1.77 0L6.54 11.3a.996.996 0 0 0 0 1.41l8.31 8.31c.49.49 1.28.49 1.77 0s.49-1.28 0-1.77L9.38 12l7.25-7.25c.48-.48.48-1.28-.01-1.76" />
+                                    </svg></i>Kembali</button>
                         </form>
                     </div>
                 </div>

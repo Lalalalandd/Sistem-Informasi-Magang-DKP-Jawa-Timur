@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Dinas;
 use App\Models\Tugas;
-use App\Models\Sub_Bagian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTugasRequest;
@@ -31,7 +30,6 @@ class TugasController extends Controller
         return view('tugas', [
             'tittle' => 'Tugas',
             'dinas' => Dinas::all(),
-            'sub_bagian' => Sub_Bagian::all(),
             'user' => User::where('dinas_id', $user->dinas_id)
                 ->where('role', 'mahasiswa')
                 ->where('status', 1)
@@ -70,7 +68,8 @@ class TugasController extends Controller
             'tugas' => 'required|max:255',
             'dinas_id' => 'required',
             'user_id' => 'required',
-            'sub_bagian' => 'required',
+            'tgl_diberikan' => 'required',
+            'tgl_dikumpulkan' => 'required',
             'status' => 'required',
         ]);
 
@@ -104,7 +103,8 @@ class TugasController extends Controller
         $tugasData = $request->only([
             'tugas',
             'dinas',
-            'sub_bagian',
+            'tgl_diberikan',
+            'tgl_dikumpulkan',
             'status',
         ]);
         $tugas->update($tugasData);
@@ -117,7 +117,8 @@ class TugasController extends Controller
         $tugasData = $request->only([
             'tugas',
             'dinas',
-            'sub_bagian',
+            'tgl_diberikan',
+            'tgl_dikumpulkan',
             'status',
         ]);
         $tugas->update($tugasData);

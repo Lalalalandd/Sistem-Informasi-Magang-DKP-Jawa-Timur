@@ -45,12 +45,12 @@
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
                                                 <td>{{ $d->tugas }}</td>
-                                                <td>{{ $d->created_at->format('d M Y H:i') }}</td>
+                                                <td>{{ $d->tgl_diberikan->format('d M Y H:i') }}</td>
+                                                <td>{{ $d->tgl_dikumpulkan->format('d M Y H:i') }}</td>
                                                 <td>{{ $d->user['name'] }}</td>
 
                                                 <td>
                                                     @if ($d->status == 1)
-                                                        {{-- <p class="btn btn-outline-success">Sudah Dikerjakan</p> --}}
                                                         <span class="badge badge-success">Selesai</span>
                                                     @else
                                                         <span class="badge badge-warning">Belum</span>
@@ -217,72 +217,59 @@
                     <form action="/tugas" method="POST">
                         {{ csrf_field() }}
                         <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="tugas" class="col-form-label">Tugas</label>
-                                <input type="text" class="form-control @error('tugas') is-invalid @enderror"
-                                    id="tugas" name="tugas" required placeholder="Isi judul tugas"
-                                    value="{{ old('tugas') }}">
-                                @error('tugas')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            {{-- <div class="mb-3">
-                                <label for="tugas" class="col-form-label">Dinas</label>
-                                <select class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
-                                    data-dropdown-css-class="select2-purple" style="width: 100%;" name="dinas"
-                                    id="dinas">
-                                    <option selected disabled>Pilih Sub Bagian</option>
-                                    @foreach ($dinas as $option)
-                                        <option value="{{ $option->id }}">
-                                            {{ $option->dinas }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('dinas')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> --}}
-                            <div class="mb-3">
-                                <label for="tugas" class="col-form-label">USer</label>
-                                <select
-                                    class="form-control select2 select2-purple p @error('user_id') is-invalid @enderror"
-                                    data-dropdown-css-class="select2-purple" style="width: 100%;" name="user_id"
-                                    id="user">
-                                    <option selected disabled>Pilih Sub Bagian</option>
-                                    @foreach ($user as $option)
-                                        <option value="{{ $option->id }}">
-                                            {{ $option->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('user_id')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="tugas" class="col-form-label">Sub Bagian</label>
-                                <select
-                                    class="form-control select2 select2-purple p @error('sub_bagian') is-invalid @enderror"
-                                    data-dropdown-css-class="select2-purple" style="width: 100%;" name="sub_bagian"
-                                    id="sub_bagian">
-                                    <option selected disabled>Pilih Sub Bagian</option>
-                                    @foreach ($sub_bagian as $option)
-                                        <option value="{{ $option->sub_bagian }}">
-                                            {{ $option->sub_bagian }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('sub_bagian')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <label for="tugas" class="col-form-label">Tugas</label>
+                                    <input type="text" class="form-control @error('tugas') is-invalid @enderror"
+                                        id="tugas" name="tugas" required placeholder="Tugas yang ingin diberikan"
+                                        value="{{ old('tugas') }}">
+                                    @error('tugas')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-12 mb-3">
+                                    <label for="tugas" class="col-form-label">Mahasiswa</label>
+                                    <select
+                                        class="form-control select2 select2-purple p @error('user_id') is-invalid @enderror"
+                                        data-dropdown-css-class="select2-purple" style="width: 100%;" name="user_id"
+                                        id="user">
+                                        <option selected disabled>Pilih Mahasiswa</option>
+                                        @foreach ($user as $option)
+                                            <option value="{{ $option->id }}">
+                                                {{ $option->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('user_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <label for="tgl_diberikan" class="col-form-label">Tanggal Diberikan</label>
+                                    <input type="date" class="form-control @error('tgl_diberikan') is-invalid @enderror"
+                                        id="tgl_diberikan" name="tgl_diberikan" required
+                                        value="{{ old('tgl_diberikan') }}">
+                                    @error('tgl_diberikan')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <label for="tgl_dikumpulkan" class="col-form-label">Tanggal Dikumpulkan</label>
+                                    <input type="date" class="form-control @error('tgl_dikumpulkan') is-invalid @enderror"
+                                        id="tgl_dikumpulkan" name="tgl_dikumpulkan" required
+                                        value="{{ old('tgl_dikumpulkan') }}">
+                                    @error('tgl_dikumpulkan')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
                             <input type="hidden" name="dinas_id" id="dinas_id"
                                 value="{{ auth()->user()->dinas_id }}">

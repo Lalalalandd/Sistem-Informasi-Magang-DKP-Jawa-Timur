@@ -13,7 +13,8 @@ class Tugas extends Model
         'dinas_id',
         'user_id',
         'tugas',
-        'sub_bagian',
+        'tgl_diberikan',
+        'tgl_dikumpulkan',
         'status'
     ];
 

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('dinas_id');
             $table->unsignedBigInteger('user_id');
             $table->string('tugas');
-            $table->string('sub_bagian');
+            $table->date('tgl_diberikan');
+            $table->date('tgl_dikumpulkan');
             $table->boolean('status');
             $table->timestamps();
 

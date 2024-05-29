@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User as ModelsUser;
+use Carbon\Carbon;
+use App\Models\Dinas;
 use Illuminate\Http\Request;
+use App\Models\User as ModelsUser;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -29,6 +30,7 @@ class LoginController extends Controller
 
             $user = Auth::user();
             $userId = $user->id;
+            
 
             if ($user->role == 'admin') {
                 return redirect()->intended('beranda');
@@ -42,22 +44,23 @@ class LoginController extends Controller
                 $suratBalasan = $user->detail->surat_balasan ?? null;
                 $tglMulai = $user->detail->tgl_mulai ?? null;
                 $today = Carbon::now();
+                $dinas = Dinas::where('id', $user->dinas_id)->first();
 
                 if ($tglMulai && $today->lt(Carbon::parse($tglMulai))) {
                     return view('nyurat', [
-                        'user' => $user
+                        'user' => $user,
+                        'dinas' => $dinas
                     ])->with('loginError', 'Tanggal mulai belum tercapai.');
                 }
 
                 if ($suratBalasan !== null && $user->status == 1) {
                     return redirect()->intended('beranda_mahasiswa');
-                } elseif ($suratBalasan === null && $user->status == 0) {
-                    return view('nyurat', [
-                        'user' => $user
-                    ]);
                 } else {
-                    return redirect()->intended('beranda_mahasiswa');
-                }
+                    return view('nyurat', [
+                        'user' => $user,
+                        'dinas' => $dinas
+                    ]);
+                } 
             } else {
                 return back()->with('loginError', 'Login Gagal!');
             }

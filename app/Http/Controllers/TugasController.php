@@ -19,14 +19,24 @@ class TugasController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $tugas = Tugas::where('dinas_id', $user->dinas_id)
+        ->whereHas('user', function($query) {
+            $query->where('status', 1);
+        })
+        ->with(['user' => function($query) {
+            $query->where('status', 1);
+        }])
+        ->get();
+        $user = Auth::user();
         return view('tugas', [
             'tittle' => 'Tugas',
             'dinas' => Dinas::all(),
             'sub_bagian' => Sub_Bagian::all(),
             'user' => User::where('dinas_id', $user->dinas_id)
                 ->where('role', 'mahasiswa')
+                ->where('status', 1)
                 ->get(),
-            'tugas' => Tugas::where('dinas_id', $user->dinas_id)->get()
+            'tugas' => $tugas
         ]);
     }
     public function index_mahasiswa()

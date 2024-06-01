@@ -47,7 +47,9 @@
                     <div class="card-body">
                         <h5 class=" mb-4"><b>Penerimaan Magang Dinas Kelautan
                                 Provinsi Jawa Timur</b></h5>
-
+                        @php
+                            use Carbon\Carbon;
+                        @endphp
                         <div class="card-text row">
                             <div class="col-sm-12">
                                 <label for="">Status Penerimaan:</label>
@@ -58,7 +60,7 @@
                                 @elseif ($user->detail['penerimaan'] == 'diproses')
                                     <span class="badge badge-info">Masih proses pengajuan</span>
                                 @endif
-                                
+
                             </div>
                             <div class="col-sm-12">
                                 <label for="">Surat Balasan:</label>
@@ -82,8 +84,8 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="">Periode Magang:</label>
-                                <span class="">{{ $user->detail['tgl_mulai'] }} s.d.
-                                    {{ $user->detail['tgl_selesai'] }}</span>
+                                <span class="">{{ Carbon::parse($user->detail['tgl_mulai'])->format('d M Y') }} s.d.
+                                    {{ Carbon::parse($user->detail['tgl_selesai'])->format('d M Y') }}</span>
                             </div>
                             <div class="col-sm-6">
                                 <label for="">Dinas:</label>

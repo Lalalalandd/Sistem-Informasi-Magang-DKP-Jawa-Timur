@@ -19,10 +19,11 @@ class PendaftarMahasiswa extends Model
         'prodi',
         'surat_pengantar',
         'surat_balasan',
+        'surat_keterangan',
         'sertifikat',
         'tgl_mulai',
         'tgl_selesai',
-        'dinas',
+        'penerimaan',
         'sub_bagian',
     ];
     public function user()

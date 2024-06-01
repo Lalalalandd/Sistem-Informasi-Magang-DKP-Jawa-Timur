@@ -39,14 +39,15 @@
                                     </thead>
                                     <tbody>
                                         @php
+                                        use Carbon\Carbon;
                                             $x = 1;
                                         @endphp
                                         @foreach ($tugas as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
                                                 <td>{{ $d->tugas }}</td>
-                                                <td>{{ $d->tgl_diberikan->format('d M Y H:i') }}</td>
-                                                <td>{{ $d->tgl_dikumpulkan->format('d M Y H:i') }}</td>
+                                                <td>{{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
+                                                <td>{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>
                                                 <td>{{ $d->user['name'] }}</td>
 
                                                 <td>
@@ -129,31 +130,10 @@
                                                                         </div>
                                                                     @enderror
                                                                 </div>
-                                                                <div class="mb-3">
-                                                                    <label for="tugas" class="col-form-label">Sub
-                                                                        Bagian</label>
-                                                                    <select
-                                                                        class="form-control select2 select2-purple p @error('sub_bagian') is-invalid @enderror"
-                                                                        data-dropdown-css-class="select2-purple"
-                                                                        style="width: 100%;" name="sub_bagian"
-                                                                        id="select2subbagian{{ $x }}">
-                                                                        <option selected disabled>Pilih Sub Bagian</option>
-                                                                        @foreach ($sub_bagian as $option)
-                                                                            <option value="{{ $option->sub_bagian }}"
-                                                                                {{ $option->sub_bagian == $d->sub_bagian ? 'selected' : '' }}>
-                                                                                {{ $option->sub_bagian }}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                    @error('sub_bagian')
-                                                                        <div class="invalid-feedback">
-                                                                            {{ $message }}
-                                                                        </div>
-                                                                    @enderror
-                                                                </div>
+                                                               
                                                                 <div class="mb-3">
                                                                     <label for="status"
-                                                                        class="col-form-label">status</label>
+                                                                        class="col-form-label">Pengerjaan</label>
                                                                     <select class="form-control select2bs4"
                                                                         style="width: 100%;" name="status"
                                                                         id="status">

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('tugas');
             $table->date('tgl_diberikan');
             $table->date('tgl_dikumpulkan');
-            $table->boolean('status');
+            $table->string('status');
             $table->timestamps();
 
             $table->foreign('dinas_id')->references('id')->on('dinas')->onDelete('cascade');

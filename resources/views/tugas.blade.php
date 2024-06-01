@@ -108,52 +108,83 @@
                                                             @method('put')
                                                             {{ csrf_field() }}
                                                             <div class="modal-body">
-                                                                <div class="mb-3">
-                                                                    <label for="subbagian" class="col-form-label">Sub
-                                                                        Bagian:</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="subbagian" name="tugas"
-                                                                        value="{{ $d->tugas }}">
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <label for="tugas"
-                                                                        class="col-form-label">Dinas</label>
-                                                                    <select
-                                                                        class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
-                                                                        data-dropdown-css-class="select2-purple"
-                                                                        style="width: 100%;" name="dinas"
-                                                                        id="select2dinas{{ $x }}">
-                                                                        <option selected disabled>Pilih Sub Bagian</option>
-                                                                        @foreach ($dinas as $option)
-                                                                            <option value="{{ $option->dinas }}"
-                                                                                {{ $option->dinas == $d->dinas ? 'selected' : '' }}>
-                                                                                {{ $option->dinas }}
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <label for="subbagian"
+                                                                            class="col-form-label">Tugas</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="subbagian" name="tugas"
+                                                                            value="{{ $d->tugas }}">
+                                                                    </div>
+                                                                    <div class="col-lg-12">
+                                                                        <label for="tugas"
+                                                                            class="col-form-label">Nama</label>
+                                                                        <select
+                                                                            class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
+                                                                            data-dropdown-css-class="select2-purple"
+                                                                            style="width: 100%;" name="dinas"
+                                                                            id="select2dinas{{ $x }}">
+                                                                            <option selected disabled>Pilih Sub Bagian
                                                                             </option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                    @error('dinas')
-                                                                        <div class="invalid-feedback">
-                                                                            {{ $message }}
-                                                                        </div>
-                                                                    @enderror
-                                                                </div>
+                                                                            @foreach ($user as $option)
+                                                                                <option value="{{ $option->id }}"
+                                                                                    {{ $option->name == $d->user['name'] ? 'selected' : '' }}>
+                                                                                    {{ $option->name }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('dinas')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <label for="tgl_diberikan" class="col-form-label">Tanggal Diberikan</label>
+                                                                        <input type="date"
+                                                                            class="form-control @error('tgl_diberikan') is-invalid @enderror"
+                                                                            id="tgl_diberikan" name="tgl_diberikan" required
+                                                                            value="{{ $d->tgl_diberikan }}">
+                                                                        @error('tgl_diberikan')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <label for="tgl_dikumpulkan" class="col-form-label">Tanggal Dikumpulkan</label>
+                                                                        <input type="date"
+                                                                            class="form-control @error('tgl_dikumpulkan') is-invalid @enderror"
+                                                                            id="tgl_dikumpulkan" name="tgl_dikumpulkan" required
+                                                                            value="{{ $d->tgl_dikumpulkan }}">
+                                                                        @error('tgl_dikumpulkan')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
 
-                                                                <div class="mb-3">
-                                                                    <label for="status"
-                                                                        class="col-form-label">Pengerjaan</label>
-                                                                    <select class="form-control select2bs4"
-                                                                        style="width: 100%;" name="status" id="status">
-                                                                        <option value="belum"
-                                                                            {{ $d->status == 'belum' ? 'selected' : '' }}>Belum
-                                                                            Dikerjakan
-                                                                        </option>
-                                                                        <option value="proses"
-                                                                            {{ $d->status == 'proses' ? 'selected' : '' }}>Proses
-                                                                        </option>
-                                                                        <option value="selesai"
-                                                                            {{ $d->status == 'selesai' ? 'selected' : '' }}>Selesai
-                                                                        </option>
-                                                                    </select>
+                                                                    <div class="col-lg-12">
+                                                                        <label for="status"
+                                                                            class="col-form-label">Pengerjaan</label>
+                                                                        <select class="form-control select2bs4"
+                                                                            style="width: 100%;" name="status"
+                                                                            id="status">
+                                                                            <option value="belum"
+                                                                                {{ $d->status == 'belum' ? 'selected' : '' }}>
+                                                                                Belum
+                                                                                Dikerjakan
+                                                                            </option>
+                                                                            <option value="proses"
+                                                                                {{ $d->status == 'proses' ? 'selected' : '' }}>
+                                                                                Proses
+                                                                            </option>
+                                                                            <option value="selesai"
+                                                                                {{ $d->status == 'selesai' ? 'selected' : '' }}>
+                                                                                Selesai
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class=" modal-footer justify-content-between">

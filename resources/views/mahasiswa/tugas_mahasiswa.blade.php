@@ -26,6 +26,7 @@
                                             <th scope="col">No.</th>
                                             <th scope="col">Tugas</th>
                                             <th scope="col">Tgl. Diberikan</th>
+                                            <th scope="col">Tgl. DiKumpulkan</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
@@ -33,17 +34,21 @@
                                     <tbody>
                                         @php
                                             $x = 1;
+                                            use Carbon\Carbon;
                                         @endphp
                                         @foreach ($tugas as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
                                                 <td>{{ $d->tugas }}</td>
-                                                <td>{{ $d->created_at->format('d M Y H:i') }}</td>
+                                                <td>{{ $d->tgl_diberikan }}</td>
+                                                <td>{{ $d->tgl_dikumpulkan }}</td>
                                                 <td>
-                                                    @if ($d->status == 1)
+                                                    @if ($d->status == 'selesai')
                                                         <button class="btn btn-outline-success">Sudah Dikerjakan</button>
+                                                    @elseif ($d->status == 'belum')
+                                                        <button class="btn btn-outline-warning">Belum Dikerjakan</button>
                                                     @else
-                                                        <button class="btn btn-outline-secondary">Belum Dikerjakan</button>
+                                                        <button class="btn btn-outline-info">Proses Pengerjaan</button>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -84,7 +89,7 @@
                                                                             <label for="subbagian"
                                                                                 class="col-form-label">Tgl. Dibuat
                                                                             </label>
-                                                                            <span>{{ $d->created_at->format('d M Y H:i') }}</span>
+                                                                            <span>{{ $d->tgl_diberikan }}</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-6">
@@ -92,7 +97,7 @@
                                                                             <label for="subbagian"
                                                                                 class="col-form-label">Tgl. Dikumpulkan
                                                                             </label>
-                                                                            <span>{{ $d->created_at->format('d M Y H:i') }}</span>
+                                                                            <span>{{ $d->tgl_dikumpulkan }}</span>
                                                                         </div>
                                                                     </div>
 
@@ -103,32 +108,48 @@
 
                                                                     <div class="col-6">
                                                                         <div class="form-group clearfix">
-                                                                            <div class="icheck-primary ">
-                                                                                <input type="radio" id="radioPrimary1{{ $d->id }}"
-                                                                                    value="0" name="status"
-                                                                                    {{ $d->status == 0 ? 'checked' : '' }}>
-                                                                                <label for="radioPrimary1{{ $d->id }}">
-                                                                                    Belum Dikerjakan
-                                                                                </label>
-                                                                            </div>
-                                                                            <div class="icheck-primary d-inline">
-                                                                                <input type="radio" id="radioPrimary2{{ $d->id }}"
-                                                                                    value="1" name="status"
-                                                                                    {{ $d->status == 1 ? 'checked' : '' }}>
-                                                                                <label for="radioPrimary2{{ $d->id }}">
-                                                                                    Sudah Dikerjakan
-                                                                                </label>
+                                                                            <div class="row">
+                                                                                <div class="icheck-warning col-12 ">
+                                                                                    <input type="radio"
+                                                                                        id="radioPrimary1{{ $d->id }}"
+                                                                                        value="belum" name="status"
+                                                                                        {{ $d->status == 'belum' ? 'checked' : '' }}>
+                                                                                    <label
+                                                                                        for="radioPrimary1{{ $d->id }}">
+                                                                                        Belum Dikerjakan
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="icheck-info col-12">
+                                                                                    <input type="radio"
+                                                                                        id="radioPrimary2{{ $d->id }}"
+                                                                                        value="proses" name="status"
+                                                                                        {{ $d->status == 'proses' ? 'checked' : '' }}>
+                                                                                    <label
+                                                                                        for="radioPrimary2{{ $d->id }}">
+                                                                                        Proses Pengerjaan
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="icheck-success col-12">
+                                                                                    <input type="radio"
+                                                                                        id="radioPrimary3{{ $d->id }}"
+                                                                                        value="selesai" name="status"
+                                                                                        {{ $d->status == 'selesai' ? 'checked' : '' }}>
+                                                                                    <label
+                                                                                        for="radioPrimary3{{ $d->id }}">
+                                                                                        Selesai Dikerjakan
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                                <div class=" modal-footer justify-content-between">
-                                                                    <button type="button" class="btn btn-default"
-                                                                        data-dismiss="modal">Tutup</button>
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Simpan</button>
-                                                                </div>
+                                                            <div class=" modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default"
+                                                                    data-dismiss="modal">Tutup</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Simpan</button>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                     <!-- /.modal-content -->

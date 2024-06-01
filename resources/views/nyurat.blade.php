@@ -51,15 +51,23 @@
                         <div class="card-text row">
                             <div class="col-sm-12">
                                 <label for="">Status Penerimaan:</label>
-                                <span class="badge badge-warning">Masih proses pengajuan</span>
+                                @if ($user->detail['penerimaan'] == 'diterima')
+                                    <span class="badge badge-success">Selamat, anda diterima!</span>
+                                @elseif ($user->detail['penerimaan'] == 'ditolak')
+                                    <span class="badge badge-danger">Maaf, Pengajuan anda kami tolak</span>
+                                @elseif ($user->detail['penerimaan'] == 'diproses')
+                                    <span class="badge badge-info">Masih proses pengajuan</span>
+                                @endif
+                                
                             </div>
                             <div class="col-sm-12">
                                 <label for="">Surat Balasan:</label>
                                 @if ($user->detail['surat_balasan'] == null)
-                                    <span class="badge badge-danger">Masih proses pengajuan</span>
+                                    <span class="badge badge-warning">Masih proses pengajuan</span>
                                 @else
-                                <iframe src="{{ url(Storage::disk('public')->url($user->detail['surat_balasan'])) }}"
-                                    frameborder="0" style="width:100%;min-height:440px;"></iframe>
+                                    <iframe
+                                        src="{{ url(Storage::disk('public')->url($user->detail['surat_balasan'])) }}"
+                                        frameborder="0" style="width:100%;min-height:440px;"></iframe>
                                 @endif
 
                             </div>
@@ -74,7 +82,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="">Periode Magang:</label>
-                                <span class="">{{ $user->detail['tgl_mulai'] }} sd
+                                <span class="">{{ $user->detail['tgl_mulai'] }} s.d.
                                     {{ $user->detail['tgl_selesai'] }}</span>
                             </div>
                             <div class="col-sm-6">

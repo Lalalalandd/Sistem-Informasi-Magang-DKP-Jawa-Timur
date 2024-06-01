@@ -51,7 +51,6 @@ class RegisterController extends Controller
             $validatedDataPendaftar['surat_pengantar'] = $suratPath;
         }
 
-        $validatedDataUser['status'] = 0;
         $validatedDataUser['role'] = 'mahasiswa';
        
         $user = User::create($validatedDataUser);

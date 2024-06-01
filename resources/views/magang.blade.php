@@ -55,10 +55,12 @@
                                                 <td>{{ Carbon::parse($d->detail['tgl_selesai'])->format('d M Y') }}</td>
                                                 <td>{{ $d->dinas['dinas'] }}</td>
                                                 <td>
-                                                    @if ($d->status == 1)
+                                                    @if ($d->detail['penerimaan'] === 'diterima')
                                                         <span class="badge badge-success">Diterima</span>
-                                                    @else
-                                                        <span class="badge badge-warning">Belum Diterima</span>
+                                                    @elseif ($d->detail['penerimaan'] === 'ditolak')
+                                                        <span class="badge badge-danger">Ditolak</span>
+                                                    @elseif ($d->detail['penerimaan'] === 'diproses')
+                                                        <span class="badge badge-info">Diproses</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -175,16 +177,25 @@
                                                                         <label for="status"
                                                                             class="col-form-label">Penerimaan</label>
                                                                         <select class="form-control select2bs4"
-                                                                            style="width: 100%;" name="status"
-                                                                            id="status">
-                                                                            <option value="1"
-                                                                                {{ $d->status == 1 ? 'selected' : '' }}>
-                                                                                Diterima</option>
-                                                                            <option value="0"
-                                                                                {{ $d->status == 0 ? 'selected' : '' }}>
-                                                                                Belum
-                                                                                Diterima</option>
+                                                                            style="width: 100%;" name="penerimaan"
+                                                                            id="penerimaan">
+                                                                            <option value="diproses"
+                                                                                {{ $d->detail['penerimaan'] === 'diproses' ? 'selected' : '' }} disabled>
+                                                                                Diproses
+                                                                            </option>
+                                                                            <option value="diterima"
+                                                                                {{ $d->detail['penerimaan'] === 'diterima' ? 'selected' : '' }}>
+                                                                                Diterima
+                                                                            </option>
+                                                                            <option value="ditolak"
+                                                                                {{ $d->detail['penerimaan'] === 'ditolak' ? 'selected' : '' }}>
+                                                                                Ditolak
+                                                                            </option>
                                                                         </select>
+                                                                        @if ($d->detail['penerimaan'] === 'diterima')
+                                                                            <input type="hidden" name="status"
+                                                                                value="1">
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('surat_balasan')->nullable();
             $table->string('surat_keterangan')->nullable();
             $table->string('sertifkiat')->nullable();
-            $table->string('penerimaan')->default('belum diterima');
+            $table->string('penerimaan')->default('diproses');
             $table->string('sub_bagian');
             $table->timestamps();
 

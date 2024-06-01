@@ -59,18 +59,20 @@ class MagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        
         $user = User::with('detail')->findOrFail($id);
         $userData = $request->only([
             'surat_balasan',
             'status',
         ]);
-
-        // dd($request);
+        $detailData = $request->only(['penerimaan']);
+        $user->detail->update($detailData);
         $user->update($userData);
         if ($request->hasFile('surat_balasan')) {
             $detail = $user->detail; // Ambil detail yang terkait
     
-        
+            
             if ($detail && $detail->surat_balasan) {
                 Storage::disk('public')->delete($detail->surat_balasan);
             }

@@ -54,7 +54,7 @@ class LoginController extends Controller
                     ])->with('loginError', 'Tanggal mulai belum tercapai.');
                 }
 
-                if ($suratBalasan !== null && $penerimaan == 1) {
+                if ($suratBalasan !== null && $penerimaan == "diterima") {
                     return redirect()->intended('beranda_mahasiswa');
                 } else {
                     return view('nyurat', [

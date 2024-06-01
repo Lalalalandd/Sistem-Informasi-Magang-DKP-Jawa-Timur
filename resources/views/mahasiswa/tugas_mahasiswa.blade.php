@@ -36,6 +36,11 @@
                                             $x = 1;
                                             use Carbon\Carbon;
                                         @endphp
+                                        @if ($tugas->isEmpty())
+                                            <tr>
+                                                <td colspan="6">Tugas belum ada</td>
+                                            </tr>
+                                        @endif
                                         @foreach ($tugas as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>

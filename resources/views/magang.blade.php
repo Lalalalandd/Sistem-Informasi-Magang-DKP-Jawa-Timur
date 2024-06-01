@@ -39,10 +39,13 @@
                                     <tbody>
                                         @php
                                             use Carbon\Carbon;
-                                        @endphp
-                                        @php
                                             $x = 1;
                                         @endphp
+                                        @if ($magang->isEmpty())
+                                            <tr>
+                                                <td colspan="11">Data pendaftar magang tidak ada</td>
+                                            </tr>
+                                        @endif
                                         @foreach ($magang as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
@@ -180,7 +183,8 @@
                                                                             style="width: 100%;" name="penerimaan"
                                                                             id="penerimaan">
                                                                             <option value="diproses"
-                                                                                {{ $d->detail['penerimaan'] === 'diproses' ? 'selected' : '' }} disabled>
+                                                                                {{ $d->detail['penerimaan'] === 'diproses' ? 'selected' : '' }}
+                                                                                disabled>
                                                                                 Diproses
                                                                             </option>
                                                                             <option value="diterima"

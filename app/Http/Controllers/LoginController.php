@@ -42,6 +42,7 @@ class LoginController extends Controller
                 $user = ModelsUser::with('detail')->find($userId);
                 $request->session()->put('user_id', $userId);
                 $suratBalasan = $user->detail->surat_balasan ?? null;
+                $penerimaan = $user->detail->penerimaan ?? null;
                 $tglMulai = $user->detail->tgl_mulai ?? null;
                 $today = Carbon::now();
                 $dinas = Dinas::where('id', $user->dinas_id)->first();
@@ -53,7 +54,7 @@ class LoginController extends Controller
                     ])->with('loginError', 'Tanggal mulai belum tercapai.');
                 }
 
-                if ($suratBalasan !== null && $user->status == 1) {
+                if ($suratBalasan !== null && $penerimaan == 1) {
                     return redirect()->intended('beranda_mahasiswa');
                 } else {
                     return view('nyurat', [

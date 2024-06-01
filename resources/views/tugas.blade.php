@@ -31,7 +31,8 @@
                                         <tr>
                                             <th scope="col">No.</th>
                                             <th scope="col">Tugas</th>
-                                            <th scope="col">Tanggal Diberikan</th>
+                                            <th scope="col">Tgl Diberikan</th>
+                                            <th scope="col">Tgl Dikumpulkan</th>
                                             <th scope="col">Nama</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
@@ -39,9 +40,14 @@
                                     </thead>
                                     <tbody>
                                         @php
-                                        use Carbon\Carbon;
+                                            use Carbon\Carbon;
                                             $x = 1;
                                         @endphp
+                                        @if ($tugas->isEmpty())
+                                            <tr>
+                                                <td colspan="7" class="text-center py-4">Data tugas tidak ada</td>
+                                            </tr>
+                                        @endif
                                         @foreach ($tugas as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
@@ -49,12 +55,13 @@
                                                 <td>{{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
                                                 <td>{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>
                                                 <td>{{ $d->user['name'] }}</td>
-
                                                 <td>
-                                                    @if ($d->status == 1)
+                                                    @if ($d->status === 'belum')
+                                                        <span class="badge badge-warning">Belum Dikerjakan</span>
+                                                    @elseif ($d->status === 'proses')
+                                                        <span class="badge badge-info">Proses</span>
+                                                    @elseif ($d->status === 'selesai')
                                                         <span class="badge badge-success">Selesai</span>
-                                                    @else
-                                                        <span class="badge badge-warning">Belum</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -91,7 +98,7 @@
                                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Edit Data Sub Bagian</h4>
+                                                            <h4 class="modal-title">Edit Data Tugas</h4>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
@@ -130,20 +137,21 @@
                                                                         </div>
                                                                     @enderror
                                                                 </div>
-                                                               
+
                                                                 <div class="mb-3">
                                                                     <label for="status"
                                                                         class="col-form-label">Pengerjaan</label>
                                                                     <select class="form-control select2bs4"
-                                                                        style="width: 100%;" name="status"
-                                                                        id="status">
-                                                                        <option value="1"
-                                                                            {{ $d->status == 1 ? 'selected' : '' }}>Sudah
+                                                                        style="width: 100%;" name="status" id="status">
+                                                                        <option value="belum"
+                                                                            {{ $d->status == 'belum' ? 'selected' : '' }}>Belum
                                                                             Dikerjakan
                                                                         </option>
-                                                                        <option value="0"
-                                                                            {{ $d->status == 0 ? 'selected' : '' }}>Belum
-                                                                            Dikerjakan
+                                                                        <option value="proses"
+                                                                            {{ $d->status == 'proses' ? 'selected' : '' }}>Proses
+                                                                        </option>
+                                                                        <option value="selesai"
+                                                                            {{ $d->status == 'selesai' ? 'selected' : '' }}>Selesai
                                                                         </option>
                                                                     </select>
                                                                 </div>
@@ -230,7 +238,8 @@
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <label for="tgl_diberikan" class="col-form-label">Tanggal Diberikan</label>
-                                    <input type="date" class="form-control @error('tgl_diberikan') is-invalid @enderror"
+                                    <input type="date"
+                                        class="form-control @error('tgl_diberikan') is-invalid @enderror"
                                         id="tgl_diberikan" name="tgl_diberikan" required
                                         value="{{ old('tgl_diberikan') }}">
                                     @error('tgl_diberikan')
@@ -241,7 +250,8 @@
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <label for="tgl_dikumpulkan" class="col-form-label">Tanggal Dikumpulkan</label>
-                                    <input type="date" class="form-control @error('tgl_dikumpulkan') is-invalid @enderror"
+                                    <input type="date"
+                                        class="form-control @error('tgl_dikumpulkan') is-invalid @enderror"
                                         id="tgl_dikumpulkan" name="tgl_dikumpulkan" required
                                         value="{{ old('tgl_dikumpulkan') }}">
                                     @error('tgl_dikumpulkan')
@@ -253,7 +263,7 @@
                             </div>
                             <input type="hidden" name="dinas_id" id="dinas_id"
                                 value="{{ auth()->user()->dinas_id }}">
-                            <input type="hidden" name="status" id="status" value="0">
+                            <input type="hidden" name="status" value="belum">
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>

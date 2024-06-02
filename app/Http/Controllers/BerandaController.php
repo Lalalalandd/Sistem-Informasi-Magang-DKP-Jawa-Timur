@@ -13,6 +13,12 @@ class BerandaController extends Controller
         ]);
     }
 
+    public function index_pegawai(){
+        return view('beranda', [
+            'tittle' => 'Beranda'
+        ]);
+    }
+
     public function index_mahasiswa(Request $request){
         $data = $request->session()->get('user_id');
         $user = User::with('detail')->find($data);
@@ -21,6 +27,7 @@ class BerandaController extends Controller
             'user' => $user
         ]);
     }
+    
 
     public function show_mahasiswa(){
         

@@ -36,7 +36,7 @@ class LoginController extends Controller
                 return redirect()->intended('beranda');
             } elseif ($user->role == 'pegawai') {
                 if ($user->status == 1){
-                    return redirect()->intended('pegawai');
+                    return redirect()->intended('beranda_pegawai');
                 }
             } elseif ($user->role == 'mahasiswa') {
                 $user = ModelsUser::with('detail')->find($userId);

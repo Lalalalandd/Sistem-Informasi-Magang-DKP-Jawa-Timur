@@ -21,6 +21,7 @@ Route::get('/dinas', [DinasController::class, 'index'])->middleware('auth');
 Route::get('/tugas_mahasiswa', [TugasController::class, 'index_mahasiswa'])->middleware('auth');
 Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth');
 Route::get('/beranda_mahasiswa', [BerandaController::class, 'index_mahasiswa'])->name('beranda_mahasiswa')->middleware('auth');
+Route::get('/beranda_pegawai', [BerandaController::class, 'index_pegawai'])->name('beranda_pegawai')->middleware('auth');
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::get('/nyurat', [NyuratController::class, 'index'])->middleware('guest');

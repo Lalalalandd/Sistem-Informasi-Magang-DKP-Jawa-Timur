@@ -25,10 +25,7 @@
                                         <tr>
                                             <th scope="col">No.</th>
                                             <th scope="col">Nama Ketua</th>
-                                            <th scope="col">Email</th>
                                             <th scope="col">Universitas</th>
-                                            <th scope="col">Fakultas</th>
-                                            <th scope="col">Prodi</th>
                                             <th scope="col">Tgl. Mulai</th>
                                             <th scope="col">Tgl. Selesai</th>
                                             <th scope="col">Dinas</th>
@@ -50,10 +47,7 @@
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
                                                 <td>{{ $d->name }}</td>
-                                                <td>{{ $d->email }}</td>
                                                 <td>{{ $d->detail['universitas'] }}</td>
-                                                <td>{{ $d->detail['fakultas'] }}</td>
-                                                <td>{{ $d->detail['prodi'] }}</td>
                                                 <td>{{ Carbon::parse($d->detail['tgl_mulai'])->format('d M Y') }}</td>
                                                 <td>{{ Carbon::parse($d->detail['tgl_selesai'])->format('d M Y') }}</td>
                                                 <td>{{ $d->dinas['dinas'] }}</td>

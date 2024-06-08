@@ -33,7 +33,7 @@
         }
 
         .bg-image {
-            background-image: url('https://i.ibb.co/k9pzQqk/mesh.png');
+            background-image: url('template/img/mesh.png');
             background-size: cover;
             background-position: center;
         }

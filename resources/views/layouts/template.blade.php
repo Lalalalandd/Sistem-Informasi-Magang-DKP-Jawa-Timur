@@ -179,9 +179,9 @@
                 <!-- Sidebar Menu -->
                 @if (auth()->user()->role == 'admin')
                     @include('layouts.adminsidebar')
-                @elseif(auth()->user()->role = 'pegawai')
+                @elseif(auth()->user()->role == 'pegawai')
                     @include('layouts.pegawaisidebar')
-                @else
+                @elseif(auth()->user()->role == 'mahasiswa')
                     @include('layouts.mahasiswasidebar')
                 @endif
 

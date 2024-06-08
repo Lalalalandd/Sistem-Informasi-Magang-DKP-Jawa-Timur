@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class MagangController extends Controller
@@ -17,6 +18,20 @@ class MagangController extends Controller
         $user->load('dinas');
        
         return view('magang', [
+            'tittle' => 'Magang',
+            'magang' =>  $user
+        ]);
+    }
+
+    public function index_pegawai()
+    {
+        $pegawai = Auth::user();
+        $user = User::where('role', 'mahasiswa')
+        ->where('dinas_id', $pegawai->dinas_id)
+        ->with('detail','dinas')
+        ->get();
+       dd($user);
+        return view('pegawai.magang_pegawai', [
             'tittle' => 'Magang',
             'magang' =>  $user
         ]);

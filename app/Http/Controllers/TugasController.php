@@ -26,7 +26,7 @@ class TugasController extends Controller
             $query->where('status', 1);
         }])
         ->get();
-        $user = Auth::user();
+        
         return view('tugas', [
             'tittle' => 'Tugas',
             'dinas' => Dinas::all(),

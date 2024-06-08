@@ -128,13 +128,12 @@
                                                                                 <p>{{ $d->detail->sub_bagian }}</p>
                                                                             </div>
                                                                             @if ($d->detail->surat_balasan == null)
-                                                                                <div class="col-lg-12">
+                                                                                <div class="col-lg-6">
                                                                                     <div class="form-group">
                                                                                         <label for="exampleInputFile">Surat
                                                                                             Balasan </label>
-                                                                                        <div class="float-right">
-                                                                                            Masih Diproses
-                                                                                        </div>
+                                                                                        <p><span class="bg-info label">Masih
+                                                                                                Diproses</span></p>
                                                                                     </div>
                                                                                 </div>
                                                                             @else
@@ -142,40 +141,35 @@
                                                                                     <div class="form-group">
                                                                                         <label for="exampleInputFile">Surat
                                                                                             Balasan</label>
-                                                                                            <div class="float-right">
-                                                                                                <a href="{{ Storage::url($d->detail->surat_balasan) }}"
-                                                                                                    target="_blank"><span class="bg-indigo label">Lihat Surat
+                                                                                        <div class="float-right">
+                                                                                            <a href="{{ Storage::url($d->detail->surat_balasan) }}"
+                                                                                                target="_blank"><span
+                                                                                                    class="bg-indigo label">Lihat
+                                                                                                    Surat
                                                                                                     Balasan</span></a>
-                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            
                                                                             @endif
 
-                                                                            <div class="col-lg-12">
-                                                                                <label for="status"
-                                                                                    class="col-form-label">Penerimaan</label>
-                                                                                <select class="form-control select2bs4"
-                                                                                    style="width: 100%;" name="penerimaan"
-                                                                                    id="penerimaan">
-                                                                                    <option value="diproses"
-                                                                                        {{ $d->detail['penerimaan'] === 'diproses' ? 'selected' : '' }}
-                                                                                        disabled>
-                                                                                        Diproses
-                                                                                    </option>
-                                                                                    <option value="diterima"
-                                                                                        {{ $d->detail['penerimaan'] === 'diterima' ? 'selected' : '' }}>
-                                                                                        Diterima
-                                                                                    </option>
-                                                                                    <option value="ditolak"
-                                                                                        {{ $d->detail['penerimaan'] === 'ditolak' ? 'selected' : '' }}>
-                                                                                        Ditolak
-                                                                                    </option>
-                                                                                </select>
-                                                                                @if ($d->detail['penerimaan'] === 'diterima')
-                                                                                    <input type="hidden" name="status"
-                                                                                        value="1">
-                                                                                @endif
+                                                                            <div class="col-lg-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="status"
+                                                                                        class="col-form-label">Penerimaan</label>
+                                                                                    @if ($d->detail['penerimaan'] === 'diterima')
+                                                                                        <p><span
+                                                                                                class="bg-success label">Diterima</span>
+                                                                                        </p>
+                                                                                    @elseif ($d->detail['penerimaan'] === 'diproses') 
+                                                                                        <p><span class="bg-info label">Proses
+                                                                                                Pengajuan</span>
+                                                                                        </p>
+                                                                                    @elseif ($d->detail['penerimaan'] === 'ditolak')
+                                                                                        <p><span
+                                                                                                class="bg-danger label">Ditolak</span>
+                                                                                        </p>
+                                                                                    @endif
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>

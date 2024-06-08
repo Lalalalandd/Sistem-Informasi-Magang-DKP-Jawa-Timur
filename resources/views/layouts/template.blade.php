@@ -67,6 +67,11 @@
         .content-wrapper {
             background-color: rgb(252, 252, 252) !important;
         }
+
+        .label{
+          padding: 8px;
+          border-radius: 6px;
+        }
     </style>
 </head>
 

@@ -30,7 +30,7 @@ class MagangController extends Controller
         ->where('dinas_id', $pegawai->dinas_id)
         ->with('detail','dinas')
         ->get();
-       dd($user);
+     
         return view('pegawai.magang_pegawai', [
             'tittle' => 'Magang',
             'magang' =>  $user
@@ -74,20 +74,35 @@ class MagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
-        
+        // Ambil pengguna beserta detailnya
         $user = User::with('detail')->findOrFail($id);
-        $userData = $request->only([
-            'surat_balasan',
-            'status',
-        ]);
+    
+        // Tentukan status berdasarkan nilai penerimaan
+        if ($request->penerimaan == "diterima") {
+            $status = 1;
+        } elseif ($request->penerimaan == "ditolak" || $request->penerimaan == "batal") {
+            $status = 0;
+        } else {
+            $status = null; // Atur status ke null jika tidak ada nilai penerimaan yang cocok
+        }
+    
+        // Ambil data dari request dan tambahkan status
+        $userData = $request->only(['surat_balasan']);
+        $userData['status'] = $status;
+    
+        // Ambil data detail
         $detailData = $request->only(['penerimaan']);
+    
+        // Update detail
         $user->detail->update($detailData);
+    
+        // Update pengguna
         $user->update($userData);
+    
+        // Penanganan file surat_balasan
         if ($request->hasFile('surat_balasan')) {
             $detail = $user->detail; // Ambil detail yang terkait
     
-            
             if ($detail && $detail->surat_balasan) {
                 Storage::disk('public')->delete($detail->surat_balasan);
             }
@@ -97,18 +112,12 @@ class MagangController extends Controller
             $path = $file->store('surat_balasan', 'public');
     
             // Perbarui path di detail
-            if ($detail) {
-                $detail->update(['surat_balasan' => $path]);
-            } else {
-                // Jika detail belum ada, buat baru
-                $user->detail()->create(['surat_balasan' => $path]);
-            }
+            $detail->update(['surat_balasan' => $path]);
         }
-
-        
+    
         return redirect('/magang');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */

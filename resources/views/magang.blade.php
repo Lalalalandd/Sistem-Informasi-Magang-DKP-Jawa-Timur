@@ -177,23 +177,20 @@
                                                                             style="width: 100%;" name="penerimaan"
                                                                             id="penerimaan">
                                                                             <option value="diproses"
-                                                                                {{ $d->detail['penerimaan'] === 'diproses' ? 'selected' : '' }}
+                                                                                {{ $d->detail['penerimaan'] == 'diproses' ? 'selected' : '' }}
                                                                                 disabled>
                                                                                 Diproses
                                                                             </option>
                                                                             <option value="diterima"
-                                                                                {{ $d->detail['penerimaan'] === 'diterima' ? 'selected' : '' }}>
+                                                                                {{ $d->detail['penerimaan'] == 'diterima' ? 'selected' : '' }}>
                                                                                 Diterima
                                                                             </option>
                                                                             <option value="ditolak"
-                                                                                {{ $d->detail['penerimaan'] === 'ditolak' ? 'selected' : '' }}>
+                                                                                {{ $d->detail['penerimaan'] == 'ditolak' ? 'selected' : '' }}>
                                                                                 Ditolak
                                                                             </option>
                                                                         </select>
-                                                                        @if ($d->detail['penerimaan'] === 'diterima')
-                                                                            <input type="hidden" name="status"
-                                                                                value="1">
-                                                                        @endif
+
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -130,24 +130,24 @@
                                                                             @if ($d->detail->surat_balasan == null)
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group">
-                                                                                        <label for="exampleInputFile">Surat
+                                                                                        <label for="exampleInputFile" class="col-form-label">Surat
                                                                                             Balasan </label>
                                                                                         <p><span class="bg-info label">Masih
                                                                                                 Diproses</span></p>
                                                                                     </div>
                                                                                 </div>
                                                                             @else
-                                                                                <div class="col-lg-12">
+                                                                                <div class="col-lg-6">
                                                                                     <div class="form-group">
-                                                                                        <label for="exampleInputFile">Surat
+                                                                                        <label for="exampleInputFile" class="col-form-label">Surat
                                                                                             Balasan</label>
-                                                                                        <div class="float-right">
+                                                                                        <p>
                                                                                             <a href="{{ Storage::url($d->detail->surat_balasan) }}"
                                                                                                 target="_blank"><span
                                                                                                     class="bg-indigo label">Lihat
                                                                                                     Surat
                                                                                                     Balasan</span></a>
-                                                                                        </div>
+                                                                                            </p>
                                                                                     </div>
                                                                                 </div>
                                                                             @endif
@@ -173,11 +173,10 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class=" modal-footer justify-content-between">
-                                                                        <button type="button" class="btn btn-default"
+                                                                    <div class="modal-footer justify-content-end">
+                                                                        <button type="button" class="btn btn-default float-right"
                                                                             data-dismiss="modal">Tutup</button>
-                                                                        <button type="submit"
-                                                                            class="btn btn-primary">Simpan</button>
+                                                                       
                                                                     </div>
                                                                 </form>
                                                             </div>

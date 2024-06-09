@@ -1,6 +1,32 @@
 <!-- Sidebar Menu -->
 <nav class="mt-3">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+            <div class="card" style="background-color: #161B22; color:aliceblue;">
+                <div class="card-body">
+
+                    <div class="col-4 ">
+                        <h6 class="text-bold small"><svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1em" height="1em" viewBox="0 0 24 24">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5">
+                                <path
+                                    d="M6.133 21C4.955 21 4 20.02 4 18.81v-8.802c0-.665.295-1.295.8-1.71l5.867-4.818a2.09 2.09 0 0 1 2.666 0l5.866 4.818c.506.415.801 1.045.801 1.71v8.802c0 1.21-.955 2.19-2.133 2.19z" />
+                                <path d="M9.5 21v-5.5a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2V21" />
+                            </g>
+                        </svg>Dinas</h6>
+                    </div>
+                    <div class="col-12">
+                        @php
+                            $dinas = auth()->user()->load('dinas');
+                        @endphp
+                        <h6 class="text-wrap small" style="color: rgb(163, 163, 163);">
+                            {{ $dinas->dinas->dinas }}
+                        </h6>
+                    </div>
+
+                </div>
+            </div>
+        </li>
         <li class="nav-header">
             Main Menu
         </li>

@@ -46,18 +46,18 @@
                                         @foreach ($magang as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
-                                                <td>{{ $d->name }}</td>
+                                                <td >{{ $d->name }}</td>
                                                 <td>{{ $d->detail['universitas'] }}</td>
                                                 <td>{{ Carbon::parse($d->detail['tgl_mulai'])->format('d M Y') }}</td>
                                                 <td>{{ Carbon::parse($d->detail['tgl_selesai'])->format('d M Y') }}</td>
                                                 <td>{{ $d->dinas['dinas'] }}</td>
                                                 <td>
                                                     @if ($d->detail['penerimaan'] === 'diterima')
-                                                        <span class="badge badge-success">Diterima</span>
+                                                        <span class="bg-success label">Diterima</span>
                                                     @elseif ($d->detail['penerimaan'] === 'ditolak')
-                                                        <span class="badge badge-danger">Ditolak</span>
+                                                        <span class="bg-danger label">Ditolak</span>
                                                     @elseif ($d->detail['penerimaan'] === 'diproses')
-                                                        <span class="badge badge-info">Diproses</span>
+                                                        <span class="bg-info label">Diproses</span>
                                                     @endif
                                                 </td>
                                                 <td>

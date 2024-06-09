@@ -57,11 +57,11 @@
                                                 <td>{{ $d->user['name'] }}</td>
                                                 <td>
                                                     @if ($d->status === 'belum')
-                                                        <span class="badge badge-warning">Belum Dikerjakan</span>
+                                                        <span class="bg-warning label">Belum Dikerjakan</span>
                                                     @elseif ($d->status === 'proses')
-                                                        <span class="badge badge-info">Proses</span>
+                                                        <span class="bg-info label">Proses</span>
                                                     @elseif ($d->status === 'selesai')
-                                                        <span class="badge badge-success">Selesai</span>
+                                                        <span class="bg-success label">Selesai</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -253,7 +253,7 @@
                                     <select
                                         class="form-control select2 select2-purple p @error('user_id') is-invalid @enderror"
                                         data-dropdown-css-class="select2-purple" style="width: 100%;" name="user_id"
-                                        id="user">
+                                        id="user" required>
                                         <option selected disabled>Pilih Mahasiswa</option>
                                         @foreach ($user as $option)
                                             <option value="{{ $option->id }}">

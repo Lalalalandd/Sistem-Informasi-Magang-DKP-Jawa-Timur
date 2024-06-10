@@ -70,6 +70,7 @@ class TugasController extends Controller
             'user_id' => 'required',
             'tgl_diberikan' => 'required',
             'tgl_dikumpulkan' => 'required',
+            'lampiran' => 'required|mimes:jpg,png,doc,docx|max:4096',
             'status' => 'required',
         ]);
 

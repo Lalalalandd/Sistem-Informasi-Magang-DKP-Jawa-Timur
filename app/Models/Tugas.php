@@ -15,6 +15,7 @@ class Tugas extends Model
         'tugas',
         'tgl_diberikan',
         'tgl_dikumpulkan',
+        'lampiran',
         'status'
     ];
 

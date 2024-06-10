@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('tugas');
             $table->date('tgl_diberikan');
             $table->date('tgl_dikumpulkan');
+            $table->string('lampiran')->nullable();
             $table->string('status')->default('belum');
             $table->timestamps();
 

@@ -7,6 +7,7 @@ use App\Models\Dinas;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreTugasRequest;
 use App\Http\Requests\UpdateTugasRequest;
 
@@ -62,7 +63,7 @@ class TugasController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
         $user = Auth::user();
         $validatedData = $request->validate([
             'tugas' => 'required|max:255',
@@ -70,9 +71,14 @@ class TugasController extends Controller
             'user_id' => 'required',
             'tgl_diberikan' => 'required',
             'tgl_dikumpulkan' => 'required',
-            'lampiran' => 'required|mimes:jpg,png,doc,docx|max:4096',
+            'lampiran' => 'required|mimes:jpg,png,doc,docx,pdf|max:4096',
             'status' => 'required',
         ]);
+
+        if($request->file('lampiran')){
+            $lampiranPath = $request->file('lampiran')->store('lampiran');
+            $validatedData['lampiran'] = $lampiranPath;
+        }
 
         $validatedData['dinas_id'] = $user->dinas_id;
         Tugas::create($validatedData);
@@ -101,15 +107,33 @@ class TugasController extends Controller
     public function update(Request $request, string $id)
     {
         $tugas = Tugas::findOrFail($id);
-        $tugasData = $request->only([
-            'tugas',
-            'dinas',
-            'tgl_diberikan',
-            'tgl_dikumpulkan',
-            'status',
+        $validatedData = $request->validate([
+            'tugas' => 'required|max:255',
+            'dinas_id' => 'required',
+            'tgl_diberikan' => 'required|date',
+            'tgl_dikumpulkan' => 'required|date',
+            'status' => 'required',
+            'lampiran' => 'nullable|mimes:jpg,png,doc,docx|max:4096',
         ]);
-        $tugas->update($tugasData);
-        return redirect('/tugas');
+    
+        // Update data tugas
+        $tugas->update($validatedData);
+    
+        // Proses file lampiran jika ada
+        if ($request->hasFile('lampiran')) {
+            // Hapus file lama jika ada
+            if ($tugas->lampiran) {
+                Storage::disk('public')->delete($tugas->lampiran);
+            }
+    
+            // Simpan file baru
+            $lampiranPath = $request->file('lampiran')->store('lampiran', 'public');
+    
+            // Update path file di database
+            $tugas->update(['lampiran' => $lampiranPath]);
+        }
+    
+        return redirect('/tugas')->with('success', 'Data tugas berhasil diperbarui.');
     }
 
     public function kerjakan(Request $request, string $id)

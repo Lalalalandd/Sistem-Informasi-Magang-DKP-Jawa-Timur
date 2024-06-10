@@ -74,32 +74,27 @@ class MagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Ambil pengguna beserta detailnya
+        dd($request);
         $user = User::with('detail')->findOrFail($id);
-    
-        // Tentukan status berdasarkan nilai penerimaan
         if ($request->penerimaan == "diterima") {
             $status = 1;
         } elseif ($request->penerimaan == "ditolak" || $request->penerimaan == "batal") {
             $status = 0;
         } else {
-            $status = null; // Atur status ke null jika tidak ada nilai penerimaan yang cocok
+            $status = null; 
         }
     
-        // Ambil data dari request dan tambahkan status
         $userData = $request->only(['surat_balasan']);
         $userData['status'] = $status;
-    
-        // Ambil data detail
         $detailData = $request->only(['penerimaan']);
     
-        // Update detail
+        
         $user->detail->update($detailData);
     
-        // Update pengguna
+       
         $user->update($userData);
     
-        // Penanganan file surat_balasan
+       
         if ($request->hasFile('surat_balasan')) {
             $detail = $user->detail; // Ambil detail yang terkait
     

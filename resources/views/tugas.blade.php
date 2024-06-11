@@ -253,7 +253,7 @@
                                     <select
                                         class="form-control select2 select2-purple p @error('user_id') is-invalid @enderror"
                                         data-dropdown-css-class="select2-purple" style="width: 100%;" name="user_id"
-                                        id="user" required>
+                                        id="select2_mahasiswa" required>
                                         <option selected disabled>Pilih Mahasiswa</option>
                                         @foreach ($user as $option)
                                             <option value="{{ $option->id }}">
@@ -326,16 +326,16 @@
         </div>
         <!-- /.modal tambah data -->
     </div>
-
-    <script>
-        $(function() {
-            $('.select2').select2()
-        })
-
-        $(document).ready(function() {
-            $("#select2insidemodal").select2({
-                dropdownParent: $("#myModal")
-            });
-        });
-    </script>
 @endsection
+
+@push('scripts')
+    <script>
+         $(document).ready(function() {
+            $('.select2').select2();
+       
+        @if(session('success'))
+            toastr.success('{{ session('success') }}');
+        @endif
+    });
+    </script>
+@endpush

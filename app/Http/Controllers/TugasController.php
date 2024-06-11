@@ -71,7 +71,7 @@ class TugasController extends Controller
             'user_id' => 'required',
             'tgl_diberikan' => 'required',
             'tgl_dikumpulkan' => 'required',
-            'lampiran' => 'required|mimes:jpg,png,doc,docx,pdf|max:4096',
+            'lampiran' => 'mimes:jpg,png,doc,docx,pdf|max:4096',
             'status' => 'required',
         ]);
 
@@ -82,7 +82,7 @@ class TugasController extends Controller
 
         $validatedData['dinas_id'] = $user->dinas_id;
         Tugas::create($validatedData);
-        return redirect('/tugas');
+        return redirect('/tugas')->with('success', 'Data tugas berhasil ditambahkan.');
     }
 
     /**

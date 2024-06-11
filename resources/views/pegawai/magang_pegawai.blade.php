@@ -36,7 +36,7 @@
                                                 @endphp
                                                 @if ($magang->isEmpty())
                                                     <tr>
-                                                        <td colspan="11">Data pendaftar magang tidak ada</td>
+                                                        <td colspan="11" class="text-center">Data pendaftar magang tidak ada</td>
                                                     </tr>
                                                 @endif
                                                 @foreach ($magang as $d)

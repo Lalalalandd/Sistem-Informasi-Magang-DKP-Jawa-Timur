@@ -148,7 +148,7 @@
                         <!-- Menu Body -->
                         <!-- Menu Footer-->
                         <li class="user-footer d-flex justify-content-between">
-                            <a href="#" class="btn btn-default">Profile</a>
+                            <a href="/profil" class="btn btn-default">Profile</a>
                             <form action="/logout" method="POST">
                                 {{ csrf_field() }}
                                 <button type="submit" class="btn btn-outline-danger btn-flat"

@@ -38,6 +38,28 @@ class TugasController extends Controller
             'tugas' => $tugas
         ]);
     }
+    public function index_pegawai()
+    {
+        $user = Auth::user();
+        $tugas = Tugas::where('dinas_id', $user->dinas_id)
+        ->whereHas('user', function($query) {
+            $query->where('status', 1);
+        })
+        ->with(['user' => function($query) {
+            $query->where('status', 1);
+        }])
+        ->get();
+        
+        return view('pegawai.tugas_pegawai', [
+            'tittle' => 'Tugas',
+            'dinas' => Dinas::all(),
+            'user' => User::where('dinas_id', $user->dinas_id)
+                ->where('role', 'mahasiswa')
+                ->where('status', 1)
+                ->get(),
+            'tugas' => $tugas
+        ]);
+    }
     public function index_mahasiswa()
     {
         $user = Auth::user();

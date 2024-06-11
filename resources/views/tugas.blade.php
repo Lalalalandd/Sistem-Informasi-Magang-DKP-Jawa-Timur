@@ -46,7 +46,7 @@
                                         @endphp
                                         @if ($tugas->isEmpty())
                                             <tr>
-                                                <td colspan="7" class="text-center py-4">Data tugas tidak ada</td>
+                                                <td colspan="8" class="text-center py-4">Data tugas tidak ada</td>
                                             </tr>
                                         @endif
                                         @foreach ($tugas as $d)

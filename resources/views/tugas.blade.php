@@ -34,6 +34,7 @@
                                             <th scope="col">Tgl Diberikan</th>
                                             <th scope="col">Tgl Dikumpulkan</th>
                                             <th scope="col">Nama</th>
+                                            <th scope="col">Lampiran</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
@@ -55,6 +56,14 @@
                                                 <td>{{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
                                                 <td>{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>
                                                 <td>{{ $d->user['name'] }}</td>
+                                                <td> @if ($d->lampiran != null)
+                                                    <a href="{{ Storage::url($d->lampiran) }}"
+                                                        target="_blank">Lihat lampiran</a></td>
+                                                @else
+                                                    <p>Tidak ada lampiran</p>
+                                                @endif
+                                                    
+                                                    
                                                 <td>
                                                     @if ($d->status === 'belum')
                                                         <span class="bg-warning label">Belum Dikerjakan</span>

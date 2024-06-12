@@ -74,7 +74,7 @@ class MagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd($request);
+       
         $user = User::with('detail')->findOrFail($id);
         if ($request->penerimaan == "diterima") {
             $status = 1;

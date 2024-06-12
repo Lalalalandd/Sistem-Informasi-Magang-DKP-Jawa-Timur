@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Dinas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfilController extends Controller
 {
@@ -12,9 +14,12 @@ class ProfilController extends Controller
      */
     public function index()
     {
-
+        $user = Auth::user();
+        $dinas =  Dinas::where('id', $user->dinas_id)->first();
         return view("/profil",[
-            "tittle" => "Profil"
+            "tittle" => "Profil",
+            "user" => $user,
+            "dinas" => $dinas
         ]);
     }
 
@@ -37,7 +42,7 @@ class ProfilController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Profil $profil)
+    public function show()
     {
         //
     }
@@ -45,7 +50,7 @@ class ProfilController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Profil $profil)
+    public function edit()
     {
         //
     }
@@ -53,7 +58,7 @@ class ProfilController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profil $profil)
+    public function update(Request $request)
     {
         //
     }
@@ -61,7 +66,7 @@ class ProfilController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Profil $profil)
+    public function destroy()
     {
         //
     }

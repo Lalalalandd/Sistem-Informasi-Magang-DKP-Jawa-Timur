@@ -43,7 +43,7 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                               <h3 class="card-title my-2">Ubah Profil</h3>
+                               <h3 class="card-title my-2"><i class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><circle cx="12" cy="6" r="4" fill="currentColor"/><path fill="currentColor" d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5"/></svg></i>Ubah Profil</h3>
                             </div>
                             <form action="">
                                 <div class="card-body">
@@ -57,7 +57,7 @@
                                                     <input type="file"
                                                         class="custom-file-input"
                                                         id="exampleInputFile"
-                                                        name="lampiran">
+                                                        name="image">
                                                     <label class="custom-file-label"
                                                         for="exampleInputFile">Choose
                                                         file</label>
@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="col-lg-10">
                                             <div class="form-group">
-                                                <input type="text" name="" id="" class="form-control">
+                                                <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}"> 
                                             </div>
                                         </div>
 
@@ -81,7 +81,7 @@
                                         </div>
                                         <div class="col-lg-10">
                                             <div class="form-group">
-                                                <input type="text" name="" id="" class="form-control">
+                                                <input type="text" name="email" id="email" class="form-control" value="{{ $user->email }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">

@@ -74,7 +74,7 @@
             border-radius: 6px;
         }
 
-        .profile-user-img{
+        .profile-user-img {
             width: 150px;
             height: 150px;
             object-fit: cover;
@@ -128,7 +128,7 @@
                     </a>
                 </li> --}}
                 @php
-                    $image = auth()->user()->image
+                    $image = auth()->user()->image;
                 @endphp
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -147,7 +147,8 @@
                             @if (auth()->user()->image == null)
                                 <img src="template/img/user-image.png" class="img-circle elevation-2" alt="User Image">
                             @else
-                                <img src="{{ asset('storage/' . $image) }}" class="img-circle elevation-2" alt="User Image">
+                                <img src="{{ asset('storage/' . $image) }}" class="img-circle elevation-2"
+                                    alt="User Image">
                             @endif
                             <p>
                                 {{ auth()->user()->name }}
@@ -238,10 +239,10 @@
     <!-- bs-custom-file-input -->
     <script src="template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- OPTIONAL SCRIPTS -->
-    <script src="template/plugins/chart.js/Chart.min.js"></script>
     <script src="template/plugins/select2/js/select2.full.min.js"></script>
+    <script src="template/plugins/chart.js/Chart.min.js"></script>
     <script src="template/plugins/toastr/toastr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     @stack('scripts')

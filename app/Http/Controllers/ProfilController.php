@@ -61,30 +61,56 @@ class ProfilController extends Controller
      */
     public function update(Request $request, string $id)
     {
-       
-        $user = User::findOrfail($id);
-        $validatedData = $request->validate([
-            'name' => 'nullable|max:255',
-            'email' => 'nullable|email',
-            'image' => 'nullable|mimes:jpg,png',
-        ]);
+        if (Auth::user()->role != "mahasiswa") {
+            $user = User::findOrfail($id);
+            $validatedData = $request->validate([
+                'name' => 'nullable|max:255',
+                'email' => 'nullable|email',
+                'image' => 'nullable|mimes:jpg,png',
+            ]);
 
-        // Update data tugas
-        $user->update($validatedData);
+            // Update data tugas
+            $user->update($validatedData);
 
-        // Proses file lampiran jika ada
-        if ($request->hasFile('image')) {
-            // Hapus file lama jika ada
-            if ($user->image && Storage::disk('public')->exists($user->image)) {
-                Storage::disk('public')->delete($user->image);
+            // Proses file lampiran jika ada
+            if ($request->hasFile('image')) {
+                // Hapus file lama jika ada
+                if ($user->image && Storage::disk('public')->exists($user->image)) {
+                    Storage::disk('public')->delete($user->image);
+                }
+
+                // Simpan file baru
+                $imagePath = $request->file('image')->store('image', 'public');
+
+                // Update path file di database
+                $user->image = $imagePath;
+                $user->save();
             }
-    
-            // Simpan file baru
-            $imagePath = $request->file('image')->store('image', 'public');
-    
-            // Update path file di database
-            $user->image = $imagePath;
-            $user->save();
+        } else {
+            $user = User::with('detail')->findOrFail($id);
+            $validatedData = $request->validate([
+                'name' => 'nullable|max:255',
+                'email' => 'nullable|email',
+                'image' => 'nullable|mimes:jpg,png',
+            ]);
+
+            // Update data tugas
+            $user->update($validatedData);
+
+            // Proses file lampiran jika ada
+            if ($request->hasFile('image')) {
+                // Hapus file lama jika ada
+                if ($user->image && Storage::disk('public')->exists($user->image)) {
+                    Storage::disk('public')->delete($user->image);
+                }
+
+                // Simpan file baru
+                $imagePath = $request->file('image')->store('image', 'public');
+
+                // Update path file di database
+                $user->image = $imagePath;
+                $user->save();
+            }
         }
 
         return redirect('/profil');

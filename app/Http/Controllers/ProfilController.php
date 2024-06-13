@@ -113,7 +113,7 @@ class ProfilController extends Controller
             }
         }
 
-        return redirect('/profil');
+        return redirect('/profil')->with('success', 'Data Berhasil Diubah!');
     }
 
     /**

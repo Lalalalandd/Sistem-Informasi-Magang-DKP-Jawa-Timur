@@ -23,6 +23,8 @@
                                         <img class="profile-user-img img-fluid img-circle" src="template/img/user-image.png"
                                             alt="User profile picture">
                                     @else
+                                        <img class="profile-user-img img-fluid img-circle"
+                                            src="{{ asset('storage/' . $user->image) }}" alt="User profile picture">
                                     @endif
                                 </div>
                                 <h3 class="profile-username text-center my-4">{{ $user->name }}</h3>
@@ -43,9 +45,16 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                               <h3 class="card-title my-2"><i class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><circle cx="12" cy="6" r="4" fill="currentColor"/><path fill="currentColor" d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5"/></svg></i>Ubah Profil</h3>
+                                <h3 class="card-title my-2"><i class="mr-2"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                                            <circle cx="12" cy="6" r="4" fill="currentColor" />
+                                            <path fill="currentColor"
+                                                d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5" />
+                                        </svg></i>Ubah Profil</h3>
                             </div>
-                            <form action="">
+                            <form action="/profil/{{ $user->id }}" method="POST" enctype="multipart/form-data">
+                                @method('put')
+                                {{ csrf_field() }}
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-2">
@@ -54,12 +63,9 @@
                                         <div class="col-lg-10">
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <input type="file"
-                                                        class="custom-file-input"
-                                                        id="exampleInputFile"
+                                                    <input type="file" class="custom-file-input" id="exampleInputFile"
                                                         name="image">
-                                                    <label class="custom-file-label"
-                                                        for="exampleInputFile">Choose
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose
                                                         file</label>
                                                 </div>
                                             </div>
@@ -72,7 +78,8 @@
                                         </div>
                                         <div class="col-lg-10">
                                             <div class="form-group">
-                                                <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}"> 
+                                                <input type="text" name="name" id="name" class="form-control"
+                                                    value="{{ $user->name }}">
                                             </div>
                                         </div>
 
@@ -81,11 +88,13 @@
                                         </div>
                                         <div class="col-lg-10">
                                             <div class="form-group">
-                                                <input type="text" name="email" id="email" class="form-control" value="{{ $user->email }}">
+                                                <input type="text" name="email" id="email" class="form-control"
+                                                    value="{{ $user->email }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <button type="submit" class="mt-4 btn btn-primary float-right">Simpan Perubahan</button>
+                                            <button type="submit" class="mt-4 btn btn-primary float-right">Simpan
+                                                Perubahan</button>
                                         </div>
                                     </div>
                                 </div>

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Dinas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfilController extends Controller
 {
@@ -16,7 +17,7 @@ class ProfilController extends Controller
     {
         $user = Auth::user();
         $dinas =  Dinas::where('id', $user->dinas_id)->first();
-        return view("/profil",[
+        return view("/profil", [
             "tittle" => "Profil",
             "user" => $user,
             "dinas" => $dinas
@@ -58,9 +59,35 @@ class ProfilController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
-        //
+       
+        $user = User::findOrfail($id);
+        $validatedData = $request->validate([
+            'name' => 'nullable|max:255',
+            'email' => 'nullable|email',
+            'image' => 'nullable|mimes:jpg,png',
+        ]);
+
+        // Update data tugas
+        $user->update($validatedData);
+
+        // Proses file lampiran jika ada
+        if ($request->hasFile('image')) {
+            // Hapus file lama jika ada
+            if ($user->image && Storage::disk('public')->exists($user->image)) {
+                Storage::disk('public')->delete($user->image);
+            }
+    
+            // Simpan file baru
+            $imagePath = $request->file('image')->store('image', 'public');
+    
+            // Update path file di database
+            $user->image = $imagePath;
+            $user->save();
+        }
+
+        return redirect('/profil');
     }
 
     /**

@@ -60,6 +60,7 @@ class TugasController extends Controller
             'tugas' => $tugas
         ]);
     }
+    
     public function index_mahasiswa()
     {
         $user = Auth::user();

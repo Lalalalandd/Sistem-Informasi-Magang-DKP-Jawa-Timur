@@ -73,6 +73,12 @@
             padding: 8px;
             border-radius: 6px;
         }
+
+        .profile-user-img{
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
     </style>
 </head>
 
@@ -121,13 +127,16 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li> --}}
+                @php
+                    $image = auth()->user()->image
+                @endphp
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         @if (auth()->user()->image == null)
                             <img src="template/img/user-image.png" class="user-image img-circle elevation-1 pengguna"
                                 alt="User Image">
                         @else
-                            <img src="{{ auth()->user()->image }}" class="user-image img-circle elevation-1"
+                            <img src="{{ asset('storage/' . $image) }}" class="user-image img-circle elevation-1"
                                 alt="User Image">
                         @endif
                         <span class="d-none d-md-inline"> {{ auth()->user()->name }}</span>
@@ -138,7 +147,7 @@
                             @if (auth()->user()->image == null)
                                 <img src="template/img/user-image.png" class="img-circle elevation-2" alt="User Image">
                             @else
-                                <img src="{{ auth()->user()->image }}" class="img-circle elevation-2" alt="User Image">
+                                <img src="{{ asset('storage/' . $image) }}" class="img-circle elevation-2" alt="User Image">
                             @endif
                             <p>
                                 {{ auth()->user()->name }}

@@ -90,11 +90,8 @@ class MagangController extends Controller
     
         
         $user->detail->update($detailData);
-    
-       
         $user->update($userData);
     
-       
         if ($request->hasFile('surat_balasan')) {
             $detail = $user->detail; // Ambil detail yang terkait
     

@@ -49,11 +49,11 @@
                                                 <td>{{ $d->tgl_dikumpulkan }}</td>
                                                 <td>
                                                     @if ($d->status == 'selesai')
-                                                        <button class="btn btn-outline-success">Sudah Dikerjakan</button>
+                                                        <span class="label bg-success">Sudah Dikerjakan</span>
                                                     @elseif ($d->status == 'belum')
-                                                        <button class="btn btn-outline-warning">Belum Dikerjakan</button>
+                                                        <span class="label bg-warning">Belum Dikerjakan</span>
                                                     @else
-                                                        <button class="btn btn-outline-info">Proses Pengerjaan</button>
+                                                        <span class="label bg-info">Proses Pengerjaan</span>
                                                     @endif
                                                 </td>
                                                 <td>

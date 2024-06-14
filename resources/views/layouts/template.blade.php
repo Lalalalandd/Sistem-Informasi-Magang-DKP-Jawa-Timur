@@ -246,5 +246,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     @stack('scripts')
+    <script>
+        toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+    };
+    </script>
 
 </html>

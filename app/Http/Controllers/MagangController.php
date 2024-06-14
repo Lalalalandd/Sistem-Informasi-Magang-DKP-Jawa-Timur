@@ -37,6 +37,15 @@ class MagangController extends Controller
         ]);
     }
 
+    public function index_mahasiswa()
+    {
+        $mahasiswa = Auth::user();
+        return view('mahasiswa.magang_mahasiswa', [
+            'tittle' => 'Magang',
+            'magang' =>  $mahasiswa
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

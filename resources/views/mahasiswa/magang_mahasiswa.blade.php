@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="my-2 fw-bold">Beranda</h1>
+                    
                 </div>
         
 
@@ -15,5 +15,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+
+    
 </div>
 @endsection

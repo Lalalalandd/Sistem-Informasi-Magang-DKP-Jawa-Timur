@@ -242,7 +242,6 @@
     <script src="template/plugins/select2/js/select2.full.min.js"></script>
     <script src="template/plugins/chart.js/Chart.min.js"></script>
     <script src="template/plugins/toastr/toastr.min.js"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     @stack('scripts')

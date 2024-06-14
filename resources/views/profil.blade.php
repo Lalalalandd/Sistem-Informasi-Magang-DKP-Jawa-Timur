@@ -77,20 +77,21 @@
                                 {{ csrf_field() }}
                                 <div class="card-body">
                                     <div class="row">
+                                       
                                         <div class="col-lg-2">
-                                            <label for="">Foto Profil</label>
+                                            <label for="">Surat Pengantar</label>
                                         </div>
-                                        <div class="col-lg-10">
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="exampleInputFile"
-                                                        name="image">
-                                                    <label class="custom-file-label" for="exampleInputFile">Choose
-                                                        file</label>
+                                        <div class="col-lg-10 ">
+                                            <input type="file"
+                                                class="form-control  @error('surat_pengantar') is-invalid @enderror"
+                                                id="image" name="image">
+                                            <label for="" class="small text-danger">*) File harus bertipe
+                                                .doc/.docx/.pdf/</label>
+                                            @error('image')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
                                                 </div>
-                                            </div>
-                                            <label for="" class="mt-1 small text-danger">*) File harus bertipe
-                                                .png/.jpg</label>
+                                            @enderror
                                         </div>
 
                                         <div class="col-lg-2">

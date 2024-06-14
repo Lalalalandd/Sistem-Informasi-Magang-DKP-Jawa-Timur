@@ -87,6 +87,7 @@ class ProfilController extends Controller
                 $user->save();
             }
         } else {
+        
             $user = User::with('detail')->findOrFail($id);
             $validatedData = $request->validate([
                 'name' => 'nullable|max:255',
@@ -94,8 +95,14 @@ class ProfilController extends Controller
                 'image' => 'nullable|mimes:jpg,png',
             ]);
 
+            $validateDetailData = $request->validate([
+                'nama_kelompok_1' => 'nullable|max:255',
+                'nama_kelompok_2' => 'nullable|max:255',
+            ]);
+
             // Update data tugas
             $user->update($validatedData);
+            $user->detail->update($validateDetailData);
 
             // Proses file lampiran jika ada
             if ($request->hasFile('image')) {

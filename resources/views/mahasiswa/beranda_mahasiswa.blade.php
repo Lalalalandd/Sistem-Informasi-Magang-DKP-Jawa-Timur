@@ -20,15 +20,23 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="callout callout-info">
-                                    <label for="">Nama Anggota Kelompok 1 :</label>
-                                    <p> {{ $user->detail['nama_kelompok_1'] }} </p>
-                                    <label for="">Nama Anggota Kelompok 2 :</label>
-                                    <p>{{ $user->detail['nama_kelompok_2'] }}</p>
+                                    @if ($user->detail['nama_kelompok_1'] != null)
+                                        <label for="">Nama Anggota Kelompok 1 :</label>
+                                        <p> {{ $user->detail['nama_kelompok_1'] }} </p>
+                                    @endif
+                                    @if ($user->detail['nama_kelompok_2'] != null)
+                                        <label for="">Nama Anggota Kelompok 2 :</label>
+                                        <p> {{ $user->detail['nama_kelompok_2'] }} </p>
+                                    @endif
                                     <label for="">Surat Pengantar :</label>
                                     <iframe src="{{ url(Storage::disk('public')->url($user->detail['surat_pengantar'])) }}"
                                         frameborder="0" style="width:100%;min-height:440px;"></iframe>
+
+                                    <label for="">Surat Balasan :</label>
+                                    <iframe src="{{ url(Storage::disk('public')->url($user->detail['surat_balasan'])) }}"
+                                        frameborder="0" style="width:100%;min-height:440px;"></iframe>
                                     <label for="">Dinas :</label>
-                                    <p>{{ $user->detail['dinas'] }}</p>
+                                    <p>{{ $user->dinas['dinas'] }}</p>
                                     <label for="">Sub Bagian :</label>
                                     <p>{{ $user->detail['sub_bagian'] }}</p>
                                     <label for="">Universitas :</label>
@@ -58,38 +66,44 @@
                             <div class="card-body">
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
-                                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
                                     </ol>
                                     <div class="carousel-inner">
-                                      <div class="carousel-item active">
-                                        <img class="d-block w-100" src="template/img/slider-141.jpg" height="201px" alt="First slide">
-                                      </div>
-                                      <div class="carousel-item">
-                                        <img class="d-block w-100" src="template/img/slider-142.jpg" height="201px" alt="Second slide">
-                                      </div>
-                                      <div class="carousel-item">
-                                        <img class="d-block w-100" src="template/img/slider-143.jpg" height="201px" alt="Third slide">
-                                      </div>
-                                      <div class="carousel-item">
-                                        <img class="d-block w-100" src="template/img/slider-144.jpg" height="201px" alt="Fourth slide">
-                                      </div>
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src="template/img/slider-141.jpg" height="201px"
+                                                alt="First slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="template/img/slider-142.jpg" height="201px"
+                                                alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="template/img/slider-143.jpg" height="201px"
+                                                alt="Third slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="template/img/slider-144.jpg" height="201px"
+                                                alt="Fourth slide">
+                                        </div>
                                     </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                      <span class="carousel-control-custom-icon" aria-hidden="true">
-                                        <i class="fas fa-chevron-left"></i>
-                                      </span>
-                                      <span class="sr-only">Previous</span>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-custom-icon" aria-hidden="true">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </span>
+                                        <span class="sr-only">Previous</span>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                      <span class="carousel-control-custom-icon" aria-hidden="true">
-                                        <i class="fas fa-chevron-right"></i>
-                                      </span>
-                                      <span class="sr-only">Next</span>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-custom-icon" aria-hidden="true">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </span>
+                                        <span class="sr-only">Next</span>
                                     </a>
-                                  </div>
+                                </div>
 
                             </div>
                             <!-- /.card-body -->

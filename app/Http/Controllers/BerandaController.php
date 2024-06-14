@@ -21,7 +21,9 @@ class BerandaController extends Controller
 
     public function index_mahasiswa(Request $request){
         $data = $request->session()->get('user_id');
-        $user = User::with('detail')->find($data);
+        $user = User::with('detail')
+        ->with('dinas')
+        ->find($data);
         return view('mahasiswa.beranda_mahasiswa', [
             'tittle' => 'Beranda',
             'user' => $user

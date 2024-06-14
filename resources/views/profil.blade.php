@@ -77,7 +77,7 @@
                                 {{ csrf_field() }}
                                 <div class="card-body">
                                     <div class="row">
-                                       
+                                      
                                         <div class="col-lg-2">
                                             <label for="">Surat Pengantar</label>
                                         </div>
@@ -86,7 +86,7 @@
                                                 class="form-control  @error('surat_pengantar') is-invalid @enderror"
                                                 id="image" name="image">
                                             <label for="" class="small text-danger">*) File harus bertipe
-                                                .doc/.docx/.pdf/</label>
+                                                .png/.jpg</label>
                                             @error('image')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

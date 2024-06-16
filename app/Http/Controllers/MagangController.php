@@ -14,9 +14,7 @@ class MagangController extends Controller
      */
     public function index()
     {
-        $user = User::where('role', 'mahasiswa')->with('detail')->get();
-        $user->load('dinas');
-       
+        $user = User::where('role', 'mahasiswa')->with('detail', 'dinas')->get();
         return view('magang', [
             'tittle' => 'Magang',
             'magang' =>  $user

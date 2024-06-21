@@ -109,11 +109,11 @@
                                                                                     @elseif($fileExtension === 'pdf')
                                                                                         <iframe
                                                                                             src="{{ asset('storage/' . $d->lampiran) }}"
-                                                                                            style="width: 100%; height: 500px;"></iframe>
+                                                                                            style="width: 100%; height: 400px;"></iframe>
                                                                                     @elseif(in_array($fileExtension, ['doc', 'docx']))
                                                                                         <iframe
                                                                                             src="https://docs.google.com/viewer?url={{ asset('storage/' . $d->lampiran) }}&embedded=true"
-                                                                                            style="width: 100%; height: 500px;"></iframe>
+                                                                                            style="width: 100%; height: 400px;"></iframe>
                                                                                     @else
                                                                                         <p>Tidak bisa menampilkan lampiran
                                                                                             dengan tipe file ini.

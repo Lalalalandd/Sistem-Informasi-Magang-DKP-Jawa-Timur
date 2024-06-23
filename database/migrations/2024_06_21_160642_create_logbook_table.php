@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('logbook', function (Blueprint $table) {
             $table->id();
-            $table->string('sub_bagian');
+            $table->unsignedBigInteger('user_id');
+            $table->date('tanggal');
+            $table->string('aktivitas');
+            $table->string('bukti');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

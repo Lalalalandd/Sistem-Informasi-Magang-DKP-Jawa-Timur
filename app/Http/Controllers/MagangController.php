@@ -38,9 +38,11 @@ class MagangController extends Controller
     public function index_mahasiswa()
     {
         $mahasiswa = Auth::user();
+        $detail = Auth::user()->detail;
         return view('mahasiswa.magang_mahasiswa', [
             'tittle' => 'Magang',
-            'magang' =>  $mahasiswa
+            'magang' =>  $mahasiswa,
+            'detail' => $detail
         ]);
     }
 

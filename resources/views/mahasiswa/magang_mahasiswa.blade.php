@@ -72,8 +72,7 @@
                                                 Unduh Surat
                                             </button>
                                         </form>
-                                        <form
-                                            action="{{ $detail->sertifikat ? Storage::url($detail->sertifikat) : '#' }}"
+                                        <form action="{{ $detail->sertifikat ? Storage::url($detail->sertifikat) : '#' }}"
                                             method="get" target="_blank">
                                             <button type="submit" class="btn mb-2"
                                                 style="width:100%; background-color: #FFD1E2 !important; color:#E96494;"
@@ -128,7 +127,8 @@
                                 </svg>
                             </i>
                             Download Logbook!</button>
-                        <button class="btn btn-outline-primary float-right mr-3">
+                        <button class="btn btn-outline-primary float-right mr-3" type="button" data-toggle="modal"
+                            data-target="#tambahdata">
                             <i>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                                     <path fill="none" stroke="currentColor" stroke-linecap="round"
@@ -139,11 +139,65 @@
                             Tambah Kegiatan</button>
                     </div>
 
-                    <div class="col-12">
-
+                    <div class="col-12 mt-4">
+                        <div class="card">
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Aktivitas</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            use Carbon\Carbon;
+                                            $x = 1;
+                                        @endphp
+                                        <tr>
+                                            <th scope="row">{{ $x++ }}</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
+        <!-- /.modal tambah data -->
+        <div class="modal fade" id="tambahdata">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Tambah Kegiatan</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/tugas" method="POST" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Tambah Data</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal tambah data -->
     @endsection

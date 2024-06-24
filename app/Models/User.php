@@ -55,6 +55,11 @@ class User extends Authenticatable
         return $this->hasOne(PendaftarMahasiswa::class, 'user_id', 'id');
     }
 
+    public function logbook()
+    {
+        return $this->hasOne(Logbook::class, 'user_id', 'id');
+    }
+
     public function tugas()
     {
         return $this->hasMany(Tugas::class);

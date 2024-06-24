@@ -147,11 +147,20 @@
                                                                     <div class="col-6">
                                                                         <label for="status"
                                                                             class="col-form-label">Status</label>
+                                                                            @if ($d->status == "selesai")
+                                                                             <p class="label bg-success text-center" style="max-width: 100px">Selesai</p>
+                                                                            @elseif($d->status == 'proses')
+                                                                            <p class="label bg-info text-center" style="max-width: 100px">Proses</p>
+                                                                            @else
+                                                                            <p class="label bg-warning text-center" style="max-width: 100px">Belum</p>
+                                                                            @endif
                                                                     </div>
 
                                                                     <div class="col-6">
                                                                         <div class="form-group clearfix">
                                                                             <div class="row">
+                                                                                <label for="aksi"
+                                                                            class="col-form-label">Aksi</label>
                                                                                 <div class="icheck-warning col-12 ">
                                                                                     <input type="radio"
                                                                                         id="radioPrimary1{{ $d->id }}"

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\logbook;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorelogbookRequest;
 use App\Http\Requests\UpdatelogbookRequest;
 
@@ -13,7 +14,15 @@ class LogbookController extends Controller
      */
     public function index()
     {
-        //
+        $mahasiswa = Auth::user();
+        $magang = logbook::where('user_id', $mahasiswa->id)->get();
+        $detail = Auth::user()->detail;
+        return view('mahasiswa.magang_mahasiswa', [
+            'tittle' => 'Magang',
+            'mahasiswa' =>  $mahasiswa,
+            'detail' => $detail,
+            'magang' => $magang
+        ]);
     }
 
     /**

@@ -18,7 +18,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="/magang_mahasiswa" class="nav-link {{ $tittle === 'Magang' ? 'active' : '' }}">
+            <a href="/logbook" class="nav-link {{ $tittle === 'Magang' ? 'active' : '' }}">
                 <i class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                         viewBox="0 0 24 24">
                         <g fill="none">

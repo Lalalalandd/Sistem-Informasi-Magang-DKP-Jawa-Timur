@@ -148,6 +148,7 @@
                                             <th scope="col">No.</th>
                                             <th scope="col">Tanggal</th>
                                             <th scope="col">Aktivitas</th>
+                                            <th scope="col">Presensi</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
@@ -157,16 +158,48 @@
                                             use Carbon\Carbon;
                                             $x = 1;
                                         @endphp
-                                        <tr>
-                                            <th scope="row">{{ $x++ }}</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        @if ($magang->isEmpty())
+                                            <tr>
+                                                <td colspan="6" class="text-center">Aktivitas harian belum dibuat</td>
+                                            </tr>
+                                        @endif
+                                        @foreach ($magang as $d)
+                                            <tr>
+                                                <th scope="row">{{ $x++ }}</th>
+                                                <td>{{ $d->tanggal }}</td>
+                                                <td>{{ $d->aktivitas }}</td>
+                                                @if ($d->bukti != null)
+                                                    <td>
+                                                        <a href="{{ Storage::url($d->lampiran) }}" target="_blank">Lihat
+                                                            lampiran</a>
+                                                    </td>
+                                                @else
+                                                    <td>Tidak ada bukti</td>
+                                                @endif
+                                                <td>
+                                                    @if ($d->status === 'masuk')
+                                                        <span class="bg-success label">Masuk</span>
+                                                    @elseif ($d->status === 'izin')
+                                                        <span class="bg-danger label">Izin</span>
+                                                    @elseif ($d->status === 'bolos')
+                                                        <span class="bg-info label">Bolos</span>
+                                                    @endif
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="card-footer clearfix">
+                                <ul class="pagination pagination-sm m-0 float-right">
+                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>

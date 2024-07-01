@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\NyuratController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PegawaiController;
@@ -20,7 +21,7 @@ use App\Http\Controllers\SubBagianController;
 //Custom Route
 Route::get('/dinas', [DinasController::class, 'index'])->middleware('auth');
 Route::get('/tugas_mahasiswa', [TugasController::class, 'index_mahasiswa'])->middleware('auth');
-Route::get('/magang_mahasiswa', [MagangController::class, 'index_mahasiswa'])->middleware('auth');
+// Route::get('/magang_mahasiswa', [LogbookController::class, 'index'])->middleware('auth');
 Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth');
 Route::get('/beranda_mahasiswa', [BerandaController::class, 'index_mahasiswa'])->name('beranda_mahasiswa')->middleware('auth');
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
@@ -39,6 +40,7 @@ Route::resource('pegawai', PegawaiController::class)->middleware('auth');
 Route::resource('subbagian', SubBagianController::class)->middleware('auth');
 Route::resource('magang', MagangController::class)->middleware('auth');
 Route::resource('profil', ProfilController::class)->middleware('auth');
+Route::resource('logbook', LogbookController::class)->middleware('auth');
 
 //Dynamic Custom Route
 Route::post('/login', [LoginController::class, 'authenticate']);

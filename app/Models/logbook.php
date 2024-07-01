@@ -14,6 +14,7 @@ class Logbook extends Model
         'tanggal',
         'aktivitas',
         'bukti',
+        'status'
     ];
     public function user()
     {

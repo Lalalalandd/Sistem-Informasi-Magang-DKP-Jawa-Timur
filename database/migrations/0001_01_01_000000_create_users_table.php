@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('role');
             $table->boolean('status')->default(0);
             $table->unsignedBigInteger('dinas_id');
-            $table->unsignedBigInteger('logbook_id');
             $table->rememberToken();
             $table->timestamps();
 

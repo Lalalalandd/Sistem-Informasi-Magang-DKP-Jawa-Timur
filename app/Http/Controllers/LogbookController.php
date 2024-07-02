@@ -39,11 +39,13 @@ class LogbookController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $user = Auth::user();
         $validatedData = $request->validate([
             'tanggal' => 'required',
             'aktivitas' => 'required',
             'bukti' => 'mimes:jpg,png|max:4096',
+            'presensi' => 'required',
             'status' => 'required',
         ]);
 

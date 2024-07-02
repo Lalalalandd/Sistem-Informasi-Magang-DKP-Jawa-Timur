@@ -181,15 +181,23 @@
                                                     <td>Tidak ada bukti</td>
                                                 @endif
                                                 <td>
-                                                    @if ($d->status === 'masuk')
+                                                    @if ($d->presensi === 'masuk')
                                                         <span class="bg-success label">Masuk</span>
-                                                    @elseif ($d->status === 'izin')
+                                                    @elseif ($d->presensi === 'izin')
                                                         <span class="bg-info label">Izin</span>
-                                                    @elseif ($d->status === 'bolos')
+                                                    @elseif ($d->presensi === 'bolos')
                                                         <span class="bg-danger label">Bolos</span>
                                                     @endif
                                                 </td>
-                                                <td></td>
+                                                <td>
+                                                    @if ($d->status === 'ditinjau')
+                                                        <span class="btn btn-outline-info">Di tinjau</span>
+                                                    @elseif ($d->status === 'diterima')
+                                                        <span class="btn btn-outline-success">Di terima</span>
+                                                    @elseif ($d->status === 'ditolak')
+                                                        <span class="btn btn-outline-danger">Di tolak</span>
+                                                    @endif
+                                                </td>
                                                 <td><button class="btn btn-outline-primary" type="button"
                                                         data-toggle="modal" data-target="#edit{{ $x }}"
                                                         title="edit">Edit</button></td>
@@ -229,10 +237,9 @@
                             <div class="col-lg-12">
                                 <label for="tanggal" class="col-form-label float-right">Tanggal:
                                     {{ Carbon::today()->format('d-m-Y') }}</label>
-                                <input type="hidden" class="form-control" id="tanggal" name="tanggal" required
-                                    value="{{ Carbon::today()->toDateString() }}">
-                                <input type="hidden" class="form-control" id="user_id" name="user_id" required
-                                    value="{{ auth()->user()->id }}">
+                                <input type="hidden" name="tanggal" value="{{ Carbon::today()->toDateString() }}">
+                                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                <input type="hidden" name="status" value="ditinjau">
                             </div>
                             <div class="col-lg-12 mb-3">
                                 <label for="aktivitas" class="col-form-label">Aktivitas</label>
@@ -261,9 +268,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <label for="status" class="col-form-label">Presensi</label>
-                                <select class="form-control select2bs4" style="width: 100%;" name="status"
-                                    id="status">
+                                <label for="presensi" class="col-form-label">Presensi</label>
+                                <select class="form-control select2bs4" style="width: 100%;" name="presensi"
+                                    id="presensi">
                                     <option value="masuk">
                                         Masuk
                                     </option>
@@ -311,7 +318,7 @@
             document.addEventListener('DOMContentLoaded', function() {
                 $('#buktiModal').on('show.bs.modal', function(event) {
                     var button = $(event.relatedTarget);
-                    var url = button.data('url'); 
+                    var url = button.data('url');
                     var modal = $(this);
                     modal.find('.modal-body iframe').attr('src', url);
                 });
@@ -319,7 +326,7 @@
                 $('#buktiModal').on('hidden.bs.modal', function(event) {
                     var modal = $(this);
                     modal.find('.modal-body iframe').attr('src',
-                    ''); 
+                        '');
                 });
             });
         </script>

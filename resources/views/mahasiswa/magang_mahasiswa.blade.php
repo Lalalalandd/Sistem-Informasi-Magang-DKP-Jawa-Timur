@@ -148,6 +148,7 @@
                                             <th scope="col">No.</th>
                                             <th scope="col">Tanggal</th>
                                             <th scope="col">Aktivitas</th>
+                                            <th scope="col">Bukti</th>
                                             <th scope="col">Presensi</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
@@ -160,7 +161,7 @@
                                         @endphp
                                         @if ($magang->isEmpty())
                                             <tr>
-                                                <td colspan="6" class="text-center">Aktivitas harian belum dibuat</td>
+                                                <td colspan="7" class="text-center">Aktivitas harian belum dibuat</td>
                                             </tr>
                                         @endif
                                         @foreach ($magang as $d)
@@ -169,9 +170,12 @@
                                                 <td>{{ $d->tanggal }}</td>
                                                 <td>{{ $d->aktivitas }}</td>
                                                 @if ($d->bukti != null)
+                                                    @php
+                                                        $urlBukti = Storage::url($d->bukti);
+                                                    @endphp
                                                     <td>
-                                                        <a href="{{ Storage::url($d->lampiran) }}" target="_blank">Lihat
-                                                            lampiran</a>
+                                                        <a href="#" data-toggle="modal" data-target="#buktiModal"
+                                                            data-url="{{ $urlBukti }}">Lihat bukti</a>
                                                     </td>
                                                 @else
                                                     <td>Tidak ada bukti</td>
@@ -180,13 +184,15 @@
                                                     @if ($d->status === 'masuk')
                                                         <span class="bg-success label">Masuk</span>
                                                     @elseif ($d->status === 'izin')
-                                                        <span class="bg-danger label">Izin</span>
+                                                        <span class="bg-info label">Izin</span>
                                                     @elseif ($d->status === 'bolos')
-                                                        <span class="bg-info label">Bolos</span>
+                                                        <span class="bg-danger label">Bolos</span>
                                                     @endif
                                                 </td>
                                                 <td></td>
-                                                <td></td>
+                                                <td><button class="btn btn-outline-primary" type="button"
+                                                        data-toggle="modal" data-target="#edit{{ $x }}"
+                                                        title="edit">Edit</button></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -217,10 +223,59 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/tugas" method="POST" enctype="multipart/form-data">
+                    <form action="/logbook" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="modal-body">
+                            <div class="col-lg-12">
+                                <label for="tanggal" class="col-form-label float-right">Tanggal:
+                                    {{ Carbon::today()->format('d-m-Y') }}</label>
+                                <input type="hidden" class="form-control" id="tanggal" name="tanggal" required
+                                    value="{{ Carbon::today()->toDateString() }}">
+                                <input type="hidden" class="form-control" id="user_id" name="user_id" required
+                                    value="{{ auth()->user()->id }}">
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <label for="aktivitas" class="col-form-label">Aktivitas</label>
+                                <input type="text" class="form-control @error('aktivitas') is-invalid @enderror"
+                                    id="aktivitas" name="aktivitas" required placeholder="aktivitas yang ingin diberikan"
+                                    value="{{ old('aktivitas') }}">
+                                @error('aktivitas')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Bukti</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile"
+                                                name="bukti">
+                                            <label class="custom-file-label" for="exampleInputFile">Choose
+                                                file</label>
+                                        </div>
+                                    </div>
+                                    <label for="" class="mt-1 small text-danger">*) File harus bertipe
+                                        .png/.jpg</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <label for="status" class="col-form-label">Presensi</label>
+                                <select class="form-control select2bs4" style="width: 100%;" name="status"
+                                    id="status">
+                                    <option value="masuk">
+                                        Masuk
+                                    </option>
+                                    <option value="izin">
+                                        Izin
+                                    </option>
+                                    <option value="bolos">
+                                        Bolos
+                                    </option>
+                                </select>
 
+                            </div>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
@@ -233,4 +288,39 @@
             <!-- /.modal-dialog -->
         </div>
         <!-- /.modal tambah data -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="buktiModal" tabindex="-1" role="dialog" aria-labelledby="buktiModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="buktiModalLabel">Lihat Bukti</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Konten modal akan diisi melalui JavaScript -->
+                        <iframe id="buktiFrame" src="" width="100%" height="500px" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                $('#buktiModal').on('show.bs.modal', function(event) {
+                    var button = $(event.relatedTarget);
+                    var url = button.data('url'); 
+                    var modal = $(this);
+                    modal.find('.modal-body iframe').attr('src', url);
+                });
+
+                $('#buktiModal').on('hidden.bs.modal', function(event) {
+                    var modal = $(this);
+                    modal.find('.modal-body iframe').attr('src',
+                    ''); 
+                });
+            });
+        </script>
     @endsection

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\logbook;
+use App\Models\Logbook;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorelogbookRequest;
 use App\Http\Requests\UpdatelogbookRequest;
@@ -36,9 +37,24 @@ class LogbookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorelogbookRequest $request)
+    public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $validatedData = $request->validate([
+            'tanggal' => 'required',
+            'aktivitas' => 'required',
+            'bukti' => 'mimes:jpg,png|max:4096',
+            'status' => 'required',
+        ]);
+
+        if($request->file('bukti')){
+            $buktiPath = $request->file('bukti')->store('bukti');
+            $validatedData['bukti'] = $buktiPath;
+        }
+
+        $validatedData['user_id'] = $user->id;
+        Logbook::create($validatedData);
+        return redirect('logbook')->with('success', 'Data aktivitas harian berhasil ditambahkan.');
     }
 
     /**

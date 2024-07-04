@@ -32,4 +32,5 @@ class PendaftarMahasiswa extends Model
     }
 
     
+    
 }

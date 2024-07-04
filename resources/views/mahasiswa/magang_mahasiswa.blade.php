@@ -200,7 +200,7 @@
                                                 </td>
                                                 <td><button class="btn btn-outline-primary" type="button"
                                                         data-toggle="modal" data-target="#edit{{ $x }}"
-                                                        title="edit">Edit</button></td>
+                                                        title="edit" {{ $d->status == "diterima" || $d->status == "ditolak" ? "disabled" : ""}}>Edit</button></td>
                                             </tr>
                                         @endforeach
                                     </tbody>

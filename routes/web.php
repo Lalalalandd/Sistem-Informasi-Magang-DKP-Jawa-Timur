@@ -13,6 +13,7 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubBagianController;
+use App\Http\Middleware\CheckLogbookDate;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -24,7 +25,7 @@ Route::get('/tugas_mahasiswa', [TugasController::class, 'index_mahasiswa'])->mid
 // Route::get('/magang_mahasiswa', [LogbookController::class, 'index'])->middleware('auth');
 Route::get('/beranda', [BerandaController::class, 'index'])->middleware('auth');
 Route::get('/beranda_mahasiswa', [BerandaController::class, 'index_mahasiswa'])->name('beranda_mahasiswa')->middleware('auth');
-Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::get('/nyurat', [NyuratController::class, 'index'])->middleware('guest');
 

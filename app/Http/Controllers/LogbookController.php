@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorelogbookRequest;
 use App\Http\Requests\UpdatelogbookRequest;
 
+
 class LogbookController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    
     public function index()
     {
         $mahasiswa = Auth::user();
@@ -44,7 +46,7 @@ class LogbookController extends Controller
         $validatedData = $request->validate([
             'tanggal' => 'required',
             'aktivitas' => 'required',
-            'bukti' => 'mimes:jpg,png|max:4096',
+            'bukti' => 'nullable|mimes:jpg,png|max:4096',
             'presensi' => 'required',
             'status' => 'required',
         ]);
@@ -52,6 +54,11 @@ class LogbookController extends Controller
         if($request->file('bukti')){
             $buktiPath = $request->file('bukti')->store('bukti');
             $validatedData['bukti'] = $buktiPath;
+        }
+
+        $today = now()->format('Y-m-d');
+        if ($user->logbook->where('tanggal', $today)->first()) {
+            return response()->json(['error' => 'You have already filled your logbook for today.']);
         }
 
         $validatedData['user_id'] = $user->id;

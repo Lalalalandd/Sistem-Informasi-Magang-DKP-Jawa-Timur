@@ -58,7 +58,7 @@ class LogbookController extends Controller
 
         $today = now()->format('Y-m-d');
         if ($user->logbook->where('tanggal', $today)->first()) {
-            return response()->json(['error' => 'You have already filled your logbook for today.']);
+            return redirect('logbook')->with(['error' => 'Kamu sudah mengisi aktivitas hari ini.']);
         }
 
         $validatedData['user_id'] = $user->id;

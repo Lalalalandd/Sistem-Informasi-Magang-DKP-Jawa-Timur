@@ -338,6 +338,9 @@
             @if (session('error'))
                 toastr.error('{{ session('error') }}');
             @endif
+            @if (session('success'))
+                toastr.success('{{ session('success') }}');
+            @endif
     
     </script>
 @endpush

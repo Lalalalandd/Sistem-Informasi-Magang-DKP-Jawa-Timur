@@ -210,7 +210,6 @@
                                             </div>
                                             <!-- /.modal-dialog -->
                                         </div>
-
                                         <!-- /.modal EDIT data -->
                                         @endforeach
                                     </tbody>

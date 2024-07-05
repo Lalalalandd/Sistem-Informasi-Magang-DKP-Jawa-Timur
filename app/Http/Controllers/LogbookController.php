@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Logbook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorelogbookRequest;
 use App\Http\Requests\UpdatelogbookRequest;
 
@@ -85,9 +86,28 @@ class LogbookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatelogbookRequest $request, logbook $logbook)
+    public function update(Request $request, string $id)
     {
-        //
+        $logbook = Logbook::findOrFail($id);
+        $validatedData = $request->validate([
+            'aktivitas' => 'required',
+            'bukti' => 'nullable|mimes:jpg,png|max:4096',
+        ]);
+        $logbook->update($validatedData);
+        if($request->file('bukti')){
+            $buktiPath = $request->file('bukti')->store('bukti');
+            $validatedData['bukti'] = $buktiPath;
+        }
+         if ($request->hasFile('bukti')) {
+            // Hapus file lama jika ada
+            if ($logbook->bukti) {
+                Storage::disk('public')->delete($logbook->bukti);
+            }
+            $buktiPath = $request->file('bukti')->store('bukti', 'public');
+            $logbook->update(['bukti' => $buktiPath]);
+        }
+
+        return redirect('logbook')->with('success', 'Data aktivitas anda berhasil diperbarui.');
     }
 
     /**

@@ -79,7 +79,7 @@
                                     <div class="row">
                                       
                                         <div class="col-lg-2">
-                                            <label for="">Surat Pengantar</label>
+                                            <label for="">Foto Profil</label>
                                         </div>
                                         <div class="col-lg-10 ">
                                             <input type="file"
@@ -110,7 +110,7 @@
                                         <div class="col-lg-10">
                                             <div class="form-group">
                                                 <input type="text" name="email" id="email" class="form-control"
-                                                    value="{{ $user->email }}">
+                                                    value="{{ $user->email }}" disabled>
                                             </div>
                                         </div>
 
@@ -230,7 +230,7 @@
                                         <div class="col-lg-10">
                                             <div class="form-group">
                                                 <input type="text" name="email" id="email" class="form-control"
-                                                    value="{{ $user->email }}">
+                                                    value="{{ $user->email }}" disabled>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">

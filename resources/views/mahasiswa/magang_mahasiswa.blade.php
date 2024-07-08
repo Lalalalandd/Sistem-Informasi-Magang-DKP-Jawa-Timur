@@ -200,80 +200,85 @@
                                                 </td>
                                                 <td><button class="btn btn-outline-primary" type="button"
                                                         data-toggle="modal" data-target="#editdata{{ $x }}"
-                                                        title="edit" {{ $d->status == "diterima" ? "disabled" : ""}}>Edit</button></td>
+                                                        title="edit"
+                                                        {{ $d->status == 'diterima' ? 'disabled' : '' }}>Edit</button></td>
                                             </tr>
 
 
                                             <!-- /.modal EDIT data -->
-                                        <div class="modal fade" id="editdata{{ $x }}">
-                                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Edit Aktivitas Harian</h4>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <form action="logbook/{{ $d->id }}" method="POST" enctype="multipart/form-data">
-                                                        @method('put')
-                                                        {{ csrf_field() }}
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <label for="tanggal" class="col-form-label float-right">Tanggal:
-                                                                        {{ $d->tanggal }}</label>
-                                                                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                                                                    
-                                                                </div>
-                                                                <div class="col-lg-12 mb-3">
-                                                                    <label for="aktivitas" class="col-form-label">Aktivitas</label>
-                                                                    <input type="text" class="form-control @error('aktivitas') is-invalid @enderror"
-                                                                        id="aktivitas" name="aktivitas" required
-                                                                        value="{{ $d->aktivitas }}">
-                                                                    @error('aktivitas')
-                                                                        <div class="invalid-feedback">
-                                                                            {{ $message }}
-                                                                        </div>
-                                                                    @enderror
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputFile">Bukti</label>
-                                                                        <div class="input-group">
-                                                                            <div class="custom-file">
-                                                                                <input type="file" class="custom-file-input" id="exampleInputFile"
-                                                                                    name="bukti" value="{{ $d->bukti }}">
-                                                                                <label class="custom-file-label" for="exampleInputFile">Choose
-                                                                                    file</label>
+                                            <div class="modal fade" id="editdata{{ $x }}">
+                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Edit Aktivitas Harian</h4>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="logbook/{{ $d->id }}" method="POST"
+                                                            enctype="multipart/form-data">
+                                                            @method('put')
+                                                            {{ csrf_field() }}
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <label for="tanggal"
+                                                                            class="col-form-label float-right">Tanggal:
+                                                                            {{ $d->tanggal }}</label>
+                                                                        <input type="hidden" name="user_id"
+                                                                            value="{{ auth()->user()->id }}">
+
+                                                                    </div>
+                                                                    <div class="col-lg-12 mb-3">
+                                                                        <label for="aktivitas"
+                                                                            class="col-form-label">Aktivitas</label>
+                                                                        <input type="text"
+                                                                            class="form-control @error('aktivitas') is-invalid @enderror"
+                                                                            id="aktivitas" name="aktivitas" required
+                                                                            value="{{ $d->aktivitas }}">
+                                                                        @error('aktivitas')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
                                                                             </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputFile">Bukti</label>
+                                                                            <div class="input-group">
+                                                                                <input type="file" class="form-control"
+                                                                                    id="exampleInputFile" name="bukti"
+                                                                                    value="{{ $d->bukti }}">
+                                                                            </div>
+                                                                            <label for=""
+                                                                                class="mt-1 small text-danger">*) File
+                                                                                harus bertipe
+                                                                                .png/.jpg</label>
                                                                         </div>
-                                                                        <label for="" class="mt-1 small text-danger">*) File harus bertipe
-                                                                            .png/.jpg</label>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="float-right">
-                                                                        <a href="{{ Storage::url($d->bukti) }}"
-                                                                            target="_blank">Lihat Bukti</a>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="float-right">
+                                                                            <a href="{{ Storage::url($d->bukti) }}"
+                                                                                target="_blank">Lihat Bukti</a>
+                                                                        </div>
                                                                     </div>
+
                                                                 </div>
-                                                               
                                                             </div>
-                                                        </div>
-                                                        <div class=" modal-footer justify-content-between">
-                                                            <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">Tutup</button>
-                                                            <button type="submit" class="btn btn-warning">Edit
-                                                                Data</button>
-                                                        </div>
-                                                    </form>
+                                                            <div class=" modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default"
+                                                                    data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-warning">Edit
+                                                                    Data</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- /.modal-content -->
                                                 </div>
-                                                <!-- /.modal-content -->
+                                                <!-- /.modal-dialog -->
                                             </div>
-                                            <!-- /.modal-dialog -->
-                                        </div>
-                                        <!-- /.modal EDIT data -->
+                                            <!-- /.modal EDIT data -->
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -316,7 +321,7 @@
                             <div class="col-lg-12 mb-3">
                                 <label for="aktivitas" class="col-form-label">Aktivitas</label>
                                 <input type="text" class="form-control @error('aktivitas') is-invalid @enderror"
-                                    id="aktivitas" name="aktivitas" required placeholder="aktivitas yang ingin diberikan"
+                                    id="aktivitas" name="aktivitas" required placeholder="Tulis aktivitas harian anda"
                                     value="{{ old('aktivitas') }}">
                                 @error('aktivitas')
                                     <div class="invalid-feedback">
@@ -328,12 +333,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputFile">Bukti</label>
                                     <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile"
-                                                name="bukti">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose
-                                                file</label>
-                                        </div>
+                                        <input type="file" class="form-control" id="exampleInputFile" name="bukti">
                                     </div>
                                     <label for="" class="mt-1 small text-danger">*) File harus bertipe
                                         .png/.jpg</label>
@@ -405,14 +405,12 @@
     @endsection
 
     @push('scripts')
-    <script>
-
+        <script>
             @if (session('error'))
                 toastr.error('{{ session('error') }}');
             @endif
             @if (session('success'))
                 toastr.success('{{ session('success') }}');
             @endif
-    
-    </script>
-@endpush
+        </script>
+    @endpush

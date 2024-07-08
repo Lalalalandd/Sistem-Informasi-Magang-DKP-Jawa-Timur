@@ -12,6 +12,7 @@ class PendaftarMahasiswa extends Model
     protected $table = 'pendaftar_mahasiswa';
     protected $fillable = [
         'user_id',
+        'periode_magang_id',
         'nama_kelompok_1',
         'nama_kelompok_2',
         'universitas',
@@ -29,6 +30,10 @@ class PendaftarMahasiswa extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function periodeMagang()
+    {
+        return $this->belongsTo(PeriodeMagang::class);
     }
 
     

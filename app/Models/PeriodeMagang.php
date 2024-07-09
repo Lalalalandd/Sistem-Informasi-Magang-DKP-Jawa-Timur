@@ -11,6 +11,7 @@ class PeriodeMagang extends Model
         'nama_periode',
         'tanggal_mulai',
         'tanggal_selesai',
+        'status',
         'kuota',
     ];
 

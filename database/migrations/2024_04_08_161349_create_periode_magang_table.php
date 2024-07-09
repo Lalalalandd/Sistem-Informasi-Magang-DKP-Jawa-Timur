@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_periode');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
+            $table->string('status');
             $table->integer('kuota')->default(50);
             $table->timestamps();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('periode_magangs');
+        Schema::dropIfExists('periode_magang');
     }
 };

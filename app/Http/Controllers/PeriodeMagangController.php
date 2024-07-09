@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\PeriodeMagang;
-use App\Http\Requests\StorePeriodeMagangRequest;
 use App\Http\Requests\UpdatePeriodeMagangRequest;
+use Illuminate\Http\Request;
 
 class PeriodeMagangController extends Controller
 {
@@ -14,7 +14,7 @@ class PeriodeMagangController extends Controller
     public function index()
     {
         $periode = PeriodeMagang::All();
-        return view ("/periode",[
+        return view ('/periode',[
             'tittle' => 'Periode Magang',
             'periode' => $periode
         ]);
@@ -31,9 +31,18 @@ class PeriodeMagangController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePeriodeMagangRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_periode' => 'required',
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
+            'kuota' => 'required',
+            'status' => 'required',
+           ]);
+        PeriodeMagang::create($validatedData);
+
+        return redirect('/periodemagang');
     }
 
     /**

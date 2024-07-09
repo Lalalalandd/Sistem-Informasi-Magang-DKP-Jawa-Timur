@@ -13,7 +13,11 @@ class PeriodeMagangController extends Controller
      */
     public function index()
     {
-        //
+        $periode = PeriodeMagang::All();
+        return view ("/periode",[
+            'tittle' => 'Periode Magang',
+            'periode' => $periode
+        ]);
     }
 
     /**

@@ -10,6 +10,7 @@ use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PeriodeMagangController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubBagianController;
@@ -42,6 +43,7 @@ Route::resource('subbagian', SubBagianController::class)->middleware('auth');
 Route::resource('magang', MagangController::class)->middleware('auth');
 Route::resource('profil', ProfilController::class)->middleware('auth');
 Route::resource('logbook', LogbookController::class)->middleware('auth');
+Route::resource('periodemagang', PeriodeMagangController::class)->middleware('auth');
 
 //Dynamic Custom Route
 Route::post('/login', [LoginController::class, 'authenticate']);

@@ -35,7 +35,7 @@ class PeriodeMagangController extends Controller
     {
         $validatedData = $request->validate([
             'nama_periode' => 'required',
-            'tanggal_mulai' => 'required',
+            'tanggal_mulai' => 'required|unique:periode_magang',
             'tanggal_selesai' => 'required',
             'kuota' => 'required',
             'status' => 'required',
@@ -72,8 +72,11 @@ class PeriodeMagangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PeriodeMagang $periodeMagang)
+    public function destroy($id)
     {
-        //
+        $periode_magang = PeriodeMagang::findOrFail($id);
+        $periode_magang->delete();
+
+        return redirect('/periodemagang');
     }
 }

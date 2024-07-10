@@ -42,15 +42,24 @@
                                     <tbody>
                                         @php
                                             $x = 1;
+                                            use Carbon\Carbon;
                                         @endphp
                                         @foreach ($periode as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
                                                 <td><?= $d->nama_periode ?></td>
-                                                <td><?= $d->tanggal_mulai ?></td>
-                                                <td><?= $d->tanggal_selesai ?></td>
+                                                <td>{{ Carbon::parse($d->tanggal_mulai)->format('d M Y') }}</td>
+                                                <td>{{ Carbon::parse($d->tanggal_selesai)->format('d M Y') }}</td>
                                                 <td><?= $d->kuota ?></td>
-                                                <td><?= $d->status ?></td>
+                                                <td>
+                                                    @if ($d->status === 'aktif')
+                                                        <span class="bg-success label">Aktif</span>
+                                                    @elseif ($d->status === 'penuh')
+                                                        <span class="bg-warning label">Penuh</span>
+                                                    @elseif ($d->status === 'tidak aktif')
+                                                        <span class="bg-danger label">Tidak Aktif</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <div class="d-flex d-inline">
                                                         <button class="btn btn-outline-warning mr-1" type="button"
@@ -80,6 +89,66 @@
                                                     </div>
                                                 </td>
                                             </tr>
+
+                                            <!-- /.modal EDIT data -->
+                                            <div class="modal fade" id="editdata{{ $x }}">
+                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Edit Periode Magang</h4>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="periodemagang/{{ $d->id }}" method="POST"
+                                                            enctype="multipart/form-data">
+                                                            @method('put')
+                                                            {{ csrf_field() }}
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 mb-3">
+                                                                        <label for="nama_periode"
+                                                                            class="col-form-label float-right">Nama Periode:
+                                                                            {{ $d->nama_periode }}</label>
+                                                                        <input type="text"
+                                                                            class="form-control @error('nama_periode') is-invalid @enderror"
+                                                                            id="nama_periode" name="nama_periode" required
+                                                                            value="{{ $d->nama_periode }}">
+                                                                        @error('nama_periode')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="col-lg-12 mb-3">
+                                                                        <label for="aktivitas"
+                                                                            class="col-form-label">Aktivitas</label>
+                                                                        <input type="text"
+                                                                            class="form-control @error('aktivitas') is-invalid @enderror"
+                                                                            id="aktivitas" name="aktivitas" required
+                                                                            value="{{ $d->aktivitas }}">
+                                                                        @error('aktivitas')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class=" modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-default"
+                                                                    data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-warning">Edit
+                                                                    Data</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                            </div>
+                                            <!-- /.modal EDIT data -->
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -151,8 +220,8 @@
                             <div class="mb-3">
                                 <label for="kuota" class="col-form-label">Kuota:</label>
                                 <input type="text" class="form-control @error('kuota') is-invalid @enderror"
-                                    id="kuota" name="kuota" required
-                                    placeholder="Kuota anda" value="{{ old('kuota') }}">
+                                    id="kuota" name="kuota" required placeholder="Kuota anda"
+                                    value="{{ old('kuota') }}">
                                 @error('kuota')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -162,8 +231,7 @@
                             <div class="mb-3">
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <select class="form-control" style="width: 100%;" name="status"
-                                        id="status">
+                                    <select class="form-control" style="width: 100%;" name="status" id="status">
                                         <option value="aktif">
                                             Aktif
                                         </option>

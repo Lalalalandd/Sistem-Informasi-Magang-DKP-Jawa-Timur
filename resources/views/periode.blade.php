@@ -109,8 +109,8 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-12 mb-3">
                                                                         <label for="nama_periode"
-                                                                            class="col-form-label float-right">Nama Periode:
-                                                                            {{ $d->nama_periode }}</label>
+                                                                            class="col-form-label">Nama Periode
+                                                                        </label>
                                                                         <input type="text"
                                                                             class="form-control @error('nama_periode') is-invalid @enderror"
                                                                             id="nama_periode" name="nama_periode" required
@@ -121,18 +121,67 @@
                                                                             </div>
                                                                         @enderror
                                                                     </div>
-                                                                    <div class="col-lg-12 mb-3">
-                                                                        <label for="aktivitas"
-                                                                            class="col-form-label">Aktivitas</label>
-                                                                        <input type="text"
-                                                                            class="form-control @error('aktivitas') is-invalid @enderror"
-                                                                            id="aktivitas" name="aktivitas" required
-                                                                            value="{{ $d->aktivitas }}">
-                                                                        @error('aktivitas')
+                                                                    <div class="mb-3">
+                                                                        <label for="tanggal_mulai"
+                                                                            class="col-form-label">Tanggal Mulai</label>
+                                                                        <input type="date"
+                                                                            class="form-control @error('tanggal_mulai') is-invalid @enderror"
+                                                                            id="tanggal_mulai" name="tanggal_mulai" required
+                                                                            placeholder="Isi nama periode magang"
+                                                                            value="{{ $d->tanggal_mulai }}">
+                                                                        @error('tanggal_mulai')
                                                                             <div class="invalid-feedback">
                                                                                 {{ $message }}
                                                                             </div>
                                                                         @enderror
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="tanggal_selesai"
+                                                                            class="col-form-label">Tanggal Selesai</label>
+                                                                        <input type="date"
+                                                                            class="form-control @error('tanggal_selesai') is-invalid @enderror"
+                                                                            id="tanggal_selesai" name="tanggal_selesai"
+                                                                            required placeholder="Isi nama periode magang"
+                                                                            value="{{ $d->tanggal_selesai }}">
+                                                                        @error('tanggal_selesai')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="kuota" class="col-form-label">Kuota
+                                                                        </label>
+                                                                        <input type="text"
+                                                                            class="form-control @error('kuota') is-invalid @enderror"
+                                                                            id="kuota" name="kuota" required
+                                                                            value="{{ $d->kuota }}">
+                                                                        @error('kuota')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="status"
+                                                                            class="col-form-label">Status</label>
+                                                                        <select class="form-select"
+                                                                            style="width: 100%;" name="status"
+                                                                            id="status">
+                                                                            <option value="aktif"
+                                                                                {{ $d->status == 'aktif' ? 'selected' : '' }}>
+                                                                                Aktif
+                                                                            </option>
+                                                                            <option value="tidak aktif"
+                                                                                {{ $d->status == 'tidak aktif' ? 'selected' : '' }}>
+                                                                                Tidak Aktif
+                                                                            </option>
+                                                                            <option value="penuh"
+                                                                                {{ $d->status == 'penuh' ? 'selected' : '' }}>
+                                                                                Penuh
+                                                                            </option>
+                                                                        </select>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -231,7 +280,7 @@
                             <div class="mb-3">
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <select class="form-control" style="width: 100%;" name="status" id="status">
+                                    <select class="form-select" style="width: 100%;" name="status" id="status">
                                         <option value="aktif">
                                             Aktif
                                         </option>

@@ -64,9 +64,18 @@ class PeriodeMagangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePeriodeMagangRequest $request, PeriodeMagang $periodeMagang)
+    public function update(Request $request, string $id)
     {
-        //
+        $periodeMagang = PeriodeMagang::findOrFail($id);
+        $periodeMagangData = $request->only([
+            'nama_periode',
+            'tanggal_mulai',
+            'tanggal_selesai',
+            'kuota',
+            'status',
+        ]);
+        $periodeMagang->update($periodeMagangData);
+        return redirect('/periodemagang');
     }
 
     /**

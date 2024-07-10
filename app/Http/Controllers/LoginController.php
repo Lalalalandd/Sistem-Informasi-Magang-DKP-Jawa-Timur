@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Dinas;
 use Illuminate\Http\Request;
+use App\Models\PeriodeMagang;
 use App\Models\User as ModelsUser;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,12 @@ class LoginController extends Controller
 {
     public function index()
     {
+        $periode_magang = PeriodeMagang::where('status', 'aktif')
+        ->orderBy('id','desc')
+        ->first();
         return view('login', [
-            'tittle' => 'Login • CIIS'
+            'tittle' => 'Login • CIIS',
+            'periode_magang' => $periode_magang
         ]);
     }
 
@@ -66,7 +71,7 @@ class LoginController extends Controller
                 return back()->with('loginError', 'Login Gagal!');
             }
         }
-        return back()->with('loginError', 'Login Gagal!');
+        return back()->with('loginError', 'Email dan Password yang anda masukkan salah!');
     }
 
     public function logout()

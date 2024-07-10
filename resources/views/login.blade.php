@@ -18,6 +18,9 @@
         rel="stylesheet">
     <!-- Theme style -->
     <link rel="stylesheet" href="template/dist/css/adminlte.min.css">
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
     <style>
         * {
             font-family: "Ubuntu", sans-serif;
@@ -74,23 +77,6 @@
                             <div class="col-md-9 col-lg-8 mx-auto">
                                 <!-- <h1 class="login-heading mb-4">DKP Jawa Timur</h1> -->
                                 <img src="template/img/dkp.png" alt="" class=" jarak mx-auto d-block img-fluid">
-
-                                @if (session()->has('loginError'))
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <strong>{{ session('loginError') }}</strong> Silahkan masukkan email dan
-                                        password yang benar.
-                                        <button type="button" class="close" data-dismiss="alert"
-                                            aria-label="Close">x</button>
-                                    </div>
-                                @endif
-
-                                @if (session()->has('success'))
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <strong>{{ session('success') }}</strong>.
-                                        <button type="button" class="close" data-dismiss="alert"
-                                            aria-label="Close">x</button>
-                                    </div>
-                                @endif
                                 <!-- Sign In Form -->
                                 <form method="post" action="/login">
                                     {{ csrf_field() }}
@@ -151,7 +137,25 @@
     <!-- AdminLTE -->
     <script src="template/dist/js/adminlte.js"></script>
 
-    <script></script>
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+        };
+        @if (session('error'))
+            toastr.error('{{ session('error') }}');
+        @endif
+        @if (session('success'))
+            toastr.success('{{ session('success') }}');
+        @endif
+        @if (session('loginError'))
+            toastr.error('{{ session('loginError') }}');
+        @endif
+    </script>
 </body>
 
 </html>

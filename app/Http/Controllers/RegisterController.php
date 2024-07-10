@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Dinas;
 use App\Models\Sub_Bagian;
 use App\Models\PendaftarMahasiswa;
+use App\Models\PeriodeMagang;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\File;
 
@@ -22,6 +23,14 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        $periode_magang = PeriodeMagang::where('status', 'aktif')
+        ->orderBy('id','desc')
+        ->first();
+
+        if ($periode_magang->pendaftaran()->count() >= $periode_magang->kuota) {
+            return redirect('/')->with('error', 'Kuota sudah penuh.');
+        }
+
         $validatedDataUser = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|unique:users|email:dns',
@@ -52,6 +61,7 @@ class RegisterController extends Controller
         }
 
         $validatedDataUser['role'] = 'mahasiswa';
+        $validatedDataPendaftar['periode_magang_id'] = $periode_magang['id'];
        
         $user = User::create($validatedDataUser);
         $user->detail()->create($validatedDataPendaftar);

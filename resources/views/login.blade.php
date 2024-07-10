@@ -78,7 +78,7 @@
                                 @php
                                     use Carbon\Carbon;
                                 @endphp
-                                <marquee direction="left" scrollamount="8">Pendaftaran magang periode {{ $periode_magang['nama_periode'] }} mulai pada tanggal {{ Carbon::parse($periode_magang['tanggal_mulai'])->format('d M Y') }} s.d {{ Carbon::parse($periode_magang['tanggal_selesai'])->format('d M Y') }}</marquee>
+                                <marquee direction="left" scrollamount="8">Pendaftaran magang periode <span style="color: #2574EA;">{{ $periode_magang['nama_periode'] }}</span> mulai pada tanggal <span style="color: #2574EA;">{{ Carbon::parse($periode_magang['tanggal_mulai'])->format('d M Y') }}</span> s.d <span style="color: #2574EA;">{{ Carbon::parse($periode_magang['tanggal_selesai'])->format('d M Y') }}</span></marquee>
                             </div>
                             <div class="col-md-9 col-lg-8 mx-auto">
                                 <!-- <h1 class="login-heading mb-4">DKP Jawa Timur</h1> -->

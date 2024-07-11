@@ -17,3 +17,13 @@
     <!-- /.content-header -->
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+
+            @if (session('info'))
+                toastr.info('{{ session('info') }}');
+            @endif
+    
+    </script>
+@endpush

@@ -44,7 +44,7 @@
                                             $x = 1;
                                             use Carbon\Carbon;
                                         @endphp
-                                        @foreach ($periode as $d)
+                                        @foreach ($periodes as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
                                                 <td><?= $d->nama_periode ?></td>

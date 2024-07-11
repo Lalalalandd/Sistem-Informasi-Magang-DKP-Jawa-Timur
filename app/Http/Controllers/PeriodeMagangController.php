@@ -18,8 +18,7 @@ class PeriodeMagangController extends Controller
         foreach ($periodes as $periode) {
             // Cek apakah jumlah pendaftaran sudah mencapai atau melebihi kuota
             if ($periode->pendaftaran()->count() >= $periode->kuota) {
-                // Ubah status kuota menjadi 'penuh'
-                $periode->status = 'penuh'; // Mengubah status bukan kuota
+                $periode->status = 'penuh'; 
                 $periode->save();
             }
         }

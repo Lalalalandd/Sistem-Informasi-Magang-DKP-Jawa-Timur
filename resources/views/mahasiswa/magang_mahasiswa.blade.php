@@ -38,7 +38,7 @@
                                             action="{{ $detail->surat_balasan ? Storage::url($detail->surat_balasan) : '#' }}"
                                             method="get" target="_blank">
                                             <button type="submit" class="btn mb-2"
-                                                style="width:100%; background-color: #FFD1E2 !important; color:#E96494;"
+                                                style="width:100%; background-color: #c5dcff !important; color:#2574EA;"
                                                 {{ $detail->surat_balasan == null ? 'disabled' : '' }}>
                                                 <i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
@@ -57,7 +57,7 @@
                                             action="{{ $detail->surat_keterangan ? Storage::url($detail->surat_keterangan) : '#' }}"
                                             method="get" target="_blank">
                                             <button type="submit" class="btn mb-2"
-                                                style="width:100%; background-color: #FFD1E2 !important; color:#E96494;"
+                                                style="width:100%; background-color:#c5dcff !important; color:#2574EA;"
                                                 {{ $detail->surat_keterangan == null ? 'disabled' : '' }}>
                                                 <i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
@@ -75,7 +75,7 @@
                                         <form action="{{ $detail->sertifikat ? Storage::url($detail->sertifikat) : '#' }}"
                                             method="get" target="_blank">
                                             <button type="submit" class="btn mb-2"
-                                                style="width:100%; background-color: #FFD1E2 !important; color:#E96494;"
+                                                style="width:100%; background-color:#c5dcff !important; color:#2574EA;"
                                                 {{ $detail->sertifikat == null ? 'disabled' : '' }}>
                                                 <i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
@@ -271,7 +271,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-12">
-                                                                        <div class="float-right">
+                                                                        <div class="float-left">
                                                                             <a href="{{ Storage::url($d->bukti) }}"
                                                                                 target="_blank">Lihat Bukti</a>
                                                                         </div>
@@ -354,7 +354,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <label for="presensi" class="col-form-label">Presensi</label>
-                                <select class="form-control select2bs4" style="width: 100%;" name="presensi"
+                                <select class="form-select" style="width: 100%;" name="presensi"
                                     id="presensi">
                                     <option value="masuk">
                                         Masuk

@@ -5,9 +5,7 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-12">
-                        Daftar Tugas
-                    </div>
+                    
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
@@ -38,7 +36,7 @@
                                         @endphp
                                         @if ($tugas->isEmpty())
                                             <tr>
-                                                <td colspan="6">Tugas belum ada</td>
+                                                <td colspan="6" class="text-center">Tugas belum ada</td>
                                             </tr>
                                         @endif
                                         @foreach ($tugas as $d)

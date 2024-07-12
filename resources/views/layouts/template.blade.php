@@ -80,6 +80,13 @@
             height: 150px;
             object-fit: cover;
         }
+
+        .vertical-line {
+            border-left: 2px solid #000; /* Mengatur garis */
+            height: 100%; /* Mengatur tinggi garis */
+            margin: 0 15px; /* Mengatur jarak */
+        }
+    </style>
     </style>
 </head>
 

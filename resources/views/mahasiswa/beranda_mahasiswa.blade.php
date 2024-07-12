@@ -69,35 +69,40 @@
                                             <h5 class="text-capitalize">{{ $user->detail['fakultas'] }}</h5>
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <a href="#" class="btn btn-outline-primary" style="border-color:#E96494 !important; color:#E96494 !important;">
-                                            {{ $user->detail['tgl_mulai'] }}
-                                        </a>
+                                    <div class="col-6 mt-4">
+                                        <span class="border text-bold d-flex align-items-center justify-content-center"
+                                            style="padding: 4px; color: #E96494; border-radius:8px; border:3px solid#E96494 !important;">
+                                            <i class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="M8 13.885q-.31 0-.54-.23t-.23-.54t.23-.539t.54-.23t.54.23t.23.54t-.23.539t-.54.23m4 0q-.31 0-.54-.23t-.23-.54t.23-.539t.54-.23t.54.23t.23.54t-.23.539t-.54.23m4 0q-.31 0-.54-.23t-.23-.54t.23-.539t.54-.23t.54.23t.23.54t-.23.539t-.54.23M5.616 21q-.691 0-1.153-.462T4 19.385V6.615q0-.69.463-1.152T5.616 5h1.769V2.77h1.077V5h7.154V2.77h1V5h1.769q.69 0 1.153.463T20 6.616v12.769q0 .69-.462 1.153T18.384 21zm0-1h12.769q.23 0 .423-.192t.192-.424v-8.768H5v8.769q0 .23.192.423t.423.192" />
+                                                </svg>
+                                            </i> {{ $user->detail['tgl_mulai'] }} s.d {{ $user->detail['tgl_selesai'] }}
+                                        </span>
+                                    </div>
+                                    <div class="col-6 mt-4">
+                                        <form
+                                            action="{{ $user->detail['surat_balasan'] ? Storage::url($user->detail['surat_balasan']) : '#' }}"
+                                            method="get" target="_blank">
+                                            <button type="submit" class="btn mb-2"
+                                                style="width:100%; height:42px; background-color:#E96494 !important; color:white;"
+                                                {{ $user->detail['surat_balasan'] == null ? 'disabled' : '' }}>
+                                                <i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em"
+                                                        viewBox="0 0 256 256">
+                                                        <g fill="currentColor">
+                                                            <path d="M208 88h-56V32Z" opacity="0.2" />
+                                                            <path
+                                                                d="M224 152a8 8 0 0 1-8 8h-24v16h16a8 8 0 0 1 0 16h-16v16a8 8 0 0 1-16 0v-56a8 8 0 0 1 8-8h32a8 8 0 0 1 8 8M92 172a28 28 0 0 1-28 28h-8v8a8 8 0 0 1-16 0v-56a8 8 0 0 1 8-8h16a28 28 0 0 1 28 28m-16 0a12 12 0 0 0-12-12h-8v24h8a12 12 0 0 0 12-12m88 8a36 36 0 0 1-36 36h-16a8 8 0 0 1-8-8v-56a8 8 0 0 1 8-8h16a36 36 0 0 1 36 36m-16 0a20 20 0 0 0-20-20h-8v40h8a20 20 0 0 0 20-20M40 112V40a16 16 0 0 1 16-16h96a8 8 0 0 1 5.66 2.34l56 56A8 8 0 0 1 216 88v24a8 8 0 0 1-16 0V96h-48a8 8 0 0 1-8-8V40H56v72a8 8 0 0 1-16 0m120-32h28.69L160 51.31Z" />
+                                                        </g>
+                                                    </svg>
+                                                </i>
+                                                Unduh Surat
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
-                                {{-- <div class="callout callout-info">
-                                    @if ($user->detail['nama_kelompok_1'] != null)
-                                        <label for="">Nama Anggota Kelompok 1 :</label>
-                                        <p> {{ $user->detail['nama_kelompok_1'] }} </p>
-                                    @endif
-                                    @if ($user->detail['nama_kelompok_2'] != null)
-                                        <label for="">Nama Anggota Kelompok 2 :</label>
-                                        <p> {{ $user->detail['nama_kelompok_2'] }} </p>
-                                    @endif
-                                    <label for="">Surat Pengantar :</label>
-                                    <iframe src="{{ url(Storage::disk('public')->url($user->detail['surat_pengantar'])) }}"
-                                        frameborder="0" style="width:100%;min-height:440px;"></iframe>
-
-                                    <label for="">Surat Balasan :</label>
-                                    <iframe src="{{ url(Storage::disk('public')->url($user->detail['surat_balasan'])) }}"
-                                        frameborder="0" style="width:100%;min-height:440px;"></iframe>
-                                    <label for="">Dinas :</label>
-                                    <p>{{ $user->dinas['dinas'] }}</p>
-                                    <label for="">Sub Bagian :</label>
-                                    <p>{{ $user->detail['sub_bagian'] }}</p>
-                                    <label for="">Universitas :</label>
-                                    <p>{{ $user->detail['universitas'] }}</p>
-                                </div> --}}
 
                             </div>
                             <!-- /.card-body -->

@@ -5,7 +5,7 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    
+
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
@@ -102,7 +102,8 @@
                                                                                     @endphp
 
                                                                                     @if (in_array($fileExtension, ['jpg', 'jpeg', 'png']))
-                                                                                        <img class="container d-flex justify-content-center align-items-center" src="{{ asset('storage/' . $d->lampiran) }}"
+                                                                                        <img class="container d-flex justify-content-center align-items-center"
+                                                                                            src="{{ asset('storage/' . $d->lampiran) }}"
                                                                                             style="max-width: 50%;">
                                                                                     @elseif($fileExtension === 'pdf')
                                                                                         <iframe
@@ -145,20 +146,23 @@
                                                                     <div class="col-6">
                                                                         <label for="status"
                                                                             class="col-form-label">Status</label>
-                                                                            @if ($d->status == "selesai")
-                                                                             <p class="label bg-success text-center" style="max-width: 100px">Selesai</p>
-                                                                            @elseif($d->status == 'proses')
-                                                                            <p class="label bg-info text-center" style="max-width: 100px">Proses</p>
-                                                                            @else
-                                                                            <p class="label bg-warning text-center" style="max-width: 100px">Belum</p>
-                                                                            @endif
+                                                                        @if ($d->status == 'selesai')
+                                                                            <p class="label bg-success text-center"
+                                                                                style="max-width: 100px">Selesai</p>
+                                                                        @elseif($d->status == 'proses')
+                                                                            <p class="label bg-info text-center"
+                                                                                style="max-width: 100px">Proses</p>
+                                                                        @else
+                                                                            <p class="label bg-warning text-center"
+                                                                                style="max-width: 100px">Belum</p>
+                                                                        @endif
                                                                     </div>
 
                                                                     <div class="col-6">
                                                                         <div class="form-group clearfix">
                                                                             <div class="row">
                                                                                 <label for="aksi"
-                                                                            class="col-form-label">Aksi</label>
+                                                                                    class="col-form-label">Aksi</label>
                                                                                 <div class="icheck-warning col-12 ">
                                                                                     <input type="radio"
                                                                                         id="radioPrimary1{{ $d->id }}"
@@ -229,3 +233,14 @@
         <!-- /.content -->
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        @if (session('error'))
+            toastr.error('{{ session('error') }}');
+        @endif
+        @if (session('success'))
+            toastr.success('{{ session('success') }}');
+        @endif
+    </script>
+@endpush

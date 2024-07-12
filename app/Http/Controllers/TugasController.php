@@ -170,7 +170,7 @@ class TugasController extends Controller
             'status',
         ]);
         $tugas->update($tugasData);
-        return redirect('/tugas_mahasiswa');
+        return redirect('/tugas_mahasiswa')->with('success', 'Status tugas berhasil diubah');
     }
 
     /**

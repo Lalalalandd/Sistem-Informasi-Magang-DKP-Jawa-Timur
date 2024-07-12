@@ -105,8 +105,20 @@
                             </div>
 
                             <div class="card-body">
-                                <canvas id="donutChart"
-                                    style="min-height: 130; height: 130; max-height: 130; max-width: 100%;"></canvas>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <canvas id="donutChart"
+                                            style="min-height: 145px; height: 145px; max-height: 145px; max-width: 100%;"
+                                            class=""></canvas>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row mt-5 d-flex justify-content-center">
+                                            <span>Masuk: {{ $masuk }}</span>
+                                            <span>izin: {{ $izin }}</span>
+                                            <span>bolos: {{ $bolos }}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -423,7 +435,7 @@
                     'Bolos',
                 ],
                 datasets: [{
-                    data: [{{ $masuk; }}, {{ $izin }}, {{ $bolos }}],
+                    data: [{{ $masuk }}, {{ $izin }}, {{ $bolos }}],
                     backgroundColor: ['#2574EA', 'skyblue', 'red'],
                 }]
             }

@@ -70,6 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="col-6 mt-4">
+                                        <h5 class="my-2">Periode Magang</h5>
                                         <span class="border text-bold d-flex align-items-center justify-content-center"
                                             style="padding: 4px; color: #E96494; border-radius:8px; border:3px solid#E96494 !important;">
                                             <i class="mr-2">
@@ -82,6 +83,7 @@
                                         </span>
                                     </div>
                                     <div class="col-6 mt-4">
+                                        <h5 class="my-2 ">Surat Balasan</h5>
                                         <form
                                             action="{{ $user->detail['surat_balasan'] ? Storage::url($user->detail['surat_balasan']) : '#' }}"
                                             method="get" target="_blank">

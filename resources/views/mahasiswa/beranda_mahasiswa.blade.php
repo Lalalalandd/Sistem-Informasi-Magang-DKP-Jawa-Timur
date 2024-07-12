@@ -167,8 +167,31 @@
 
                     <div class="col-6">
                         <div class="card card-primary">
-                            <div class="card-header">
+                            <div class="card-header" style="background-color: #2574EA !important;">
                                 <h3 class="card-title">Tugas Terbaru</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                               
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card card-default">
+
+                            <div class="card-body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card card-primary">
+                            <div class="card-header" style="background-color: #E96494 !important;">
+                                <h3 class="card-title">Acara Dinas</h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>

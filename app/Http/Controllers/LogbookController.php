@@ -15,17 +15,26 @@ class LogbookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    
+
     public function index()
     {
         $mahasiswa = Auth::user();
         $magang = logbook::where('user_id', $mahasiswa->id)->get();
+
+        //Menghitung jumlah presesni
+        $masuk = $magang->where('presensi', 'masuk')->count();
+        $izin = $magang->where('presensi', 'izin')->count();
+        $bolos = $magang->where('presensi', 'bolos')->count();
+
         $detail = Auth::user()->detail;
         return view('mahasiswa.magang_mahasiswa', [
             'tittle' => 'Magang',
             'mahasiswa' =>  $mahasiswa,
             'detail' => $detail,
-            'magang' => $magang
+            'magang' => $magang,
+            'masuk' => $masuk,
+            'izin' => $izin,
+            'bolos' => $bolos,
         ]);
     }
 
@@ -52,7 +61,7 @@ class LogbookController extends Controller
             'status' => 'required',
         ]);
 
-        if($request->file('bukti')){
+        if ($request->file('bukti')) {
             $buktiPath = $request->file('bukti')->store('bukti');
             $validatedData['bukti'] = $buktiPath;
         }
@@ -94,11 +103,11 @@ class LogbookController extends Controller
             'bukti' => 'nullable|mimes:jpg,png|max:4096',
         ]);
         $logbook->update($validatedData);
-        if($request->file('bukti')){
+        if ($request->file('bukti')) {
             $buktiPath = $request->file('bukti')->store('bukti');
             $validatedData['bukti'] = $buktiPath;
         }
-         if ($request->hasFile('bukti')) {
+        if ($request->hasFile('bukti')) {
             // Hapus file lama jika ada
             if ($logbook->bukti) {
                 Storage::disk('public')->delete($logbook->bukti);

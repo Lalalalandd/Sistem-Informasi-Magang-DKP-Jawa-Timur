@@ -105,7 +105,8 @@
                             </div>
 
                             <div class="card-body">
-
+                                <canvas id="donutChart"
+                                    style="min-height: 130; height: 130; max-height: 130; max-width: 100%;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -402,6 +403,7 @@
                 });
             });
         </script>
+        <script src="template/plugins/plugins/chart.js/Chart.min.js"></script>
     @endsection
 
     @push('scripts')
@@ -412,5 +414,29 @@
             @if (session('success'))
                 toastr.success('{{ session('success') }}');
             @endif
+
+            var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+            var donutData = {
+                labels: [
+                    'Masuk',
+                    'Izin',
+                    'Bolos',
+                ],
+                datasets: [{
+                    data: [{{ $masuk; }}, {{ $izin }}, {{ $bolos }}],
+                    backgroundColor: ['#2574EA', 'skyblue', 'red'],
+                }]
+            }
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            })
         </script>
     @endpush

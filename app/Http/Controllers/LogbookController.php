@@ -20,16 +20,16 @@ class LogbookController extends Controller
     {
         $mahasiswa = Auth::user();
         $magang = logbook::where('user_id', $mahasiswa->id)->paginate(10);
-        
+
         //Menghitung jumlah presesni
         $masuk = $magang->where('presensi', 'masuk')->count();
         $izin = $magang->where('presensi', 'izin')->count();
         $bolos = $magang->where('presensi', 'bolos')->count();
 
         $total = $masuk + $izin + $bolos;
-        $masukPercent = $total > 0 ? ($masuk / $total) * 100 : 0;
-        $izinPercent = $total > 0 ? ($izin / $total) * 100 : 0;
-        $bolosPercent = $total > 0 ? ($bolos / $total) * 100 : 0;
+        $masukPercent = $total > 0 ? number_format(($masuk / $total) * 100, 1) : 0;
+        $izinPercent = $total > 0 ? number_format(($izin / $total) * 100, 1) : 0;
+        $bolosPercent = $total > 0 ? number_format(($bolos / $total) * 100, 1) : 0;
 
         $detail = Auth::user()->detail;
         return view('mahasiswa.magang_mahasiswa', [

@@ -43,8 +43,8 @@
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
                                                 <td>{{ $d->tugas }}</td>
-                                                <td>{{ $d->tgl_diberikan }}</td>
-                                                <td>{{ $d->tgl_dikumpulkan }}</td>
+                                                <td>{{ Carbon::parse($d->tgl_diberikan)->format('d M Y'); }}</td>
+                                                <td>{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y'); }}</td>
                                                 <td>
                                                     @if ($d->status == 'selesai')
                                                         <span class="label bg-success">Sudah Dikerjakan</span>

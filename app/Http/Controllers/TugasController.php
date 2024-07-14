@@ -64,12 +64,11 @@ class TugasController extends Controller
     public function index_mahasiswa()
     {
         $user = Auth::user();
-        $detailUser = $user->detail;
         return view('mahasiswa.tugas_mahasiswa', [
             'tittle' => 'Tugas',
             'tugas' => Tugas::where('user_id', $user->id)
                 ->orderBy('id', 'desc')
-                ->get()
+                ->paginate(10)
 
         ]);
     }

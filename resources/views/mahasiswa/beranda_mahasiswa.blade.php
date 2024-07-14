@@ -79,7 +79,8 @@
                                                     <path fill="currentColor"
                                                         d="M8 13.885q-.31 0-.54-.23t-.23-.54t.23-.539t.54-.23t.54.23t.23.54t-.23.539t-.54.23m4 0q-.31 0-.54-.23t-.23-.54t.23-.539t.54-.23t.54.23t.23.54t-.23.539t-.54.23m4 0q-.31 0-.54-.23t-.23-.54t.23-.539t.54-.23t.54.23t.23.54t-.23.539t-.54.23M5.616 21q-.691 0-1.153-.462T4 19.385V6.615q0-.69.463-1.152T5.616 5h1.769V2.77h1.077V5h7.154V2.77h1V5h1.769q.69 0 1.153.463T20 6.616v12.769q0 .69-.462 1.153T18.384 21zm0-1h12.769q.23 0 .423-.192t.192-.424v-8.768H5v8.769q0 .23.192.423t.423.192" />
                                                 </svg>
-                                            </i> {{ $user->detail['tgl_mulai'] }} s.d {{ $user->detail['tgl_selesai'] }}
+                                            </i> {{ Carbon::parse($user->detail['tgl_mulai'])->format('d M Y') }} s.d
+                                            {{ Carbon::parse($user->detail['tgl_selesai'])->format('d M Y') }}
                                         </span>
                                     </div>
                                     <div class="col-6 mt-4">
@@ -140,8 +141,8 @@
                                                     alt="Third slide">
                                             </div>
                                             <div class="carousel-item">
-                                                <img class="d-block w-100" src="template/img/slider-144.jpg" height="201px"
-                                                    alt="Fourth slide">
+                                                <img class="d-block w-100" src="template/img/slider-144.jpg"
+                                                    height="201px" alt="Fourth slide">
                                             </div>
                                         </div>
                                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
@@ -178,32 +179,36 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                               
+                                <ul class="list-group">
+                                    @foreach ($tugas as $d)
+                                        <li class="list-group-item">
+                                            <div class="d-flex justify-content-between">
+                                                <h6>{{ $d->tugas }}</h6>
+                                                <small>
+                                                    <i>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em"
+                                                            height="1.5em" viewBox="0 0 256 256">
+                                                            <path fill="currentColor"
+                                                                d="M128 26a102 102 0 1 0 102 102A102.12 102.12 0 0 0 128 26m0 192a90 90 0 1 1 90-90a90.1 90.1 0 0 1-90 90m62-90a6 6 0 0 1-6 6h-56a6 6 0 0 1-6-6V72a6 6 0 0 1 12 0v50h50a6 6 0 0 1 6 6" />
+                                                        </svg>
+                                                    </i>
+                                                    {{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}
+                                                </small>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
 
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="card card-default">
-
                             <div class="card-body">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card card-primary">
-                            <div class="card-header" style="background-color: #E96494 !important;">
-                                <h3 class="card-title">Acara Dinas</h3>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
+                                <div class="row">
+                                    
                                 </div>
                             </div>
-                            <div class="card-body">
-                               
-                            </div>
-
                         </div>
                     </div>
                 </div>

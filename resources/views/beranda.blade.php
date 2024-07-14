@@ -52,8 +52,8 @@
                                                     </tr>
                                                 @endforeach
                                                 <tr class="text-center">
-                                                    <td colspan="2">Total</td>
-                                                    <td>{{ $total }}</td>
+                                                    <td colspan="2"><dt>Total</dt></td>
+                                                    <td><dt>{{ $total }}</dt></td>
                                                 </tr>
                                                 {{-- <tr>
                                                     <td style="width: 20%;">{{ $univ->universitas }}</td>

@@ -206,7 +206,29 @@
                         <div class="card card-default">
                             <div class="card-body">
                                 <div class="row">
-                                    
+                                    <div class="col-12">
+                                        <h4 class="" style="color:#2574EA;">
+                                            Dinas
+                                        </h4>
+                                    </div>
+                                    <div class="col-7 mt-3 border-end">
+                                        <h5>
+                                            {{ $dinas->dinas }}
+                                        </h5>
+                                        <p class="lh-sm text-muted">
+                                            {{ $dinas->alamat }}
+                                        </p>
+                                    </div>
+                                    <div class="col-5 mt-3 d-flex justify-content-center align-items-center">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h6 style="color:#2574EA;">Sub Bagian</h6>
+                                            </div>
+                                            <div class="col-12">
+                                                <h5>{{ $user->detail['sub_bagian'] }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

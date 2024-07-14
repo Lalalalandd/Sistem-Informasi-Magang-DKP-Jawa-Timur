@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Dinas;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 
@@ -32,10 +33,12 @@ class BerandaController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();
+        $dinas = Dinas::where('id', $user->dinas_id)->first();
         return view('mahasiswa.beranda_mahasiswa', [
             'tittle' => 'Beranda',
             'user' => $user,
-            'tugas' => $tugas
+            'tugas' => $tugas,
+            'dinas' => $dinas
         ]);
     }
 

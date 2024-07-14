@@ -113,9 +113,9 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row mt-5 d-flex justify-content-center">
-                                            <span>Masuk: {{ $masuk }}</span>
-                                            <span>izin: {{ $izin }}</span>
-                                            <span>bolos: {{ $bolos }}</span>
+                                            <span>Masuk: {{ $masuk }}%</span>
+                                            <span>Izin: {{ $izin }}%</span>
+                                            <span>Bolos: {{ $bolos }}%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -428,21 +428,30 @@
             @endif
 
             var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-            var donutData = {
-                labels: [
-                    'Masuk',
-                    'Izin',
-                    'Bolos',
-                ],
-                datasets: [{
-                    data: [{{ $masuk }}, {{ $izin }}, {{ $bolos }}],
-                    backgroundColor: ['#2574EA', 'skyblue', 'red'],
-                }]
+        var donutData = {
+            labels: [
+                'Masuk',
+                'Izin',
+                'Bolos',
+            ],
+            datasets: [{
+                data: [{{ round($masuk, 2) }}, {{ round($izin, 2) }}, {{ round($bolos, 2) }}],
+                backgroundColor: ['#2574EA', 'skyblue', 'red'],
+            }]
+        }
+        var donutOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var label = data.labels[tooltipItem.index] || '';
+                        var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] || 0;
+                        return label + ': ' + value + '%';
+                    }
+                }
             }
-            var donutOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-            }
+        }
             //Create pie or douhnut chart
             // You can switch between pie and douhnut using the method below.
             new Chart(donutChartCanvas, {

@@ -19,8 +19,8 @@ class LogbookController extends Controller
     public function index()
     {
         $mahasiswa = Auth::user();
-        $magang = logbook::where('user_id', $mahasiswa->id)->get();
-
+        $magang = logbook::where('user_id', $mahasiswa->id)->paginate(10);
+        
         //Menghitung jumlah presesni
         $masuk = $magang->where('presensi', 'masuk')->count();
         $izin = $magang->where('presensi', 'izin')->count();

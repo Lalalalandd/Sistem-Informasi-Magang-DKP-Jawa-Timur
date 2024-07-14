@@ -296,14 +296,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                </ul>
+                            <div class="card-footer clearfix" style="max-height: 65px !important;">
+                                {{ $magang->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
                     </div>
@@ -354,8 +348,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <label for="presensi" class="col-form-label">Presensi</label>
-                                <select class="form-select" style="width: 100%;" name="presensi"
-                                    id="presensi">
+                                <select class="form-select" style="width: 100%;" name="presensi" id="presensi">
                                     <option value="masuk">
                                         Masuk
                                     </option>
@@ -428,30 +421,30 @@
             @endif
 
             var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-        var donutData = {
-            labels: [
-                'Masuk',
-                'Izin',
-                'Bolos',
-            ],
-            datasets: [{
-                data: [{{ round($masuk, 2) }}, {{ round($izin, 2) }}, {{ round($bolos, 2) }}],
-                backgroundColor: ['#2574EA', 'skyblue', 'red'],
-            }]
-        }
-        var donutOptions = {
-            maintainAspectRatio: false,
-            responsive: true,
-            tooltips: {
-                callbacks: {
-                    label: function(tooltipItem, data) {
-                        var label = data.labels[tooltipItem.index] || '';
-                        var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] || 0;
-                        return label + ': ' + value + '%';
+            var donutData = {
+                labels: [
+                    'Masuk',
+                    'Izin',
+                    'Bolos',
+                ],
+                datasets: [{
+                    data: [{{ round($masuk, 2) }}, {{ round($izin, 2) }}, {{ round($bolos, 2) }}],
+                    backgroundColor: ['#2574EA', 'skyblue', 'red'],
+                }]
+            }
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var label = data.labels[tooltipItem.index] || '';
+                            var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] || 0;
+                            return label + ': ' + value + '%';
+                        }
                     }
                 }
             }
-        }
             //Create pie or douhnut chart
             // You can switch between pie and douhnut using the method below.
             new Chart(donutChartCanvas, {

@@ -296,7 +296,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix" style="max-height: 65px !important;">
+                            <div class="card-footer clearfix" style="max-height: 65px !important; {{ $magang->hasPages() ? '' : 'height: 45px !important;' }}">
                                 {{ $magang->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>

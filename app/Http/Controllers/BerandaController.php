@@ -6,15 +6,64 @@ use App\Models\User;
 use App\Models\Dinas;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BerandaController extends Controller
 {
+    // public function index()
+    // {
+    //     $user = User::with('detail')
+    //         ->where('role', 'mahasiswa')
+    //         ->count();
+    //     $universitasTerbanyak = User::join('pendaftar_mahasiswa', 'users.id', '=', 'pendaftar_mahasiswa.user_id')
+    //         ->select('pendaftar_mahasiswa.universitas', DB::raw('count(*) as jumlah'))
+    //         ->where('users.role', 'mahasiswa')
+    //         ->groupBy('pendaftar_mahasiswa.universitas')
+    //         ->orderBy('jumlah', 'desc')
+    //         ->take(10)
+    //         ->get();
+
+    //     $persentase = ($universitasTerbanyak->jumlah / $user) * 100;
+    //     return view('beranda', [
+    //         'tittle' => 'Beranda',
+    //         'univ' => $universitasTerbanyak,
+    //         'persentase' => $persentase
+    //     ]);
+    // }
     public function index()
     {
+        // // Menghitung total mahasiswa
+        // $totalMahasiswa = User::where('role', 'mahasiswa')
+        //     ->count();
+
+        $totalMahasiswaDiterima = User::join('pendaftar_mahasiswa', 'users.id', '=', 'pendaftar_mahasiswa.user_id')
+            ->where('users.role', 'mahasiswa')
+            ->where('pendaftar_mahasiswa.penerimaan', 'diterima')
+            ->count();
+
+        // Mengambil 10 universitas terbanyak berdasarkan jumlah mahasiswa
+        $universitasTerbanyak = User::join('pendaftar_mahasiswa', 'users.id', '=', 'pendaftar_mahasiswa.user_id')
+            ->select('pendaftar_mahasiswa.universitas', DB::raw('count(*) as jumlah'))
+            ->where('users.role', 'mahasiswa')
+            ->where('pendaftar_mahasiswa.penerimaan', 'diterima')
+            ->groupBy('pendaftar_mahasiswa.universitas')
+            ->orderBy('jumlah', 'desc')
+            ->take(10)
+            ->get();
+
+        // Menghitung persentase untuk setiap universitas
+        $universitasTerbanyak->transform(function ($item) use ($totalMahasiswaDiterima) {
+            $item->persentase = ($item->jumlah / $totalMahasiswaDiterima) * 100;
+            return $item;
+        });
+
         return view('beranda', [
-            'tittle' => 'Beranda'
+            'tittle' => 'Beranda',
+            'universitasTerbanyak' => $universitasTerbanyak,
+            'total' => $totalMahasiswaDiterima
         ]);
     }
+
 
     public function index_pegawai()
     {

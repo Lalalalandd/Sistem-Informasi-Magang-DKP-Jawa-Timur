@@ -180,7 +180,7 @@
                                         @foreach ($magang as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
-                                                <td>{{ $d->tanggal }}</td>
+                                                <td>{{ Carbon::parse($d->tanggal)->format('d M Y'); }}</td>
                                                 <td>{{ $d->aktivitas }}</td>
                                                 @if ($d->bukti != null)
                                                     @php

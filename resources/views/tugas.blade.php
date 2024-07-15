@@ -304,12 +304,8 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="exampleInputFile">Lampiran</label>
-                                       
-
-                                            <input type="file" class="form-control" id="exampleInputFile"
-                                                name="lampiran">
-                                            
-
+                                        <input type="file" class="form-control" id="exampleInputFile"
+                                            name="lampiran">
                                         <label for="" class="mt-1 small text-danger">*) File harus bertipe
                                             .doc/.docx/.pdf</label>
                                     </div>

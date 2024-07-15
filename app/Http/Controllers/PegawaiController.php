@@ -38,16 +38,24 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|unique:users|email:dns',
-            'password' => 'required|max:255|min:5',
-            'dinas_id' => 'required|unique:users',
-            'role' => 'required',
-            'status' => 'required'
-        ]);
-        User::create($validatedData);
-        return redirect('/pegawai');
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|max:255',
+                'email' => 'required|unique:users|email:dns',
+                'password' => 'required|max:255|min:5',
+                'dinas_id' => 'required|unique:users',
+                'role' => 'required',
+                'status' => 'required'
+            ]);
+    
+            User::create($validatedData);
+            return redirect('/pegawai')->with('success', 'Pegawai berhasil ditambahkan!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect('/pegawai')
+                ->withErrors($e->validator)
+                ->withInput()
+                ->with('error', 'Data tidak sesuai, silakan periksa kembali.');
+        }
     }
 
     /**
@@ -80,7 +88,7 @@ class PegawaiController extends Controller
             'status',
         ]);
         $user->update($userData);
-        return redirect('/pegawai');
+        return redirect('/pegawai')->with('success', 'Data pegawai berhasil diubah!');
     }
 
     /**
@@ -90,6 +98,6 @@ class PegawaiController extends Controller
     {
         $dinas = User::findOrFail($id);
         $dinas->delete();
-        return redirect('/pegawai');
+        return redirect('/pegawai')->with('success','Pegawai berhasil dihapus!');
     }
 }

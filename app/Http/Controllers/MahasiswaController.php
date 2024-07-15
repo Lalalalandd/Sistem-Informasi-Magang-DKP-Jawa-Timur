@@ -14,7 +14,7 @@ class MahasiswaController extends Controller
     {
         return view('mahasiswa',[
             'tittle' => 'Mahasiswa',
-            'user' => User::where('role', 'mahasiswa')->get()
+            'user' => User::where('role', 'mahasiswa')->paginate(10)
         ]);
     }
 
@@ -63,7 +63,7 @@ class MahasiswaController extends Controller
             'status',
         ]);
         $user->update($userData);
-        return redirect('/mahasiswa');
+        return redirect('/mahasiswa')->with('success', 'Data mahasiswa berhasil diubah!');
     }
 
     /**
@@ -73,6 +73,6 @@ class MahasiswaController extends Controller
     {
         $dinas = User::findOrFail($id);
         $dinas->delete();
-        return redirect('/mahasiswa');
+        return redirect('/mahasiswa')->with('success', 'Akun mahasiswa berhasil dihapus!');
     }
 }

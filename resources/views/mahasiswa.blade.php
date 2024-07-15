@@ -4,11 +4,7 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
-                <div class="row mt-2 pt-3">
-                    <div class="col-sm-12">
-                        <h5>Tabel Akun Mahasiswa</h5>
-                    </div>
-
+                <div class="row">
 
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -115,10 +111,14 @@
                                                                 <div class="mb-3">
                                                                     <label for="status"
                                                                         class="col-form-label">Status</label>
-                                                                    <select class="form-control select2bs4"
-                                                                        style="width: 100%;" name="status" id="status"> 
-                                                                        <option value="1" {{ $d->status == 1 ? 'selected' : '' }}>Aktif</option>
-                                                                        <option value="0" {{ $d->status == 0 ? 'selected' : '' }}>Tidak Aktif</option>
+                                                                    <select class="form-select" style="width: 100%;"
+                                                                        name="status" id="status">
+                                                                        <option value="1"
+                                                                            {{ $d->status == 1 ? 'selected' : '' }}>Aktif
+                                                                        </option>
+                                                                        <option value="0"
+                                                                            {{ $d->status == 0 ? 'selected' : '' }}>Tidak
+                                                                            Aktif</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -139,14 +139,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                </ul>
+                            <div class="card-footer clearfix"
+                                style="max-height: 65px !important; {{ $user->hasPages() ? '' : 'height: 45px !important;' }}">
+                                {{ $user->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
                     </div>
@@ -158,3 +153,13 @@
         <!-- /.content -->
     </div>
 @endsection
+@push('scripts')
+    <script>
+        @if (session('success'))
+            toastr.success('{{ session('success') }}');
+        @endif
+        @if (session('error'))
+            toastr.error('{{ session('error') }}');
+        @endif
+    </script>
+@endpush

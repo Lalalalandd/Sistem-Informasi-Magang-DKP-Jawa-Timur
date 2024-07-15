@@ -33,6 +33,7 @@
                                             <th scope="col">No.</th>
                                             <th scope="col">Nama</th>
                                             <th scope="col">Email</th>
+                                            <th scope="col">Dinas</th>
                                             <th scope="col">Role</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
@@ -47,6 +48,7 @@
                                                 <th scope="row">{{ $x++ }}</th>
                                                 <td> {{ $d->name }} </td>
                                                 <td> {{ $d->email }} </td>
+                                                <td> {{ $d->dinas['dinas'] }} </td>
                                                 <td> {{ $d->role }} </td>
                                                 <td>
                                                     @if ($d->status == 1)
@@ -117,13 +119,39 @@
                                                                         id="password" name="password"
                                                                         value="{{ $d->password }}">
                                                                 </div>
+                                                                <div class=" mb-3">
+                                                                    <label for="tugas"
+                                                                        class="col-form-label">Dinas</label>
+                                                                    <select
+                                                                        class="form-control select2 select2-purple p @error('dinas_id') is-invalid @enderror"
+                                                                        data-dropdown-css-class="select2-purple"
+                                                                        style="width: 100%;" name="dinas_id"
+                                                                        id="select2_edit" required>
+                                                                        <option selected disabled>Pilih Dinas</option>
+                                                                        @foreach ($dinas as $option)
+                                                                            <option value="{{ $option->id }}"
+                                                                                {{ $option->dinas == $d->dinas['dinas'] ? 'selected' : '' }}>
+                                                                                {{ $option->dinas }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error('dinas_id')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
                                                                 <div class="mb-3">
                                                                     <label for="status"
-                                                                        class="col-form-label">status</label>
-                                                                    <select class="form-control select2bs4"
-                                                                        style="width: 100%;" name="status" id="status"> 
-                                                                        <option value="1" {{ $d->status == 1 ? 'selected' : '' }}>Aktif</option>
-                                                                        <option value="0" {{ $d->status == 0 ? 'selected' : '' }}>Tidak Aktif</option>
+                                                                        class="col-form-label">Status</label>
+                                                                    <select class="form-select" style="width: 100%;"
+                                                                        name="status" id="status">
+                                                                        <option value="1"
+                                                                            {{ $d->status == 1 ? 'selected' : '' }}>Aktif
+                                                                        </option>
+                                                                        <option value="0"
+                                                                            {{ $d->status == 0 ? 'selected' : '' }}>Tidak
+                                                                            Aktif</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -176,7 +204,7 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="name" class="col-form-label">Nama:</label>
+                                <label for="name" class="col-form-label">Nama</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     id="name" name="name" required placeholder="Isi nama pegawai/dinas"
                                     value="{{ old('name') }}">
@@ -187,7 +215,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="col-form-label">Email:</label>
+                                <label for="email" class="col-form-label">Email</label>
                                 <input type="text" class="form-control @error('email') is-invalid @enderror"
                                     id="email" name="email" required placeholder="Isi email pegawai/dinas"
                                     value="{{ old('email') }}">
@@ -198,11 +226,30 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="col-form-label">Password:</label>
+                                <label for="password" class="col-form-label">Password</label>
                                 <input type="text" class="form-control @error('password') is-invalid @enderror"
                                     id="password" name="password" required placeholder="Masukkan Password"
                                     value="{{ old('password') }}">
                                 @error('password')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class=" mb-3">
+                                <label for="tugas" class="col-form-label">Dinas</label>
+                                <select
+                                    class="form-control select2 select2-purple p @error('dinas_id') is-invalid @enderror"
+                                    data-dropdown-css-class="select2-purple" style="width: 100%;" name="dinas_id"
+                                    id="select2" required>
+                                    <option selected disabled>Pilih Dinas</option>
+                                    @foreach ($dinas as $option)
+                                        <option value="{{ $option->id }}">
+                                            {{ $option->dinas }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('dinas_id')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -224,3 +271,14 @@
         <!-- /.modal tambah data -->
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+
+            @if (session('success'))
+                toastr.success('{{ session('success') }}');
+            @endif
+        });
+    </script>
+@endpush

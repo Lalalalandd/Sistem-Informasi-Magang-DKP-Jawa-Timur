@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
+use App\Models\Dinas;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -11,9 +13,15 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        return view('pegawai',[
+        $dinas = Dinas::all();
+        $user = User::where('role', 'pegawai')
+            ->with('dinas')
+            ->get();
+       
+        return view('pegawai', [
             'tittle' => 'Pegawai',
-            'user' => User::where('role', 'pegawai')->get()
+            'user' => $user,
+            'dinas' => $dinas,
         ]);
     }
 
@@ -34,6 +42,7 @@ class PegawaiController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|unique:users|email:dns',
             'password' => 'required|max:255|min:5',
+            'dinas_id' => 'required|unique:users',
             'role' => 'required',
             'status' => 'required'
         ]);
@@ -67,6 +76,7 @@ class PegawaiController extends Controller
             'name',
             'email',
             'password',
+            'dinas_id',
             'status',
         ]);
         $user->update($userData);

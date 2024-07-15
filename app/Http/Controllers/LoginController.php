@@ -39,7 +39,7 @@ class LoginController extends Controller
 
             if ($user->role == 'admin') {
                 return redirect()->intended('beranda')->with('info','Selamat datang di Sistem Informasi CIIS');
-            } elseif ($user->role == 'pegawai') {
+            } elseif ($user->role === 'pegawai') {
                 if ($user->status == 1){
                     return redirect()->intended('beranda_pegawai')->with('info','Selamat datang di Sistem Informasi CIIS');;
                 }

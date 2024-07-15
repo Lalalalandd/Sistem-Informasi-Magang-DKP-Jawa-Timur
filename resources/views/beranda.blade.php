@@ -55,16 +55,7 @@
                                                     <td colspan="2"><dt>Total</dt></td>
                                                     <td><dt>{{ $total }}</dt></td>
                                                 </tr>
-                                                {{-- <tr>
-                                                    <td style="width: 20%;">{{ $univ->universitas }}</td>
-                                                    <td style="width: 70%;">
-                                                        <div class="progress progress-xs">
-                                                            <div class="progress-bar progress-bar-danger"
-                                                                style="width: {{ $persentase }}"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td style="width: 10%;">sdf</td>
-                                                </tr> --}}
+                                            
                                             </tbody>
                                         </table>
                                     </div>

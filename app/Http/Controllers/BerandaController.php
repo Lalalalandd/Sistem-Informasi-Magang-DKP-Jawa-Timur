@@ -67,7 +67,7 @@ class BerandaController extends Controller
 
     public function index_pegawai()
     {
-        return view('beranda', [
+        return view('pegawai.beranda_pegawai', [
             'tittle' => 'Beranda'
         ]);
     }

@@ -16,7 +16,7 @@ class PegawaiController extends Controller
         $dinas = Dinas::all();
         $user = User::where('role', 'pegawai')
             ->with('dinas')
-            ->get();
+            ->paginate(10);
        
         return view('pegawai', [
             'tittle' => 'Pegawai',

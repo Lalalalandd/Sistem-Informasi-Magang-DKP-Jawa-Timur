@@ -5,8 +5,22 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-12">
-                        <h5>Pendaftar Magang</h5>
+                    <div class="col-12">
+                        <form method="GET" action="/magang">
+                            <div class="form-group">
+                                <label for="periode_magang_id">Periode Magang</label>
+                                <select name="periode_magang_id" id="periode_magang_id" class="form-control">
+                                    <option value="">Pilih Periode</option>
+                                    @foreach ($periodeMagang as $periode)
+                                        <option value="{{ $periode->id }}"
+                                            {{ request('periode_magang_id') == $periode->id ? 'selected' : '' }}>
+                                            {{ $periode->nama_periode }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </form>
                     </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -46,7 +60,7 @@
                                         @foreach ($magang as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
-                                                <td >{{ $d->name }}</td>
+                                                <td>{{ $d->name }}</td>
                                                 <td>{{ $d->detail['universitas'] }}</td>
                                                 <td>{{ Carbon::parse($d->detail['tgl_mulai'])->format('d M Y') }}</td>
                                                 <td>{{ Carbon::parse($d->detail['tgl_selesai'])->format('d M Y') }}</td>
@@ -229,3 +243,14 @@
         <!-- /.content -->
     </div>
 @endsection
+@push('scripts')
+    <script>
+        document.getElementById('filterForm').addEventListener('submit', function(e) {
+            var periodeMagangId = document.getElementById('periode_magang_id').value;
+            if (periodeMagangId === '') {
+                var formAction = this.action;
+                this.action = formAction.split('?')[0]; // Remove query string
+            }
+        });
+    </script>
+@endpush

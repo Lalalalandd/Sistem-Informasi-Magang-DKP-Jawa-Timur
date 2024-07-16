@@ -38,7 +38,7 @@ class MagangController extends Controller
         $user = User::where('role', 'mahasiswa')
             ->where('dinas_id', $pegawai->dinas_id)
             ->with('detail', 'dinas')
-            ->get();
+            ->paginate(10);
 
         return view('pegawai.magang_pegawai', [
             'tittle' => 'Magang',

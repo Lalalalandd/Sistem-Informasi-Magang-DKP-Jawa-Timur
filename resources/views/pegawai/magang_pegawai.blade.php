@@ -24,7 +24,6 @@
                                                     <th scope="col">Universitas</th>
                                                     <th scope="col">Tgl. Mulai</th>
                                                     <th scope="col">Tgl. Selesai</th>
-                                                    <th scope="col">Dinas</th>
                                                     <th scope="col">Penerimaan</th>
                                                     <th scope="col">Aksi</th>
                                                 </tr>
@@ -47,8 +46,7 @@
                                                         <td>{{ Carbon::parse($d->detail['tgl_mulai'])->format('d M Y') }}
                                                         </td>
                                                         <td>{{ Carbon::parse($d->detail['tgl_selesai'])->format('d M Y') }}
-                                                        </td>
-                                                        <td>{{ $d->dinas['dinas'] }}</td>
+                                                        </td>                                                      
                                                         <td>
                                                             @if ($d->detail['penerimaan'] === 'diterima')
                                                                 <span class="badge badge-success">Diterima</span>

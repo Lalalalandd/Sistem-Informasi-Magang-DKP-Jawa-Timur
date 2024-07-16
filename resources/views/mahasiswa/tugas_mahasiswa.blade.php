@@ -21,12 +21,12 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">Tugas</th>
-                                            <th scope="col">Tgl. Diberikan</th>
-                                            <th scope="col">Tgl. DiKumpulkan</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Aksi</th>
+                                            <th class="text-center">No.</th>
+                                            <th>Tugas</th>
+                                            <th>Tgl. Diberikan</th>
+                                            <th>Tgl. DiKumpulkan</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -41,11 +41,11 @@
                                         @endif
                                         @foreach ($tugas as $d)
                                             <tr>
-                                                <th scope="row">{{ $x++ }}</th>
-                                                <td>{{ $d->tugas }}</td>
-                                                <td>{{ Carbon::parse($d->tgl_diberikan)->format('d M Y'); }}</td>
-                                                <td>{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y'); }}</td>
-                                                <td>
+                                                <td scope="row" class="align-middle text-center">{{ $x++ }}</td>
+                                                <td class="align-middle">{{ $d->tugas }}</td>
+                                                <td class="align-middle">{{ Carbon::parse($d->tgl_diberikan)->format('d M Y'); }}</td>
+                                                <td class="align-middle">{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y'); }}</td>
+                                                <td class="align-middle">
                                                     @if ($d->status == 'selesai')
                                                         <span class="label bg-success">Sudah Dikerjakan</span>
                                                     @elseif ($d->status == 'belum')

@@ -158,13 +158,13 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">Tanggal</th>
-                                            <th scope="col">Aktivitas</th>
-                                            <th scope="col">Bukti</th>
-                                            <th scope="col">Presensi</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Aksi</th>
+                                            <th class="text-center">No.</th>
+                                            <th>Tanggal</th>
+                                            <th>Aktivitas</th>
+                                            <th>Bukti</th>
+                                            <th>Presensi</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -179,21 +179,21 @@
                                         @endif
                                         @foreach ($magang as $d)
                                             <tr>
-                                                <th scope="row">{{ $x++ }}</th>
-                                                <td>{{ Carbon::parse($d->tanggal)->format('d M Y'); }}</td>
-                                                <td>{{ $d->aktivitas }}</td>
+                                                <td scope="row" class="align-middle text-center">{{ $x++ }}</td>
+                                                <td class="align-middle">{{ Carbon::parse($d->tanggal)->format('d M Y'); }}</td>
+                                                <td class="align-middle">{{ $d->aktivitas }}</td>
                                                 @if ($d->bukti != null)
                                                     @php
                                                         $urlBukti = Storage::url($d->bukti);
                                                     @endphp
-                                                    <td>
+                                                    <td class="align-middle">
                                                         <a href="#" data-toggle="modal" data-target="#buktiModal"
                                                             data-url="{{ $urlBukti }}">Lihat bukti</a>
                                                     </td>
                                                 @else
-                                                    <td>Tidak ada bukti</td>
+                                                    <td class="align-middle">Tidak ada bukti</td>
                                                 @endif
-                                                <td>
+                                                <td class="align-middle">
                                                     @if ($d->presensi === 'masuk')
                                                         <span class="bg-success label">Masuk</span>
                                                     @elseif ($d->presensi === 'izin')
@@ -202,7 +202,7 @@
                                                         <span class="bg-danger label">Bolos</span>
                                                     @endif
                                                 </td>
-                                                <td>
+                                                <td class="align-middle">
                                                     @if ($d->status === 'ditinjau')
                                                         <span class="btn btn-outline-info">Di tinjau</span>
                                                     @elseif ($d->status === 'diterima')

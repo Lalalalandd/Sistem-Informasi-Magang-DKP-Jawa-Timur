@@ -7,19 +7,27 @@
                 <div class="row mb-2">
                     <div class="col-12">
                         <form method="GET" action="/magang" id="filterForm">
-                            <div class="form-group">
-                                <label for="periode_magang_id">Periode Magang</label>
-                                <select name="periode_magang_id" id="periode_magang_id" class="form-control">
-                                    <option value="">Pilih Periode</option>
-                                    @foreach ($periodeMagang as $periode)
-                                        <option value="{{ $periode->id }}"
-                                            {{ request('periode_magang_id') == $periode->id ? 'selected' : '' }}>
-                                            {{ $periode->nama_periode }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <div class="row">
+                                <div class="col-12 d-flex align-items-center justify-content-end">
+                                    {{-- <label for="periode_magang_id" class="mr-2">Periode Magang</label> --}}
+                                    <i class="mr-2" style="color:#2574EA;"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="1.5em" height="1.5em" viewBox="0 0 32 32">
+                                            <path fill="currentColor"
+                                                d="M18 28h-4a2 2 0 0 1-2-2v-7.59L4.59 11A2 2 0 0 1 4 9.59V6a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v3.59a2 2 0 0 1-.59 1.41L20 18.41V26a2 2 0 0 1-2 2M6 6v3.59l8 8V26h4v-8.41l8-8V6Z" />
+                                        </svg></i>
+                                    <select name="periode_magang_id" id="periode_magang_id" class="form-select"
+                                        style="width: 200px;">
+                                        <option value="">Pilih Periode</option>
+                                        @foreach ($periodeMagang as $periode)
+                                            <option value="{{ $periode->id }}"
+                                                {{ request('periode_magang_id') == $periode->id ? 'selected' : '' }}>
+                                                {{ $periode->nama_periode }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <button type="submit" class="btn btn-primary ml-2">Filter</button>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Filter</button>
                         </form>
                     </div>
                 </div><!-- /.row -->
@@ -33,18 +41,19 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+
                             <div class="card-body table-responsive p-0">
-                                <table class="table table-hover">
+                                <table class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">Nama Ketua</th>
-                                            <th scope="col">Universitas</th>
-                                            <th scope="col">Tgl. Mulai</th>
-                                            <th scope="col">Tgl. Selesai</th>
-                                            <th scope="col">Dinas</th>
-                                            <th scope="col">Penerimaan</th>
-                                            <th scope="col">Aksi</th>
+                                            <th class="text-center">No.</th>
+                                            <th>Nama Ketua</th>
+                                            <th>Universitas</th>
+                                            <th>Tgl. Mulai</th>
+                                            <th>Tgl. Selesai</th>
+                                            <th>Dinas</th>
+                                            <th>Penerimaan</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -59,13 +68,17 @@
                                         @endif
                                         @foreach ($magang as $d)
                                             <tr>
-                                                <th scope="row">{{ $x++ }}</th>
-                                                <td>{{ $d->name }}</td>
-                                                <td>{{ $d->detail['universitas'] }}</td>
-                                                <td>{{ Carbon::parse($d->detail['tgl_mulai'])->format('d M Y') }}</td>
-                                                <td>{{ Carbon::parse($d->detail['tgl_selesai'])->format('d M Y') }}</td>
-                                                <td>{{ $d->dinas['dinas'] }}</td>
-                                                <td>
+                                                <td scope="row" class="align-middle text-center">
+                                                    <dt>{{ $x++ }}</dt>
+                                                    </th>
+                                                <td class="align-middle">{{ $d->name }}</td>
+                                                <td class="align-middle">{{ $d->detail['universitas'] }}</td>
+                                                <td class="align-middle">
+                                                    {{ Carbon::parse($d->detail['tgl_mulai'])->format('d M Y') }}</td>
+                                                <td class="align-middle">
+                                                    {{ Carbon::parse($d->detail['tgl_selesai'])->format('d M Y') }}</td>
+                                                <td class="align-middle">{{ $d->dinas['dinas'] }}</td>
+                                                <td class="align-middle">
                                                     @if ($d->detail['penerimaan'] === 'diterima')
                                                         <span class="bg-success label">Diterima</span>
                                                     @elseif ($d->detail['penerimaan'] === 'ditolak')
@@ -224,7 +237,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix" style="max-height: 65px !important; {{ $magang->hasPages() ? '' : 'height: 45px !important;' }}">
+                            <div class="card-footer clearfix"
+                                style="max-height: 65px !important; {{ $magang->hasPages() ? '' : 'height: 45px !important;' }}">
                                 {{ $magang->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
@@ -238,13 +252,12 @@
     </div>
 @endsection
 
-    <script>
-        document.getElementById('filterForm').addEventListener('submit', function(e) {
-            var periodeMagangId = document.getElementById('periode_magang_id').value;
-            if (periodeMagangId === '') {
-                var formAction = this.action;
-                this.action = formAction.split('?')[0]; // Remove query string
-            }
-        });
-    </script>
-
+<script>
+    document.getElementById('filterForm').addEventListener('submit', function(e) {
+        var periodeMagangId = document.getElementById('periode_magang_id').value;
+        if (periodeMagangId === '') {
+            var formAction = this.action;
+            this.action = formAction.split('?')[0]; // Remove query string
+        }
+    });
+</script>

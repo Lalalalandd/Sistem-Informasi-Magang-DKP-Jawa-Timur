@@ -179,8 +179,11 @@
                                         @endif
                                         @foreach ($magang as $d)
                                             <tr>
-                                                <td scope="row" class="align-middle text-center">{{ $x++ }}</td>
-                                                <td class="align-middle">{{ Carbon::parse($d->tanggal)->format('d M Y'); }}</td>
+                                                <td scope="row" class="align-middle text-center">
+                                                    <dt>{{ $x++ }}</dt>
+                                                </td>
+                                                <td class="align-middle">
+                                                    {{ Carbon::parse($d->tanggal)->format('d M Y') }}</td>
                                                 <td class="align-middle">{{ $d->aktivitas }}</td>
                                                 @if ($d->bukti != null)
                                                     @php
@@ -296,7 +299,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix" style="max-height: 65px !important; {{ $magang->hasPages() ? '' : 'height: 45px !important;' }}">
+                            <div class="card-footer clearfix"
+                                style="max-height: 65px !important; {{ $magang->hasPages() ? '' : 'height: 45px !important;' }}">
                                 {{ $magang->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>

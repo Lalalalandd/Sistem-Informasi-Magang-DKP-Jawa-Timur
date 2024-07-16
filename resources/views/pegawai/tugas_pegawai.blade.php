@@ -51,165 +51,169 @@
                                         @endif
                                         @foreach ($tugas as $d)
                                             <tr>
-                                                <th scope="row">{{ $x++ }}</th>
+                                                <th scope="row">
+                                                    <dt>{{ $x++ }}</dt>
+                                                </th>
                                                 <td>{{ $d->tugas }}</td>
                                                 <td>{{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
                                                 <td>{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>
                                                 <td>{{ $d->user['name'] }}</td>
-                                                <td> @if ($d->lampiran != null)
-                                                    <a href="{{ Storage::url($d->lampiran) }}"
-                                                        target="_blank">Lihat lampiran</a></td>
-                                                @else
-                                                    <p>Tidak ada lampiran</p>
-                                                @endif
-                                                    
-                                                    
                                                 <td>
-                                                    @if ($d->status === 'belum')
-                                                        <span class="bg-warning label">Belum Dikerjakan</span>
-                                                    @elseif ($d->status === 'proses')
-                                                        <span class="bg-info label">Proses</span>
-                                                    @elseif ($d->status === 'selesai')
-                                                        <span class="bg-success label">Selesai</span>
-                                                    @endif
+                                                    @if ($d->lampiran != null)
+                                                        <a href="{{ Storage::url($d->lampiran) }}" target="_blank">Lihat
+                                                            lampiran</a>
                                                 </td>
-                                                <td>
-                                                    <div class="d-flex d-inline">
-                                                        <button class="btn btn-outline-warning mr-1" title="Edit"
-                                                            type="button" data-toggle="modal"
-                                                            data-target="#editdata{{ $x }}"><i><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="1em"
-                                                                    height="1em" viewBox="0 0 512 512">
-                                                                    <path fill="currentColor"
-                                                                        d="m29.663 482.25l.087.087a24.847 24.847 0 0 0 17.612 7.342a25.178 25.178 0 0 0 8.1-1.345l142.006-48.172l272.5-272.5A88.832 88.832 0 0 0 344.334 42.039l-272.5 272.5l-48.168 142.002a24.844 24.844 0 0 0 5.997 25.709m337.3-417.584a56.832 56.832 0 0 1 80.371 80.373L411.5 180.873L331.127 100.5ZM99.744 331.884L308.5 123.127l80.373 80.373l-208.757 208.756l-121.634 41.262Z" />
-                                                                </svg></i></button>
-                                                        <form action="/tugas/{{ $d->id }}" method="POST">
-                                                            {{ csrf_field() }}
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="btn btn-outline-danger" type="submit"
-                                                                title="Hapus"
-                                                                onclick="return confirm('Apakah anda yakin?')"><i><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="1.2em"
-                                                                        height="1.2em" viewBox="0 0 24 24">
-                                                                        <path fill="none" stroke="currentColor"
-                                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                                            stroke-width="2"
-                                                                            d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
-                                                                    </svg></i></button>
-                                                        </form>
+                                            @else
+                                                <p>Tidak ada lampiran</p>
+                                        @endif
+
+
+                                        <td>
+                                            @if ($d->status === 'belum')
+                                                <span class="bg-warning label">Belum Dikerjakan</span>
+                                            @elseif ($d->status === 'proses')
+                                                <span class="bg-info label">Proses</span>
+                                            @elseif ($d->status === 'selesai')
+                                                <span class="bg-success label">Selesai</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="d-flex d-inline">
+                                                <button class="btn btn-outline-warning mr-1" title="Edit" type="button"
+                                                    data-toggle="modal" data-target="#editdata{{ $x }}"><i><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                            viewBox="0 0 512 512">
+                                                            <path fill="currentColor"
+                                                                d="m29.663 482.25l.087.087a24.847 24.847 0 0 0 17.612 7.342a25.178 25.178 0 0 0 8.1-1.345l142.006-48.172l272.5-272.5A88.832 88.832 0 0 0 344.334 42.039l-272.5 272.5l-48.168 142.002a24.844 24.844 0 0 0 5.997 25.709m337.3-417.584a56.832 56.832 0 0 1 80.371 80.373L411.5 180.873L331.127 100.5ZM99.744 331.884L308.5 123.127l80.373 80.373l-208.757 208.756l-121.634 41.262Z" />
+                                                        </svg></i></button>
+                                                <form action="/tugas/{{ $d->id }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-outline-danger" type="submit" title="Hapus"
+                                                        onclick="return confirm('Apakah anda yakin?')"><i><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="1.2em"
+                                                                height="1.2em" viewBox="0 0 24 24">
+                                                                <path fill="none" stroke="currentColor"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2"
+                                                                    d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
+                                                            </svg></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                        </tr>
+
+                                        <!-- /.modal EDIT data -->
+                                        <div class="modal fade" id="editdata{{ $x }}">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Edit Data Tugas</h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
                                                     </div>
-                                                </td>
-                                            </tr>
+                                                    <form action="tugas/{{ $d->id }}" method="POST">
+                                                        @method('put')
+                                                        {{ csrf_field() }}
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <label for="subbagian"
+                                                                        class="col-form-label">Tugas</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="subbagian" name="tugas"
+                                                                        value="{{ $d->tugas }}">
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <label for="tugas"
+                                                                        class="col-form-label">Nama</label>
+                                                                    <select
+                                                                        class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
+                                                                        data-dropdown-css-class="select2-purple"
+                                                                        style="width: 100%;" name="dinas"
+                                                                        id="select2dinas{{ $x }}">
+                                                                        <option selected disabled>Pilih Sub Bagian
+                                                                        </option>
+                                                                        @foreach ($user as $option)
+                                                                            <option value="{{ $option->id }}"
+                                                                                {{ $option->name == $d->user['name'] ? 'selected' : '' }}>
+                                                                                {{ $option->name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error('dinas')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <label for="tgl_diberikan"
+                                                                        class="col-form-label">Tanggal Diberikan</label>
+                                                                    <input type="date"
+                                                                        class="form-control @error('tgl_diberikan') is-invalid @enderror"
+                                                                        id="tgl_diberikan" name="tgl_diberikan" required
+                                                                        value="{{ $d->tgl_diberikan }}">
+                                                                    @error('tgl_diberikan')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <label for="tgl_dikumpulkan"
+                                                                        class="col-form-label">Tanggal Dikumpulkan</label>
+                                                                    <input type="date"
+                                                                        class="form-control @error('tgl_dikumpulkan') is-invalid @enderror"
+                                                                        id="tgl_dikumpulkan" name="tgl_dikumpulkan"
+                                                                        required value="{{ $d->tgl_dikumpulkan }}">
+                                                                    @error('tgl_dikumpulkan')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
 
-                                            <!-- /.modal EDIT data -->
-                                            <div class="modal fade" id="editdata{{ $x }}">
-                                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Edit Data Tugas</h4>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <form action="tugas/{{ $d->id }}" method="POST">
-                                                            @method('put')
-                                                            {{ csrf_field() }}
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <label for="subbagian"
-                                                                            class="col-form-label">Tugas</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="subbagian" name="tugas"
-                                                                            value="{{ $d->tugas }}">
-                                                                    </div>
-                                                                    <div class="col-lg-12">
-                                                                        <label for="tugas"
-                                                                            class="col-form-label">Nama</label>
-                                                                        <select
-                                                                            class="form-control select2 select2-purple p @error('dinas') is-invalid @enderror"
-                                                                            data-dropdown-css-class="select2-purple"
-                                                                            style="width: 100%;" name="dinas"
-                                                                            id="select2dinas{{ $x }}">
-                                                                            <option selected disabled>Pilih Sub Bagian
-                                                                            </option>
-                                                                            @foreach ($user as $option)
-                                                                                <option value="{{ $option->id }}"
-                                                                                    {{ $option->name == $d->user['name'] ? 'selected' : '' }}>
-                                                                                    {{ $option->name }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                        @error('dinas')
-                                                                            <div class="invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
-                                                                        @enderror
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <label for="tgl_diberikan" class="col-form-label">Tanggal Diberikan</label>
-                                                                        <input type="date"
-                                                                            class="form-control @error('tgl_diberikan') is-invalid @enderror"
-                                                                            id="tgl_diberikan" name="tgl_diberikan" required
-                                                                            value="{{ $d->tgl_diberikan }}">
-                                                                        @error('tgl_diberikan')
-                                                                            <div class="invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
-                                                                        @enderror
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <label for="tgl_dikumpulkan" class="col-form-label">Tanggal Dikumpulkan</label>
-                                                                        <input type="date"
-                                                                            class="form-control @error('tgl_dikumpulkan') is-invalid @enderror"
-                                                                            id="tgl_dikumpulkan" name="tgl_dikumpulkan" required
-                                                                            value="{{ $d->tgl_dikumpulkan }}">
-                                                                        @error('tgl_dikumpulkan')
-                                                                            <div class="invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
-                                                                        @enderror
-                                                                    </div>
-
-                                                                    <div class="col-lg-12">
-                                                                        <label for="status"
-                                                                            class="col-form-label">Pengerjaan</label>
-                                                                        <select class="form-control select2bs4"
-                                                                            style="width: 100%;" name="status"
-                                                                            id="status">
-                                                                            <option value="belum"
-                                                                                {{ $d->status == 'belum' ? 'selected' : '' }}>
-                                                                                Belum
-                                                                                Dikerjakan
-                                                                            </option>
-                                                                            <option value="proses"
-                                                                                {{ $d->status == 'proses' ? 'selected' : '' }}>
-                                                                                Proses
-                                                                            </option>
-                                                                            <option value="selesai"
-                                                                                {{ $d->status == 'selesai' ? 'selected' : '' }}>
-                                                                                Selesai
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
+                                                                <div class="col-lg-12">
+                                                                    <label for="status"
+                                                                        class="col-form-label">Pengerjaan</label>
+                                                                    <select class="form-control select2bs4"
+                                                                        style="width: 100%;" name="status"
+                                                                        id="status">
+                                                                        <option value="belum"
+                                                                            {{ $d->status == 'belum' ? 'selected' : '' }}>
+                                                                            Belum
+                                                                            Dikerjakan
+                                                                        </option>
+                                                                        <option value="proses"
+                                                                            {{ $d->status == 'proses' ? 'selected' : '' }}>
+                                                                            Proses
+                                                                        </option>
+                                                                        <option value="selesai"
+                                                                            {{ $d->status == 'selesai' ? 'selected' : '' }}>
+                                                                            Selesai
+                                                                        </option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
-                                                            <div class=" modal-footer justify-content-between">
-                                                                <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">Tutup</button>
-                                                                <button type="submit" class="btn btn-warning">Edit
-                                                                    Data</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <!-- /.modal-content -->
+                                                        </div>
+                                                        <div class=" modal-footer justify-content-between">
+                                                            <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">Tutup</button>
+                                                            <button type="submit" class="btn btn-warning">Edit
+                                                                Data</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <!-- /.modal-dialog -->
+                                                <!-- /.modal-content -->
                                             </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
 
-                                            <!-- /.modal EDIT data -->
+                                        <!-- /.modal EDIT data -->
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -305,12 +309,9 @@
                                         <label for="exampleInputFile">Lampiran</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file"
-                                                    class="custom-file-input"
-                                                    id="exampleInputFile"
+                                                <input type="file" class="custom-file-input" id="exampleInputFile"
                                                     name="lampiran">
-                                                <label class="custom-file-label"
-                                                    for="exampleInputFile">Choose
+                                                <label class="custom-file-label" for="exampleInputFile">Choose
                                                     file</label>
                                             </div>
                                         </div>
@@ -339,12 +340,12 @@
 
 @push('scripts')
     <script>
-         $(document).ready(function() {
+        $(document).ready(function() {
             $('.select2').select2();
-       
-        @if(session('success'))
-            toastr.success('{{ session('success') }}');
-        @endif
-    });
+
+            @if (session('success'))
+                toastr.success('{{ session('success') }}');
+            @endif
+        });
     </script>
 @endpush

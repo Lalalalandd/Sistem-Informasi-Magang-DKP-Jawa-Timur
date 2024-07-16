@@ -45,7 +45,9 @@
                                         @endphp
                                         @foreach ($user as $d)
                                             <tr>
-                                                <td scope="row" class="text-center align-middle">{{ $x++ }}</td>
+                                                <td scope="row" class="text-center align-middle">
+                                                    <dt>{{ $x++ }}</dt>
+                                                </td>
                                                 <td class="align-middle"> {{ $d->name }} </td>
                                                 <td class="align-middle"> {{ $d->email }} </td>
                                                 <td class="align-middle"> {{ $d->dinas['dinas'] }} </td>
@@ -172,7 +174,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix" style="max-height: 65px !important; {{ $user->hasPages() ? '' : 'height: 45px !important;' }}">
+                            <div class="card-footer clearfix"
+                                style="max-height: 65px !important; {{ $user->hasPages() ? '' : 'height: 45px !important;' }}">
                                 {{ $user->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>

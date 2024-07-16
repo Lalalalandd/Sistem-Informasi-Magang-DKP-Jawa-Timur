@@ -46,10 +46,14 @@
                                         @endphp
                                         @foreach ($periodes as $d)
                                             <tr>
-                                                <td scope="row" class="text-center">{{ $x++ }}</td>
+                                                <td scope="row" class="text-center align-middle">
+                                                    <dt>{{ $x++ }}</dt>
+                                                </td>
                                                 <td class="align-middle"> {{ $d->nama_periode }} </td>
-                                                <td class="align-middle">{{ Carbon::parse($d->tanggal_mulai)->format('d M Y') }}</td>
-                                                <td class="align-middle">{{ Carbon::parse($d->tanggal_selesai)->format('d M Y') }}</td>
+                                                <td class="align-middle">
+                                                    {{ Carbon::parse($d->tanggal_mulai)->format('d M Y') }}</td>
+                                                <td class="align-middle">
+                                                    {{ Carbon::parse($d->tanggal_selesai)->format('d M Y') }}</td>
                                                 <td class="align-middle"> {{ $d->kuota }}</td>
                                                 <td class="align-middle">
                                                     @if ($d->status === 'aktif')
@@ -165,9 +169,8 @@
                                                                     <div class="mb-3">
                                                                         <label for="status"
                                                                             class="col-form-label">Status</label>
-                                                                        <select class="form-select"
-                                                                            style="width: 100%;" name="status"
-                                                                            id="status">
+                                                                        <select class="form-select" style="width: 100%;"
+                                                                            name="status" id="status">
                                                                             <option value="aktif"
                                                                                 {{ $d->status == 'aktif' ? 'selected' : '' }}>
                                                                                 Aktif
@@ -202,7 +205,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix" style="max-height: 65px !important; {{ $periodes->hasPages() ? '' : 'height: 45px !important;' }}">
+                            <div class="card-footer clearfix"
+                                style="max-height: 65px !important; {{ $periodes->hasPages() ? '' : 'height: 45px !important;' }}">
                                 {{ $periodes->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>

@@ -51,10 +51,14 @@
                                         @endif
                                         @foreach ($tugas as $d)
                                             <tr>
-                                                <td scope="row" class="text-center align-middle">{{ $x++ }}</td>
+                                                <td scope="row" class="text-center align-middle">
+                                                    <dt>{{ $x++ }}</dt>
+                                                </td>
                                                 <td class="align-middle">{{ $d->tugas }}</td>
-                                                <td class="align-middle">{{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
-                                                <td class="align-middle">{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>
+                                                <td class="align-middle">
+                                                    {{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
+                                                <td class="align-middle">
+                                                    {{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>
                                                 <td class="align-middle">{{ $d->user['name'] }}</td>
                                                 <td class="align-middle">
                                                     @if ($d->lampiran != null)
@@ -62,10 +66,9 @@
                                                             lampiran</a>
                                                 </td>
                                             @else
-                                            <div class="d-flex align-items-center" style="height: 100%;">
-                                                <p class="mb-0">Tidak ada lampiran</p>
-                                            </div>
-                                            
+                                                <div class="d-flex align-items-center" style="height: 100%;">
+                                                    <p class="mb-0">Tidak ada lampiran</p>
+                                                </div>
                                         @endif
 
 

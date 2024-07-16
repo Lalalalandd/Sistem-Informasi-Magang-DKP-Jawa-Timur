@@ -41,12 +41,15 @@
                                         @endphp
                                         @foreach ($sub_bagian as $d)
                                             <tr>
-                                                <td scope="row" class="text-center align-middle">{{ $x++ }}</td>
+                                                <td scope="row" class="text-center align-middle">
+                                                    <dt>{{ $x++ }}</dt>
+                                                </td>
                                                 <td class="align-middle"><?= $d->sub_bagian ?></td>
                                                 <td>
                                                     <div class="d-flex d-inline">
-                                                        <button class="btn btn-outline-warning mr-1" type="button" title="Edit"
-                                                            data-toggle="modal" data-target="#editdata<?= $x ?>"><i><svg
+                                                        <button class="btn btn-outline-warning mr-1" type="button"
+                                                            title="Edit" data-toggle="modal"
+                                                            data-target="#editdata<?= $x ?>"><i><svg
                                                                     xmlns="http://www.w3.org/2000/svg" width="1em"
                                                                     height="1em" viewBox="0 0 512 512">
                                                                     <path fill="currentColor"
@@ -57,7 +60,8 @@
                                                             {{ csrf_field() }}
                                                             @method('delete')
                                                             @csrf
-                                                            <button class="btn btn-outline-danger" type="submit" title="Hapus"
+                                                            <button class="btn btn-outline-danger" type="submit"
+                                                                title="Hapus"
                                                                 onclick="return confirm('Apakah anda yakin?')"><i><svg
                                                                         xmlns="http://www.w3.org/2000/svg" width="1.2em"
                                                                         height="1.2em" viewBox="0 0 24 24">

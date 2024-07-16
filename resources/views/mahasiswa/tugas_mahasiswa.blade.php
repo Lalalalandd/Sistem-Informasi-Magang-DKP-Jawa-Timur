@@ -41,10 +41,14 @@
                                         @endif
                                         @foreach ($tugas as $d)
                                             <tr>
-                                                <td scope="row" class="align-middle text-center">{{ $x++ }}</td>
+                                                <td scope="row" class="align-middle text-center">
+                                                    <dt>{{ $x++ }}</dt>
+                                                </td>
                                                 <td class="align-middle">{{ $d->tugas }}</td>
-                                                <td class="align-middle">{{ Carbon::parse($d->tgl_diberikan)->format('d M Y'); }}</td>
-                                                <td class="align-middle">{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y'); }}</td>
+                                                <td class="align-middle">
+                                                    {{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
+                                                <td class="align-middle">
+                                                    {{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>
                                                 <td class="align-middle">
                                                     @if ($d->status == 'selesai')
                                                         <span class="label bg-success">Sudah Dikerjakan</span>
@@ -214,7 +218,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix" style="max-height: 65px !important; {{ $tugas->hasPages() ? '' : 'height: 45px !important;' }}">
+                            <div class="card-footer clearfix"
+                                style="max-height: 65px !important; {{ $tugas->hasPages() ? '' : 'height: 45px !important;' }}">
                                 {{ $tugas->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>

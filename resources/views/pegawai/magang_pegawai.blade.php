@@ -35,18 +35,21 @@
                                                 @endphp
                                                 @if ($magang->isEmpty())
                                                     <tr>
-                                                        <td colspan="11" class="text-center">Data mahasiswa magang tidak ada</td>
+                                                        <td colspan="11" class="text-center">Data mahasiswa magang tidak
+                                                            ada</td>
                                                     </tr>
                                                 @endif
                                                 @foreach ($magang as $d)
                                                     <tr>
-                                                        <th scope="row">{{ $x++ }}</th>
+                                                        <th scope="row">
+                                                            <dt>{{ $x++ }}</dt>
+                                                        </th>
                                                         <td>{{ $d->name }}</td>
                                                         <td>{{ $d->detail['universitas'] }}</td>
                                                         <td>{{ Carbon::parse($d->detail['tgl_mulai'])->format('d M Y') }}
                                                         </td>
                                                         <td>{{ Carbon::parse($d->detail['tgl_selesai'])->format('d M Y') }}
-                                                        </td>                                                      
+                                                        </td>
                                                         <td>
                                                             @if ($d->detail['penerimaan'] === 'diterima')
                                                                 <span class="badge badge-success">Diterima</span>
@@ -128,7 +131,8 @@
                                                                             @if ($d->detail->surat_balasan == null)
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group">
-                                                                                        <label for="exampleInputFile" class="col-form-label">Surat
+                                                                                        <label for="exampleInputFile"
+                                                                                            class="col-form-label">Surat
                                                                                             Balasan </label>
                                                                                         <p><span class="bg-info label">Masih
                                                                                                 Diproses</span></p>
@@ -137,7 +141,8 @@
                                                                             @else
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group">
-                                                                                        <label for="exampleInputFile" class="col-form-label">Surat
+                                                                                        <label for="exampleInputFile"
+                                                                                            class="col-form-label">Surat
                                                                                             Balasan</label>
                                                                                         <p>
                                                                                             <a href="{{ Storage::url($d->detail->surat_balasan) }}"
@@ -145,7 +150,7 @@
                                                                                                     class="bg-indigo label">Lihat
                                                                                                     Surat
                                                                                                     Balasan</span></a>
-                                                                                            </p>
+                                                                                        </p>
                                                                                     </div>
                                                                                 </div>
                                                                             @endif
@@ -158,11 +163,13 @@
                                                                                         <p><span
                                                                                                 class="bg-success label">Diterima</span>
                                                                                         </p>
-                                                                                    @elseif ($d->detail['penerimaan'] === 'diproses') 
+                                                                                        @elseif
+                                                                                        ($d->detail['penerimaan'] === 'diproses')
                                                                                         <p><span class="bg-info label">Proses
                                                                                                 Pengajuan</span>
                                                                                         </p>
-                                                                                    @elseif ($d->detail['penerimaan'] === 'ditolak')
+                                                                                        @elseif
+                                                                                        ($d->detail['penerimaan'] === 'ditolak')
                                                                                         <p><span
                                                                                                 class="bg-danger label">Ditolak</span>
                                                                                         </p>
@@ -172,9 +179,10 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer justify-content-end">
-                                                                        <button type="button" class="btn btn-default float-right"
+                                                                        <button type="button"
+                                                                            class="btn btn-default float-right"
                                                                             data-dismiss="modal">Tutup</button>
-                                                                       
+
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -186,7 +194,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="card-footer clearfix" style="max-height: 65px !important; {{ $magang->hasPages() ? '' : 'height: 45px !important;' }}">
+                                    <div class="card-footer clearfix"
+                                        style="max-height: 65px !important; {{ $magang->hasPages() ? '' : 'height: 45px !important;' }}">
                                         {{ $magang->links('vendor.pagination.bootstrap-5') }}
                                     </div>
                                 </div>

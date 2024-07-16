@@ -13,63 +13,24 @@ class MagangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     $periodeMagang = PeriodeMagang::all();
-    //     $user = User::where('role', 'mahasiswa')->with('detail', 'dinas')->get();
-    //     return view('magang', [
-    //         'tittle' => 'Magang',
-    //         'magang' =>  $user,
-    //         'periodeMagang' => $periodeMagang
-    //     ]);
-    // }
     public function index(Request $request)
     {
-        
-        $periodeMagang = PeriodeMagang::all(); // Asumsi Anda memiliki model PeriodeMagang
 
-        $query = User::where('role', 'mahasiswa')->with('detail', 'dinas');
+        $periodeMagang = PeriodeMagang::all();
 
-        // Cek apakah periode_magang_id ada dalam permintaan
-        if ($request->has('periode_magang_id') && $request->input('periode_magang_id') !== '') {
-            $periodeMagangId = $request->input('periode_magang_id');
-            $query->whereHas('detail', function ($query) use ($periodeMagangId) {
-                $query->where('periode_magang_id', $periodeMagangId);
+        $users = User::where('role', 'mahasiswa')->with('detail', 'dinas');
+        $users->when($request->periode_magang_id, function ($query) use ($request) {
+            return $query->whereHas('detail', function ($query) use ($request) {
+                $query->where('periode_magang_id', $request->periode_magang_id);
             });
-        }
-
-        $users = $query->get();
-
+        });
+        $users = $users->get();
         return view('magang', [
             'tittle' => 'Magang',
             'magang' => $users,
             'periodeMagang' => $periodeMagang
         ]);
     }
-
-    // public function filterByPeriodeMagang(Request $request)
-    // {
-    //     $periodeMagang = PeriodeMagang::all(); // Asumsi Anda memiliki model PeriodeMagang
-
-    //     $query = User::where('role', 'mahasiswa')->with('detail', 'dinas');
-
-    //     // Cek apakah periode_magang_id ada dalam permintaan
-    //     if ($request->has('periode_magang_id') && $request->input('periode_magang_id') !== '') {
-    //         $periodeMagangId = $request->input('periode_magang_id');
-    //         $query->whereHas('detail', function ($query) use ($periodeMagangId) {
-    //             $query->where('periode_magang_id', $periodeMagangId);
-    //         });
-    //     }
-
-    //     $users = $query->get();
-
-    //     return view('magang', [
-    //         'tittle' => 'Magang',
-    //         'magang' => $users,
-    //         'periodeMagang' => $periodeMagang
-    //     ]);
-    // }
-
 
     public function index_pegawai()
     {

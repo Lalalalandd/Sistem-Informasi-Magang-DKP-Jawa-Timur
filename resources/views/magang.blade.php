@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-12">
-                        <form method="GET" action="/magang">
+                        <form method="GET" action="/magang" id="filterForm">
                             <div class="form-group">
                                 <label for="periode_magang_id">Periode Magang</label>
                                 <select name="periode_magang_id" id="periode_magang_id" class="form-control">
@@ -52,11 +52,11 @@
                                             use Carbon\Carbon;
                                             $x = 1;
                                         @endphp
-                                        @if ($magang->isEmpty())
+                                        {{-- @if ($magang->isEmpty())
                                             <tr>
                                                 <td colspan="11" class="text-center">Data pendaftar magang tidak ada</td>
                                             </tr>
-                                        @endif
+                                        @endif --}}
                                         @foreach ($magang as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
@@ -243,7 +243,7 @@
         <!-- /.content -->
     </div>
 @endsection
-@push('scripts')
+
     <script>
         document.getElementById('filterForm').addEventListener('submit', function(e) {
             var periodeMagangId = document.getElementById('periode_magang_id').value;
@@ -253,4 +253,4 @@
             }
         });
     </script>
-@endpush
+

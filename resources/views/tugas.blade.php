@@ -29,14 +29,14 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">Tugas</th>
-                                            <th scope="col">Tgl Diberikan</th>
-                                            <th scope="col">Tgl Dikumpulkan</th>
-                                            <th scope="col">Nama</th>
-                                            <th scope="col">Lampiran</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Aksi</th>
+                                            <th class="text-center">No.</th>
+                                            <th>Tugas</th>
+                                            <th>Tgl Diberikan</th>
+                                            <th>Tgl Dikumpulkan</th>
+                                            <th>Nama</th>
+                                            <th>Lampiran</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,22 +51,25 @@
                                         @endif
                                         @foreach ($tugas as $d)
                                             <tr>
-                                                <th scope="row">{{ $x++ }}</th>
-                                                <td>{{ $d->tugas }}</td>
-                                                <td>{{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
-                                                <td>{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>
-                                                <td>{{ $d->user['name'] }}</td>
-                                                <td>
+                                                <td scope="row" class="text-center">{{ $x++ }}</td>
+                                                <td class="align-middle">{{ $d->tugas }}</td>
+                                                <td class="align-middle">{{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
+                                                <td class="align-middle">{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>
+                                                <td class="align-middle">{{ $d->user['name'] }}</td>
+                                                <td class="align-middle">
                                                     @if ($d->lampiran != null)
                                                         <a href="{{ Storage::url($d->lampiran) }}" target="_blank">Lihat
                                                             lampiran</a>
                                                 </td>
                                             @else
-                                                <p>Tidak ada lampiran</p>
+                                            <div class="d-flex align-items-center" style="height: 100%;">
+                                                <p class="mb-0">Tidak ada lampiran</p>
+                                            </div>
+                                            
                                         @endif
 
 
-                                        <td>
+                                        <td class="align-middle">
                                             @if ($d->status === 'belum')
                                                 <span class="bg-warning label">Belum Dikerjakan</span>
                                             @elseif ($d->status === 'proses')
@@ -215,14 +218,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                </ul>
+                            <div class="card-footer clearfix"
+                                style="max-height: 65px !important; {{ $tugas->hasPages() ? '' : 'height: 45px !important;' }}">
+                                {{ $tugas->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
                     </div>

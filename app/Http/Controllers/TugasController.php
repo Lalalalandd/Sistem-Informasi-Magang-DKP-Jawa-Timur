@@ -26,7 +26,7 @@ class TugasController extends Controller
         ->with(['user' => function($query) {
             $query->where('status', 1);
         }])
-        ->get();
+        ->paginate(10);
         
         return view('tugas', [
             'tittle' => 'Tugas',

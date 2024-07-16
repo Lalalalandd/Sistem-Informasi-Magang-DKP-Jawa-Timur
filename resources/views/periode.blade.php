@@ -30,13 +30,13 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">Nama Periode</th>
-                                            <th scope="col">Tanggal Mulai</th>
-                                            <th scope="col">Tanggal Selesai</th>
-                                            <th scope="col">Kuota</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Aksi</th>
+                                            <th class="text-center">No.</th>
+                                            <th>Nama Periode</th>
+                                            <th>Tanggal Mulai</th>
+                                            <th>Tanggal Selesai</th>
+                                            <th>Kuota</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,12 +46,12 @@
                                         @endphp
                                         @foreach ($periodes as $d)
                                             <tr>
-                                                <th scope="row">{{ $x++ }}</th>
-                                                <td><?= $d->nama_periode ?></td>
-                                                <td>{{ Carbon::parse($d->tanggal_mulai)->format('d M Y') }}</td>
-                                                <td>{{ Carbon::parse($d->tanggal_selesai)->format('d M Y') }}</td>
-                                                <td><?= $d->kuota ?></td>
-                                                <td>
+                                                <td scope="row" class="text-center">{{ $x++ }}</td>
+                                                <td class="align-middle"> {{ $d->nama_periode }} </td>
+                                                <td class="align-middle">{{ Carbon::parse($d->tanggal_mulai)->format('d M Y') }}</td>
+                                                <td class="align-middle">{{ Carbon::parse($d->tanggal_selesai)->format('d M Y') }}</td>
+                                                <td class="align-middle"> {{ $d->kuota }}</td>
+                                                <td class="align-middle">
                                                     @if ($d->status === 'aktif')
                                                         <span class="bg-success label">Aktif</span>
                                                     @elseif ($d->status === 'penuh')

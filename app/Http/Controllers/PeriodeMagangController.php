@@ -13,7 +13,7 @@ class PeriodeMagangController extends Controller
      */
     public function index()
     {
-        $periodes = PeriodeMagang::orderBy('id', 'desc')->get();
+        $periodes = PeriodeMagang::orderBy('id', 'desc')->paginate(10);
 
         foreach ($periodes as $periode) {
             // Cek apakah jumlah pendaftaran sudah mencapai atau melebihi kuota

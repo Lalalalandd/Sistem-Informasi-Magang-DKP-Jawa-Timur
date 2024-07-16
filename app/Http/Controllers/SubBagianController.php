@@ -16,7 +16,7 @@ class SubBagianController extends Controller
     {
         return view('sub_bagian', [
             'tittle' => 'Sub Bagian',
-            'sub_bagian' => Sub_Bagian::all()
+            'sub_bagian' => Sub_Bagian::paginate(10)
         ]);
     }
 

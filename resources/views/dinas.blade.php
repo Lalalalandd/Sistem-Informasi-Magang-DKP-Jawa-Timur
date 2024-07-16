@@ -30,10 +30,10 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">Dinas</th>
-                                            <th scope="col">Alamat</th>
-                                            <th scope="col">Aksi</th>
+                                            <th class="text-center">No.</th>
+                                            <th>Dinas</th>
+                                            <th>Alamat</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -42,9 +42,9 @@
                                         @endphp
                                         @foreach ($dinas as $d)
                                             <tr>
-                                                <th scope="row">{{ $x++ }}</th>
-                                                <td><?= $d->dinas ?></td>
-                                                <td><?= $d->alamat ?></td>
+                                                <td scope="row" class="text-center">{{ $x++ }}</td>
+                                                <td class="align-middle">{{ $d->dinas }}</td>
+                                                <td class="align-middle">{{ $d->alamat }}</td>
                                                 <td>
                                                     <div class="d-flex d-inline">
                                                     <button class="btn btn-outline-warning mr-1" type="button" title="Edit" data-toggle="modal"
@@ -120,14 +120,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                </ul>
+                            <div class="card-footer clearfix"
+                                style="max-height: 65px !important; {{ $dinas->hasPages() ? '' : 'height: 45px !important;' }}">
+                                {{ $dinas->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
                     </div>

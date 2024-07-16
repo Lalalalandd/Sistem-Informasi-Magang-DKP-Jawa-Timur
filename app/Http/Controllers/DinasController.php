@@ -12,7 +12,7 @@ class DinasController extends Controller
     {
         return view('dinas', [
             'tittle' => 'Dinas',
-            'dinas' => Dinas::all()
+            'dinas' => Dinas::paginate(10)
         ]);
     }
 

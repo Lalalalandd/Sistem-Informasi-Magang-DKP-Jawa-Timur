@@ -45,7 +45,7 @@
                                         @endphp
                                         @foreach ($user as $d)
                                             <tr>
-                                                <td scope="row" class="text-center">{{ $x++ }}</td>
+                                                <td scope="row" class="text-center align-middle">{{ $x++ }}</td>
                                                 <td class="align-middle"> {{ $d->name }} </td>
                                                 <td class="align-middle"> {{ $d->email }} </td>
                                                 <td class="align-middle"> {{ $d->dinas['dinas'] }} </td>

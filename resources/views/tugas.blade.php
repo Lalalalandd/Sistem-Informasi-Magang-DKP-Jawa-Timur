@@ -51,7 +51,7 @@
                                         @endif
                                         @foreach ($tugas as $d)
                                             <tr>
-                                                <td scope="row" class="text-center">{{ $x++ }}</td>
+                                                <td scope="row" class="text-center align-middle">{{ $x++ }}</td>
                                                 <td class="align-middle">{{ $d->tugas }}</td>
                                                 <td class="align-middle">{{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
                                                 <td class="align-middle">{{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>

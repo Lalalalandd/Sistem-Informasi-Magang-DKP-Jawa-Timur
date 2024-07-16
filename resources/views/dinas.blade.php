@@ -42,7 +42,7 @@
                                         @endphp
                                         @foreach ($dinas as $d)
                                             <tr>
-                                                <td scope="row" class="text-center">{{ $x++ }}</td>
+                                                <td scope="row" class="text-center align-middle">{{ $x++ }}</td>
                                                 <td class="align-middle">{{ $d->dinas }}</td>
                                                 <td class="align-middle">{{ $d->alamat }}</td>
                                                 <td>

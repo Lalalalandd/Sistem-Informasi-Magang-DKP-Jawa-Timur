@@ -41,7 +41,7 @@
                                         @endphp
                                         @foreach ($sub_bagian as $d)
                                             <tr>
-                                                <td scope="row" class="text-center">{{ $x++ }}</td>
+                                                <td scope="row" class="text-center align-middle">{{ $x++ }}</td>
                                                 <td class="align-middle"><?= $d->sub_bagian ?></td>
                                                 <td>
                                                     <div class="d-flex d-inline">

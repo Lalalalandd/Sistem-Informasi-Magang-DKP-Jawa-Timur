@@ -36,7 +36,7 @@
                                         @endphp
                                         @if ($tugas->isEmpty())
                                             <tr>
-                                                <td colspan="6" class="text-center">Tugas belum ada</td>
+                                                <td colspan="6" class="text-center">Tugas belum diberikan</td>
                                             </tr>
                                         @endif
                                         @foreach ($tugas as $d)

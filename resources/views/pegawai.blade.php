@@ -30,13 +30,13 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">Nama</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Dinas</th>
-                                            <th scope="col">Role</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Aksi</th>
+                                            <th class="text-center">No.</th>
+                                            <th>Nama</th>
+                                            <th>Email</th>
+                                            <th>Dinas</th>
+                                            <th>Role</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -45,16 +45,16 @@
                                         @endphp
                                         @foreach ($user as $d)
                                             <tr>
-                                                <th scope="row">{{ $x++ }}</th>
-                                                <td> {{ $d->name }} </td>
-                                                <td> {{ $d->email }} </td>
-                                                <td> {{ $d->dinas['dinas'] }} </td>
-                                                <td> {{ $d->role }} </td>
-                                                <td>
+                                                <td scope="row" class="text-center">{{ $x++ }}</td>
+                                                <td class="align-middle"> {{ $d->name }} </td>
+                                                <td class="align-middle"> {{ $d->email }} </td>
+                                                <td class="align-middle"> {{ $d->dinas['dinas'] }} </td>
+                                                <td class="align-middle"> {{ $d->role }} </td>
+                                                <td class="align-middle">
                                                     @if ($d->status == 1)
-                                                        <button class="btn btn-outline-success">Aktif</button>
+                                                        <span class="bg-success label">Aktif</span>
                                                     @else
-                                                        <button class="btn btn-outline-secondary">Tidak Aktif</button>
+                                                        <span class="bg-secondary label">Tidak Aktif</span>
                                                     @endif
                                                 </td>
                                                 <td>

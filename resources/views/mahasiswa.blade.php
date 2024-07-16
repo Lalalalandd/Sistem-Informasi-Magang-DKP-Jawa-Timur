@@ -43,7 +43,7 @@
                                                     @if ($d->status == 1)
                                                         <span class="bg-success label">Aktif</span>
                                                     @else
-                                                        <span class="bg-danger label">Tidak Aktif</span>
+                                                        <span class="bg-secondary label">Tidak Aktif</span>
                                                     @endif
                                                 </td>
                                                 <td>

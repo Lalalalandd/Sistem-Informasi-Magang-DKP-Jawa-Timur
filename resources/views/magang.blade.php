@@ -52,11 +52,11 @@
                                             use Carbon\Carbon;
                                             $x = 1;
                                         @endphp
-                                        {{-- @if ($magang->isEmpty())
+                                        @if ($magang->isEmpty())
                                             <tr>
                                                 <td colspan="11" class="text-center">Data pendaftar magang tidak ada</td>
                                             </tr>
-                                        @endif --}}
+                                        @endif
                                         @foreach ($magang as $d)
                                             <tr>
                                                 <th scope="row">{{ $x++ }}</th>
@@ -224,14 +224,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                </ul>
+                            <div class="card-footer clearfix" style="max-height: 65px !important; {{ $magang->hasPages() ? '' : 'height: 45px !important;' }}">
+                                {{ $magang->links('vendor.pagination.bootstrap-5') }}
                             </div>
                         </div>
                     </div>

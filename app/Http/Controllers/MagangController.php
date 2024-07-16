@@ -24,7 +24,7 @@ class MagangController extends Controller
                 $query->where('periode_magang_id', $request->periode_magang_id);
             });
         });
-        $users = $users->get();
+        $users = $users->paginate(10);
         return view('magang', [
             'tittle' => 'Magang',
             'magang' => $users,

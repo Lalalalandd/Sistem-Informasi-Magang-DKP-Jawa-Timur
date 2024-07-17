@@ -39,10 +39,10 @@
                                         </h4>
                                     </div>
 
-                                    <div class="col-6 border-end">
+                                    <div class="col-6  d-flex align-items-center border-end">
                                         <div class="row">
                                             <div class="col-12 mt-2">
-                                                <span class="text-muted ">Nama Ketua Kelompok</span>
+                                                <span class="text-muted">Nama Ketua Kelompok</span>
                                                 <h5 class="text-capitalize">{{ $user->name }}</h5>
                                             </div>
                                             @if ($user->detail['nama_kelompok_1'] != null)
@@ -59,14 +59,16 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-4 ml-2">
-                                        <div class="col-12 mt-2">
-                                            <span class="text-muted ">Universitas:</span>
-                                            <h5 class="text-capitalize">{{ $user->detail['universitas'] }}</h5>
-                                        </div>
-                                        <div class="col-12">
-                                            <span class="text-muted ">Fakultas:</span>
-                                            <h5 class="text-capitalize">{{ $user->detail['fakultas'] }}</h5>
+                                    <div class="col-4 ml-2 d-flex align-items-center">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <span class="text-muted ">Universitas:</span>
+                                                <h5 class="text-capitalize">{{ $user->detail['universitas'] }}</h5>
+                                            </div>
+                                            <div class="col-12">
+                                                <span class="text-muted ">Fakultas:</span>
+                                                <h5 class="text-capitalize">{{ $user->detail['fakultas'] }}</h5>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-6 mt-4">
@@ -180,6 +182,11 @@
                             </div>
                             <div class="card-body">
                                 <ul class="list-group">
+                                    @if ($tugas->isEmpty())
+                                        <li class="list-group-item">
+                                            <h6>Tugas belum ada</h6>
+                                        </li>
+                                    @endif
                                     @foreach ($tugas as $d)
                                         <li class="list-group-item">
                                             <div class="d-flex justify-content-between">

@@ -19,13 +19,13 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">No.</th>
-                                                    <th scope="col">Nama Ketua</th>
-                                                    <th scope="col">Universitas</th>
-                                                    <th scope="col">Tgl. Mulai</th>
-                                                    <th scope="col">Tgl. Selesai</th>
-                                                    <th scope="col">Penerimaan</th>
-                                                    <th scope="col">Aksi</th>
+                                                    <th class="text-center">No.</th>
+                                                    <th>Nama Ketua</th>
+                                                    <th>Universitas</th>
+                                                    <th>Tgl. Mulai</th>
+                                                    <th>Tgl. Selesai</th>
+                                                    <th>Penerimaan</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -41,22 +41,24 @@
                                                 @endif
                                                 @foreach ($magang as $d)
                                                     <tr>
-                                                        <th scope="row">
+                                                        <td scope="row" class="text-center align-middle">
                                                             <dt>{{ $x++ }}</dt>
-                                                        </th>
-                                                        <td>{{ $d->name }}</td>
-                                                        <td>{{ $d->detail['universitas'] }}</td>
-                                                        <td>{{ Carbon::parse($d->detail['tgl_mulai'])->format('d M Y') }}
                                                         </td>
-                                                        <td>{{ Carbon::parse($d->detail['tgl_selesai'])->format('d M Y') }}
+                                                        <td class="align-middle">{{ $d->name }}</td>
+                                                        <td class="align-middle">{{ $d->detail['universitas'] }}</td>
+                                                        <td class="align-middle">
+                                                            {{ Carbon::parse($d->detail['tgl_mulai'])->format('d M Y') }}
                                                         </td>
-                                                        <td>
+                                                        <td class="align-middle">
+                                                            {{ Carbon::parse($d->detail['tgl_selesai'])->format('d M Y') }}
+                                                        </td>
+                                                        <td class="align-middle">
                                                             @if ($d->detail['penerimaan'] === 'diterima')
-                                                                <span class="badge badge-success">Diterima</span>
+                                                                <span class="bg-success label">Diterima</span>
                                                             @elseif ($d->detail['penerimaan'] === 'ditolak')
-                                                                <span class="badge badge-danger">Ditolak</span>
+                                                                <span class="bg-danger label">Ditolak</span>
                                                             @elseif ($d->detail['penerimaan'] === 'diproses')
-                                                                <span class="badge badge-info">Diproses</span>
+                                                                <span class="bg-info label">Diproses</span>
                                                             @endif
                                                         </td>
                                                         <td>
@@ -160,19 +162,17 @@
                                                                                     <label for="status"
                                                                                         class="col-form-label">Penerimaan</label>
                                                                                     @if ($d->detail['penerimaan'] === 'diterima')
-                                                                                        <p><span
+                                                                                       <p> <span
                                                                                                 class="bg-success label">Diterima</span>
-                                                                                        </p>
-                                                                                        @elseif
-                                                                                        ($d->detail['penerimaan'] === 'diproses')
-                                                                                        <p><span class="bg-info label">Proses
+                                                                                            </p>
+                                                                                    @elseif($d->detail['penerimaan'] === 'diproses')
+                                                                                    <p><span class="bg-info label">Proses
                                                                                                 Pengajuan</span>
-                                                                                        </p>
-                                                                                        @elseif
-                                                                                        ($d->detail['penerimaan'] === 'ditolak')
-                                                                                        <p><span
+                                                                                            </p>
+                                                                                    @elseif($d->detail['penerimaan'] === 'ditolak')
+                                                                                    <p><span
                                                                                                 class="bg-danger label">Ditolak</span>
-                                                                                        </p>
+                                                                                            </p>
                                                                                     @endif
                                                                                 </div>
                                                                             </div>

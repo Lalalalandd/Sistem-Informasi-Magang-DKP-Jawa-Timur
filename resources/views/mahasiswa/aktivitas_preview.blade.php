@@ -62,10 +62,14 @@
                     <td>{{ $x++ }}</td> <!-- Menggunakan sintaks Blade untuk increment x -->
                     <td>{{ Carbon::parse($d->tanggal)->format('d M Y') }}</td>
                     <!-- Mengakses properti tanggal dari objek $d -->
+                    @if ($d->bukti != null)
                     <td>
                         <img src="{{ Storage::url($d->bukti) }}" alt=""
                             style="max-height: 80px; max-width: 80px;">
                     </td> <!-- Isi bagian ini sesuai kebutuhan -->
+                    @else
+                    <td>Tidak ada bukti</td>
+                    @endif
                     <td>{{ ucfirst($d->presensi) }}</td> <!-- Isi bagian ini sesuai kebutuhan -->
                     <td>{{ ucfirst($d->status) }}</td> <!-- Isi bagian ini sesuai kebutuhan -->
                 </tr>

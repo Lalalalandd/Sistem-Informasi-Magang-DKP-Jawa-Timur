@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->date('tanggal');
             $table->string('aktivitas');
-            $table->string('bukti');
+            $table->string('bukti')->nullable();
             $table->string('presensi');
             $table->string('status')->default('ditinjau');
             $table->timestamps();

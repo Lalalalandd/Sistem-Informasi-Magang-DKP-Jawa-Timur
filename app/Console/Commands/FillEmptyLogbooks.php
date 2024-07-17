@@ -34,7 +34,7 @@ class FillEmptyLogbooks extends Command
         foreach ($users as $user) {
             $logbook = $user->logbook->where('tanggal', $today)->first();
 
-            if ($logbook) {
+            if (!$logbook) {
                 Logbook::create([
                     'user_id' => $user->id,
                     'tanggal' => $today,

@@ -34,6 +34,7 @@
                                             <th>Tgl Diberikan</th>
                                             <th>Tgl Dikumpulkan</th>
                                             <th>Nama</th>
+                                            <th>Dinas</th>
                                             <th>Lampiran</th>
                                             <th>Status</th>
                                             <th>Aksi</th>
@@ -59,7 +60,8 @@
                                                     {{ Carbon::parse($d->tgl_diberikan)->format('d M Y') }}</td>
                                                 <td class="align-middle">
                                                     {{ Carbon::parse($d->tgl_dikumpulkan)->format('d M Y') }}</td>
-                                                <td class="align-middle">{{ $d->user['name'] }}</td>
+                                                <td class="align-middle text-truncate" style="max-width: 150px;">{{ $d->user['name'] }}</td>
+                                                <td class="align-middle text-truncate" style="max-width: 150px;">{{ $d->dinas['dinas'] }}</td>
                                                 <td class="align-middle">
                                                     @if ($d->lampiran != null)
                                                         <a href="{{ Storage::url($d->lampiran) }}" target="_blank">Lihat

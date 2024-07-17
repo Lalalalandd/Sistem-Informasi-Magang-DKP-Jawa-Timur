@@ -18,23 +18,23 @@ class TugasController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $tugas = Tugas::where('dinas_id', $user->dinas_id)
-        ->whereHas('user', function($query) {
+        $tugas = Tugas::whereHas('user', function($query) {
             $query->where('status', 1);
         })
         ->with(['user' => function($query) {
             $query->where('status', 1);
         }])
         ->paginate(10);
+
+        $user = User::where('role', 'mahasiswa')
+        ->where('status', 1)
+        ->with('dinas')
+        ->get();
         
         return view('tugas', [
             'tittle' => 'Tugas',
             'dinas' => Dinas::all(),
-            'user' => User::where('dinas_id', $user->dinas_id)
-                ->where('role', 'mahasiswa')
-                ->where('status', 1)
-                ->get(),
+            'user' => $user,
             'tugas' => $tugas
         ]);
     }

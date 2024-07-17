@@ -54,6 +54,9 @@ Route::delete('/dinas/{id}', [DinasController::class, 'destroy'])->middleware('a
 Route::put('/dinas/update/{id}', [DinasController::class, 'update'])->middleware('auth');
 Route::put('/tugas/kerjakan/{id}', [TugasController::class, 'kerjakan'])->middleware('auth');
 
+// routes/web.php
+Route::get('/logbook/preview/{id}', [LogbookController::class, 'preview'])->middleware('auth');
+// Route::get('/logbook/preview', [LogbookController::class, 'preview'])->middleware('auth');
 
 //Filter
 // Route::get('/magang', [MagangController::class, 'filterByPeriodeMagang'])->name('filter.magang')->middleware('auth');

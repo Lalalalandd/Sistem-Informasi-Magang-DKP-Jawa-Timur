@@ -43,6 +43,17 @@ class LogbookController extends Controller
         ]);
     }
 
+    public function preview($id)
+    {
+        $magang = Logbook::where("user_id", Auth::user()->id)->get();
+        $mahasiswa = Auth::user();
+
+        return view('mahasiswa.aktivitas_preview', [
+            'tittle' => 'Preview',
+            'magang' => $magang
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

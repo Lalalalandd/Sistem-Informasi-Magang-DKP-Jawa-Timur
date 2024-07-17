@@ -99,7 +99,7 @@
                     <div class="col-lg-6">
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title text-primary">
+                                <h3 class="card-title text-primary text-bold">
                                     Presensi
                                 </h3>
                             </div>
@@ -128,6 +128,9 @@
                     </div>
 
                     <div class="col-6 mt-3">
+                        @foreach ($magang as $d)
+                        @endforeach
+                        <form action="/logbook/preview/{{ $d->id }}" method="GET">
                         <button class="btn btn-outline-primary float-right">
                             <i>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
@@ -140,6 +143,7 @@
                                 </svg>
                             </i>
                             Download Logbook!</button>
+                        </form>
                         <button class="btn btn-outline-primary float-right mr-3" type="button" data-toggle="modal"
                             data-target="#tambahdata">
                             <i>

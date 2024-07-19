@@ -14,13 +14,17 @@ class PeriodeMagangController extends Controller
     public function index()
     {
         $periodes = PeriodeMagang::orderBy('id', 'desc')->paginate(10);
+        $today = now()->format('Y-m-d');
 
         foreach ($periodes as $periode) {
-            // Cek apakah jumlah pendaftaran sudah mencapai atau melebihi kuota
             if ($periode->pendaftaran()->count() >= $periode->kuota) {
-                $periode->status = 'penuh'; 
-                $periode->save();
+                $periode->status = 'penuh';
+            }elseif($today >= $periode->tanggal_selesai ){
+                $periode->status = 'tidak aktif'; 
+            }else{
+                $periode->status = 'aktif'; 
             }
+            $periode->save();
         }
 
         return view('periode', [

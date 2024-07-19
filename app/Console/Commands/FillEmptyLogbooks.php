@@ -29,7 +29,7 @@ class FillEmptyLogbooks extends Command
     public function handle()
     {
         $today = Carbon::today()->format('Y-m-d');
-        $users = User::all();
+        $users = User::where('role', 'mahasiswa')->get();
 
         foreach ($users as $user) {
             $logbook = $user->logbook->where('tanggal', $today)->first();

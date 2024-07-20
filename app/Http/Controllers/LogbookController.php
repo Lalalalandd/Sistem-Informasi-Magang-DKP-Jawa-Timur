@@ -118,6 +118,7 @@ class LogbookController extends Controller
             'aktivitas' => 'required',
             'bukti' => 'nullable|mimes:jpg,png|max:4096',
         ]);
+        $validatedData['status'] = 'ditinjau';
         $logbook->update($validatedData);
         if ($request->file('bukti')) {
             $buktiPath = $request->file('bukti')->store('bukti');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Logbook;
 use Illuminate\Http\Request;
 
 class AktivitasMhswController extends Controller
@@ -11,8 +13,13 @@ class AktivitasMhswController extends Controller
      */
     public function index()
     {
+       
+        $logbook = Logbook::where('status','ditinjau')
+        ->with('user')
+        ->paginate(10);
         return view('aktivitas_mhsw',[
-            'tittle' => 'Aktivitas Mahasiswa'
+            'tittle' => 'Aktivitas Mahasiswa',
+            'logbook' => $logbook
         ]);
     }
 

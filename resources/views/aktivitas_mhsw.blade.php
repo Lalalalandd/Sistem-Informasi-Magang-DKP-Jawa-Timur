@@ -5,14 +5,7 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-12">
-                        <a href="#" class="btn btn-outline-primary float-right" type="button" data-toggle="modal"
-                            data-target="#tambahdata"><i><svg xmlns="http://www.w3.org/2000/svg" width="1.2em"
-                                    height="1.2em" viewBox="0 0 32 32">
-                                    <path fill="currentColor"
-                                        d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3m0 2c6.087 0 11 4.913 11 11s-4.913 11-11 11S5 22.087 5 16S9.913 5 16 5m-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z" />
-                                </svg></i> Tambah Data</a>
-                    </div>
+                   
 
 
                 </div><!-- /.row -->
@@ -31,20 +24,29 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">No.</th>
-                                            <th>Sub Bagian</th>
+                                            <th>Nama</th>
+                                            <th>Tanggal</th>
+                                            <th>Aktivitas</th>
+                                            <th>Bukti</th>
+                                            <th>Presensi</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php
                                             $x = 1;
+                                            use Carbon\Carbon;
                                         @endphp
-                                        {{-- @foreach ($sub_bagian as $d)
+                                        @foreach ($logbook as $d)
                                             <tr>
                                                 <td scope="row" class="text-center align-middle">
                                                     <dt>{{ $x++ }}</dt>
                                                 </td>
-                                                <td class="align-middle"><?= $d->sub_bagian ?></td>
+                                                <td class="align-middle">{{ $d->user['name'] }}</td>
+                                                <td class="align-middle">{{ Carbon::parse($d->tanggal)->format('d M Y') }}</td>
+                                                <td class="align-middle">{{ $d->aktivitas }}</td>
+                                                <td class="align-middle">{{ $d->bukti }}</td>
+                                                <td class="align-middle">{{ $d->presensi }}</td>
                                                 <td>
                                                     <div class="d-flex d-inline">
                                                         <button class="btn btn-outline-warning mr-1" type="button"
@@ -112,14 +114,14 @@
                                                 <!-- /.modal-dialog -->
                                             </div>
                                             <!-- /.modal EDIT data -->
-                                        @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            {{-- <div class="card-footer clearfix"
-                                style="max-height: 65px !important; {{ $sub_bagian->hasPages() ? '' : 'height: 45px !important;' }}">
-                                {{ $sub_bagian->links('vendor.pagination.bootstrap-5') }}
-                            </div> --}}
+                            <div class="card-footer clearfix"
+                                style="max-height: 65px !important; {{ $logbook->hasPages() ? '' : 'height: 45px !important;' }}">
+                                {{ $logbook->links('vendor.pagination.bootstrap-5') }}
+                            </div>
                         </div>
                     </div>
                 </div>

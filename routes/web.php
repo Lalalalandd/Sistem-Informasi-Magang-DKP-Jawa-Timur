@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AktivitasMhswController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DinasController;
 use App\Http\Controllers\LoginController;
@@ -44,6 +45,7 @@ Route::resource('magang', MagangController::class)->middleware('auth');
 Route::resource('profil', ProfilController::class)->middleware('auth');
 Route::resource('logbook', LogbookController::class)->middleware('auth');
 Route::resource('periodemagang', PeriodeMagangController::class)->middleware('auth');
+Route::resource('aktivitas_mhsw', AktivitasMhswController::class)->middleware('auth');
 
 //Dynamic Custom Route
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -54,10 +56,7 @@ Route::delete('/dinas/{id}', [DinasController::class, 'destroy'])->middleware('a
 Route::put('/dinas/update/{id}', [DinasController::class, 'update'])->middleware('auth');
 Route::put('/tugas/kerjakan/{id}', [TugasController::class, 'kerjakan'])->middleware('auth');
 
-// routes/web.php
+// Preview
 Route::get('/logbook/preview/{id}', [LogbookController::class, 'preview'])->middleware('auth');
-// Route::get('/logbook/preview', [LogbookController::class, 'preview'])->middleware('auth');
 
-//Filter
-// Route::get('/magang', [MagangController::class, 'filterByPeriodeMagang'])->name('filter.magang')->middleware('auth');
 

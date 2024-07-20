@@ -72,6 +72,9 @@
                 </li>
             </ul>
         </li>
+        <li class="nav-header">
+            Magang
+        </li>
         <li class="nav-item">
             <a href="/magang" class="nav-link {{ $tittle === 'Magang' ? 'active' : '' }}">
                 <i class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
@@ -100,6 +103,22 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="/aktivitas_mhsw" class="nav-link {{ $tittle === 'Aktivitas Mahasiswa' ? 'active' : '' }}">
+                <i class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                        viewBox="0 0 24 24">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="1.5">
+                            <path d="M17 12h-2l-2 5l-2-10l-2 5H7" />
+                            <path
+                                d="M3 12c0-4.243 0-6.364 1.318-7.682C5.636 3 7.758 3 12 3c4.243 0 6.364 0 7.682 1.318C21 5.636 21 7.758 21 12c0 4.243 0 6.364-1.318 7.682C18.364 21 16.242 21 12 21c-4.243 0-6.364 0-7.682-1.318C3 18.364 3 16.242 3 12" />
+                        </g>
+                    </svg></i>
+                <p>
+                    Aktivitas Mahasiswa
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="tugas" class="nav-link {{ $tittle === 'Tugas' ? 'active' : '' }}">
                 <i class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                         viewBox="0 0 24 24">
@@ -111,6 +130,9 @@
                     Tugas
                 </p>
             </a>
+        </li>
+        <li class="nav-header">
+            Dinas
         </li>
         <li class="nav-item">
             <a href="dinas" class="nav-link {{ $tittle === 'Dinas' ? 'active' : '' }}">

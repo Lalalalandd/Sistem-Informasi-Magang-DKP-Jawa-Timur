@@ -60,7 +60,10 @@ class AktivitasMhswController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $logbook = Logbook::findOrFail($id);
+        $logbook->status = $request->input('status');
+        $logbook->save();
+        return redirect('/aktivitas_mhsw');
     }
 
     /**

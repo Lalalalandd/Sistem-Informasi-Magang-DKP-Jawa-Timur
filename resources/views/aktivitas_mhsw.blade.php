@@ -5,7 +5,7 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                   
+
 
 
                 </div><!-- /.row -->
@@ -29,6 +29,7 @@
                                             <th>Aktivitas</th>
                                             <th>Bukti</th>
                                             <th>Presensi</th>
+                                            <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -37,83 +38,66 @@
                                             $x = 1;
                                             use Carbon\Carbon;
                                         @endphp
+                                        @if ($logbook->isEmpty())
+                                            <td colspan="8" class="text-center">Data tidak ada.</td>
+                                        @endif
                                         @foreach ($logbook as $d)
                                             <tr>
                                                 <td scope="row" class="text-center align-middle">
                                                     <dt>{{ $x++ }}</dt>
                                                 </td>
                                                 <td class="align-middle">{{ $d->user['name'] }}</td>
-                                                <td class="align-middle">{{ Carbon::parse($d->tanggal)->format('d M Y') }}</td>
-                                                <td class="align-middle">{{ $d->aktivitas }}</td>
-                                                <td class="align-middle">{{ $d->bukti }}</td>
-                                                <td class="align-middle">{{ $d->presensi }}</td>
-                                                <td>
-                                                    <div class="d-flex d-inline">
-                                                        <button class="btn btn-outline-warning mr-1" type="button"
-                                                            title="Edit" data-toggle="modal"
-                                                            data-target="#editdata<?= $x ?>"><i><svg
-                                                                    xmlns="http://www.w3.org/2000/svg" width="1em"
-                                                                    height="1em" viewBox="0 0 512 512">
-                                                                    <path fill="currentColor"
-                                                                        d="m29.663 482.25l.087.087a24.847 24.847 0 0 0 17.612 7.342a25.178 25.178 0 0 0 8.1-1.345l142.006-48.172l272.5-272.5A88.832 88.832 0 0 0 344.334 42.039l-272.5 272.5l-48.168 142.002a24.844 24.844 0 0 0 5.997 25.709m337.3-417.584a56.832 56.832 0 0 1 80.371 80.373L411.5 180.873L331.127 100.5ZM99.744 331.884L308.5 123.127l80.373 80.373l-208.757 208.756l-121.634 41.262Z" />
-                                                                </svg></i></button>
-                                                        <form action="/subbagian/{{ $d->id }}" method="POST"
-                                                            class="d-inline">
-                                                            {{ csrf_field() }}
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="btn btn-outline-danger" type="submit"
-                                                                title="Hapus"
-                                                                onclick="return confirm('Apakah anda yakin?')"><i><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" width="1.2em"
-                                                                        height="1.2em" viewBox="0 0 24 24">
-                                                                        <path fill="none" stroke="currentColor"
-                                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                                            stroke-width="2"
-                                                                            d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
-                                                                    </svg></i></button>
-                                                        </form>
-                                                    </div>
+                                                <td class="align-middle">{{ Carbon::parse($d->tanggal)->format('d M Y') }}
                                                 </td>
+                                                <td class="align-middle">{{ $d->aktivitas }}</td>
+                                                @if ($d->bukti != null)
+                                                    @php
+                                                        $urlBukti = Storage::url($d->bukti);
+                                                    @endphp
+                                                    <td class="align-middle">
+                                                        <a href="#" data-toggle="modal" data-target="#buktiModal"
+                                                            data-url="{{ $urlBukti }}">Lihat bukti</a>
+                                                    </td>
+                                                @else
+                                                    <td class="align-middle">Tidak ada bukti</td>
+                                                @endif
+                                                <td class="align-middle">
+                                                    @if ($d->presensi === 'masuk')
+                                                        <span class="bg-success label">Masuk</span>
+                                                    @elseif ($d->presensi === 'izin')
+                                                        <span class="bg-info label">Izin</span>
+                                                    @elseif ($d->presensi === 'bolos')
+                                                        <span class="bg-danger label">Bolos</span>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle">
+                                                    @if ($d->status === 'ditinjau')
+                                                        <span class="btn btn-outline-info">Di tinjau</span>
+                                                    @elseif ($d->status === 'diterima')
+                                                        <span class="btn btn-outline-success">Di terima</span>
+                                                    @elseif ($d->status === 'ditolak')
+                                                        <span class="btn btn-outline-danger">Di tolak</span>
+                                                    @endif
+                                                </td>
+                                                <td class="d-flex d-inline">
+                                                    <form action="/aktivitas_mhsw/{{ $d->id }}" method="POST">
+                                                        @method('put')
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="status" value="diterima">
+                                                        <button class="btn btn-outline-success mr-1" type="submit"
+                                                            title="terima"><i class="fas fa-check"></i></button>
+                                                    </form>
+                                                    <form action="/aktivitas_mhsw/{{ $d->id }}" method="POST">
+                                                        @method('put')
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="status" value="ditolak">
+                                                        <button class="btn btn-outline-danger" type="submit"
+                                                            title="tolak"><i class="fas fa-times"></i>
+                                                        </button>
+                                                    </form>
 
+                                                </td>
                                             </tr>
-
-                                            <!-- /.modal EDIT data -->
-                                            <div class="modal fade" id="editdata<?= $x ?>">
-                                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Edit Data Sub Bagian</h4>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <form action="/subbagian/{{ $d->id }}" method="POST">
-                                                            @method('put')
-                                                            {{ csrf_field() }}
-                                                            <div class="modal-body">
-                                                                <div class="mb-3">
-                                                                    <label for="subbagian" class="col-form-label">Sub
-                                                                        Bagian:</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="subbagian" name="sub_bagian"
-                                                                        value="{{ $d->sub_bagian }}">
-                                                                </div>
-                                                            </div>
-                                                            <div class=" modal-footer justify-content-between">
-                                                                <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">Tutup</button>
-                                                                <button type="submit" class="btn btn-warning">Edit
-                                                                    Data</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <!-- /.modal-content -->
-                                                </div>
-                                                <!-- /.modal-dialog -->
-                                            </div>
-                                            <!-- /.modal EDIT data -->
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -131,31 +115,41 @@
         </div>
         <!-- /.content -->
 
-        <!-- /.modal tambah data -->
-        <div class="modal fade" id="tambahdata">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Tambah Sub Bagian</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="/subbagian" method="POST">
-                        {{ csrf_field() }}
-                        <div class="modal-body">
-                           
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary">Tambah Data</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal tambah data -->
+        
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="buktiModal" tabindex="-1" role="dialog" aria-labelledby="buktiModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buktiModalLabel">Lihat Bukti</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <!-- Konten modal akan diisi melalui JavaScript -->
+                    <img id="buktiImage" src="" alt="Bukti"
+                        style="max-width: 500px; max-height: 500px; width: auto; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('#buktiModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var url = button.data('url');
+                var modal = $(this);
+                modal.find('.modal-body img').attr('src', url);
+            });
+
+            $('#buktiModal').on('hidden.bs.modal', function(event) {
+                var modal = $(this);
+                modal.find('.modal-body img').attr('src', '');
+            });
+        });
+    </script>
 @endsection

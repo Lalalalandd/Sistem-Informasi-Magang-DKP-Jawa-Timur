@@ -46,7 +46,7 @@
                                     </thead>
                                     <tbody>
                                         @php
-                                            $x = 1;
+                                            $x = ($logbook->currentPage() - 1) * $logbook->perPage() + 1;
                                             use Carbon\Carbon;
                                         @endphp
                                         @if ($logbook->isEmpty())

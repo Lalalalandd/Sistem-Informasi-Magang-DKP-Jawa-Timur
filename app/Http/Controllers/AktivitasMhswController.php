@@ -11,15 +11,20 @@ class AktivitasMhswController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-       
-        $logbook = Logbook::where('status','ditinjau')
-        ->with('user')
-        ->paginate(10);
+        $query = Logbook::query();
+
+        // Filter berdasarkan status
+        $query->when($request->status, function ($query) use ($request) {
+            return $query->where('status', $request->status);
+        });
+
+        $logbook = $query->with('user')->paginate(7);
         return view('aktivitas_mhsw',[
             'tittle' => 'Aktivitas Mahasiswa',
-            'logbook' => $logbook
+            'logbook' => $logbook,
+            'status' => $request->status
         ]);
     }
 

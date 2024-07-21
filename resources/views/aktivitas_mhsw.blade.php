@@ -6,7 +6,18 @@
             <div class="container-fluid">
                 <div class="row mb-2">
 
-
+                    <form method="GET" action="/aktivitas_mhsw">
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="">Semua Status</option>
+                                <option value="ditinjau" {{ request('status') == 'ditinjau' ? 'selected' : '' }}>Ditinjau</option>
+                                <option value="diterima" {{ request('status') == 'diterima' ? 'selected' : '' }}>Diterima</option>
+                                <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </form>
 
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->

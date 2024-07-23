@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('periode_magang_id');
+            $table->unsignedBigInteger('sub_bagian_id');
+            $table->unsignedBigInteger('universitas_id');
             $table->string('nama_kelompok_1')->nullable();
             $table->string('nama_kelompok_2')->nullable();
-            $table->string('universitas');
             $table->string('fakultas');
             $table->string('prodi');
             $table->string('surat_pengantar');
@@ -27,10 +28,11 @@ return new class extends Migration
             $table->string('surat_keterangan')->nullable();
             $table->string('sertifkiat')->nullable();
             $table->string('penerimaan')->default('diproses');
-            $table->string('sub_bagian');
             $table->timestamps();
             
             $table->foreign('periode_magang_id')->references('id')->on('periode_magang')->onDelete('cascade');
+            $table->foreign('sub_bagian_id')->references('id')->on('sub_bagian')->onDelete('cascade');
+            $table->foreign('universitas_id')->references('id')->on('universitas')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

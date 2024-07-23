@@ -44,6 +44,11 @@
                                             $x = 1;
                                             use Carbon\Carbon;
                                         @endphp
+                                        @if ($periodes->isEmpty())
+                                            <td colspan="7" class="text-center">
+                                                Periode masih belum ada.
+                                            </td>
+                                        @endif
                                         @foreach ($periodes as $d)
                                             <tr>
                                                 <td scope="row" class="text-center align-middle">

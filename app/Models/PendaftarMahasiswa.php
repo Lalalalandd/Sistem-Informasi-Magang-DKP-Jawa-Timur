@@ -13,6 +13,8 @@ class PendaftarMahasiswa extends Model
     protected $fillable = [
         'user_id',
         'periode_magang_id',
+        'sub_bagian_id',
+        'universitas_id',
         'nama_kelompok_1',
         'nama_kelompok_2',
         'universitas',
@@ -25,7 +27,6 @@ class PendaftarMahasiswa extends Model
         'tgl_mulai',
         'tgl_selesai',
         'penerimaan',
-        'sub_bagian',
     ];
     public function user()
     {
@@ -35,7 +36,13 @@ class PendaftarMahasiswa extends Model
     {
         return $this->belongsTo(PeriodeMagang::class);
     }
+    public function sub_bagian()
+    {
+        return $this->belongsTo(Sub_Bagian::class);
+    }
+    public function universitas()
+    {
+        return $this->belongsTo(Universitas::class);
+    }
 
-    
-    
 }

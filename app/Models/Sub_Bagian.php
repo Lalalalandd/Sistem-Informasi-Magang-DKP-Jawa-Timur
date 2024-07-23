@@ -14,4 +14,9 @@ class Sub_Bagian extends Model
         'sub_bagian'
     ];
 
+    public function pendaftarMahasiswa()
+    {
+        return $this->hasOne(PendaftarMahasiswa::class, 'sub_bagian_id');
+    }
+
 }

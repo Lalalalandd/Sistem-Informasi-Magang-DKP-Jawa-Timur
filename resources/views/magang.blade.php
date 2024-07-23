@@ -72,7 +72,7 @@
                                                     <dt>{{ $x++ }}</dt>
                                                     </th>
                                                 <td class="align-middle">{{ $d->name }}</td>
-                                                <td class="align-middle">{{ $d->detail['universitas'] }}</td>
+                                                <td class="align-middle">{{ $d->detail['universitas']->universitas }}</td>
                                                 <td class="align-middle">
                                                     {{ Carbon::parse($d->detail['tgl_mulai'])->format('d M Y') }}</td>
                                                 <td class="align-middle">
@@ -123,7 +123,7 @@
                                                                     <div class="col-lg-6">
                                                                         <label for="name"
                                                                             class="col-form-label">Universitas</label>
-                                                                        <p> {{ $d->detail->universitas }}</p>
+                                                                        <p> {{ $d->detail->universitas->universitas }}</p>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <label for="email" class="col-form-label">Program
@@ -150,7 +150,7 @@
                                                                     <div class="col-lg-6">
                                                                         <label for="email" class="col-form-label">Sub
                                                                             Bagian</label>
-                                                                        <p>{{ $d->detail->sub_bagian }}</p>
+                                                                        <p>{{ $d->detail->sub_bagian->sub_bagian }}</p>
                                                                     </div>
                                                                     @if ($d->detail->surat_balasan == null)
                                                                         <div class="col-lg-12">

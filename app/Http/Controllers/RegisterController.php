@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Dinas;
 use App\Models\Sub_Bagian;
-use App\Models\PendaftarMahasiswa;
-use App\Models\PeriodeMagang;
+use App\Models\Universitas;
 use Illuminate\Http\Request;
+use App\Models\PeriodeMagang;
+use App\Models\PendaftarMahasiswa;
 use Illuminate\Validation\Rules\File;
 
 class RegisterController extends Controller
@@ -17,7 +18,8 @@ class RegisterController extends Controller
         return view('register', [
             'tittle' => 'Register',
             'dinas' => Dinas::all(),
-            'sub_bagian' => Sub_Bagian::all()
+            'sub_bagian' => Sub_Bagian::all(),
+            'univ' => Universitas::all()
         ]);
     }
 
@@ -41,7 +43,7 @@ class RegisterController extends Controller
         $validatedDataPendaftar = $request->validate([
             'nama_kelompok_1' => 'max:255',
             'nama_kelompok_2' => 'max:255',
-            'universitas' => 'required',
+            'universitas_id' => 'required',
             'fakultas' => 'required',
             'prodi' => 'required',
             'surat_pengantar' => [
@@ -51,7 +53,7 @@ class RegisterController extends Controller
             ],
             'tgl_mulai' => 'required',
             'tgl_selesai' => 'required',
-            'sub_bagian' => 'required',
+            'sub_bagian_id' => 'required',
         ]);
 
        

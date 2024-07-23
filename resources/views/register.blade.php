@@ -157,12 +157,19 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-group mb-3 ">
-                                            <label for="">Universitas</label>
-                                            <input type="text"
-                                                class="form-control p @error('universitas') is-invalid @enderror"
-                                                id="universitas" name="universitas" placeholder="Masukkan universitas"
-                                                value="{{ old('universitas') }}">
+                                        <div class="form-group">
+                                            <label for="universitas">Universitas</label>
+                                            <select
+                                                class="form-control select2 select2-purple p @error('universitas') is-invalid @enderror"
+                                                data-dropdown-css-class="select2-purple" style="width: 100%;"
+                                                name="universitas_id" id="universitas_id">
+                                                <option selected disabled>Pilih Universitas</option>
+                                                @foreach ($univ as $option)
+                                                    <option value="{{ $option->id }}">
+                                                        {{ $option->universitas }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                             @error('universitas')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -232,10 +239,10 @@
                                             <select
                                                 class="form-control select2 select2-purple p @error('sub_bagian') is-invalid @enderror"
                                                 data-dropdown-css-class="select2-purple" style="width: 100%;"
-                                                name="sub_bagian" id="sub_bagian">
+                                                name="sub_bagian_id" id="sub_bagian_id">
                                                 <option selected disabled>Pilih Sub Bagian</option>
                                                 @foreach ($sub_bagian as $option)
-                                                    <option value="{{ $option->sub_bagian }}">
+                                                    <option value="{{ $option->id }}">
                                                         {{ $option->sub_bagian }}
                                                     </option>
                                                 @endforeach

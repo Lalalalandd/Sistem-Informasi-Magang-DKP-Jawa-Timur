@@ -63,7 +63,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <span class="text-muted ">Universitas:</span>
-                                                <h5 class="text-capitalize">{{ $user->detail['universitas'] }}</h5>
+                                                <h5 class="text-capitalize">{{ $user->detail['universitas']->universitas }}</h5>
                                             </div>
                                             <div class="col-12">
                                                 <span class="text-muted ">Fakultas:</span>
@@ -232,7 +232,7 @@
                                                 <h6 style="color:#2574EA;">Sub Bagian</h6>
                                             </div>
                                             <div class="col-12">
-                                                <h5>{{ $user->detail['sub_bagian'] }}</h5>
+                                                <h5>{{ $user->detail['sub_bagian']->sub_bagian }}</h5>
                                             </div>
                                         </div>
                                     </div>

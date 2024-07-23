@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="">Universitas:</label>
-                                <span class="">{{ $user->detail['universitas'] }}</span>
+                                <span class="">{{ $user->detail['universitas']->universitas }}</span>
                             </div>
                             <div class="col-sm-6">
                                 <label for="">Periode Magang:</label>

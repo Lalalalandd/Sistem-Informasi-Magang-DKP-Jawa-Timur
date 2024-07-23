@@ -37,7 +37,7 @@
                                     </thead>
                                     <tbody>
                                         @php
-                                            $x = 1;
+                                            $x = ($universitas->currentPage() - 1) * $universitas->perPage() + 1;
                                         @endphp
                                         @foreach ($universitas as $d)
                                             <tr>

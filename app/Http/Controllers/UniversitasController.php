@@ -13,7 +13,11 @@ class UniversitasController extends Controller
      */
     public function index()
     {
-        //
+        $univ = Universitas::paginate(10);
+        return view('universitas' ,[
+            'tittle' => 'Universitas',
+            'universitas' => $univ
+        ]);
     }
 
     /**

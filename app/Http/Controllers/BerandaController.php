@@ -43,10 +43,11 @@ class BerandaController extends Controller
 
         // Mengambil 10 universitas terbanyak berdasarkan jumlah mahasiswa
         $universitasTerbanyak = User::join('pendaftar_mahasiswa', 'users.id', '=', 'pendaftar_mahasiswa.user_id')
-            ->select('pendaftar_mahasiswa.universitas', DB::raw('count(*) as jumlah'))
+            ->join('universitas', 'pendaftar_mahasiswa.universitas_id', '=', 'universitas.id')
+            ->select('universitas.universitas as universitas', DB::raw('count(*) as jumlah'))
             ->where('users.role', 'mahasiswa')
             ->where('pendaftar_mahasiswa.penerimaan', 'diterima')
-            ->groupBy('pendaftar_mahasiswa.universitas')
+            ->groupBy('universitas.universitas')
             ->orderBy('jumlah', 'desc')
             ->take(10)
             ->get();

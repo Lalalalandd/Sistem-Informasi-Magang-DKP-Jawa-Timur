@@ -15,7 +15,9 @@ use App\Http\Controllers\PeriodeMagangController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubBagianController;
+use App\Http\Controllers\UniversitasController;
 use App\Http\Middleware\CheckLogbookDate;
+use App\Models\Universitas;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -46,6 +48,7 @@ Route::resource('profil', ProfilController::class)->middleware('auth');
 Route::resource('logbook', LogbookController::class)->middleware('auth');
 Route::resource('periodemagang', PeriodeMagangController::class)->middleware('auth');
 Route::resource('aktivitas_mhsw', AktivitasMhswController::class)->middleware('auth');
+Route::resource('universitas', UniversitasController::class)->middleware('auth');
 
 //Dynamic Custom Route
 Route::post('/login', [LoginController::class, 'authenticate']);

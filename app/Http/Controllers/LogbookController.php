@@ -20,6 +20,7 @@ class LogbookController extends Controller
     {
         $mahasiswa = Auth::user();
         $magang = logbook::where('user_id', $mahasiswa->id)->paginate(10);
+       
 
         //Menghitung jumlah presesni
         $masuk = $magang->where('presensi', 'masuk')->count();

@@ -39,7 +39,7 @@
                                         <b>Email</b> <a class="text-muted float-right">{{ $user->email }}</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>Universitas</b> <a class="text-muted float-right">{{ $user->detail['universitas'] }}</a>
+                                        <b>Universitas</b> <a class="text-muted float-right">{{ $user->detail['universitas']->universitas }}</a>
                                     </li>
                                     <li class="list-group-item">
                                         <b>Fakultas</b> <a class="text-muted float-right">{{ $user->detail['fakultas'] }}</a>

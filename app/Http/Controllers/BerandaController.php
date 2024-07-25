@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Dinas;
+use App\Models\PendaftarMahasiswa;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -58,10 +59,18 @@ class BerandaController extends Controller
             return $item;
         });
 
+        $magangaktif = PendaftarMahasiswa::where('penerimaan', 'diterima')
+        ->count();
+
+        $maganglulus = PendaftarMahasiswa::where('penerimaan', 'lulus')
+        ->count();
+
         return view('beranda', [
             'tittle' => 'Beranda',
             'universitasTerbanyak' => $universitasTerbanyak,
-            'total' => $totalMahasiswaDiterima
+            'total' => $totalMahasiswaDiterima,
+            'magangaktif' => $magangaktif,
+            'maganglulus' => $maganglulus
         ]);
     }
 

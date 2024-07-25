@@ -29,7 +29,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <h5 class="" style="color:#2574EA;">
-                                            Universitas/instansi terbanyak
+                                            Universitas terbanyak
                                         </h5>
                                     </div>
                                     <div class="col-12 mt-3">
@@ -42,9 +42,11 @@
                                                         <td style="width: 70%;">
                                                             <div class="progress mb-3">
                                                                 <div class="progress-bar bg-primary" role="progressbar"
-                                                                    aria-valuenow="{{ $univ->jumlah }}" aria-valuemin="0" aria-valuemax="{{ $total }}"
+                                                                    aria-valuenow="{{ $univ->jumlah }}" aria-valuemin="0"
+                                                                    aria-valuemax="{{ $total }}"
                                                                     style="width: {{ $univ->persentase }}%">
-                                                                    <span class="sr-only">{{ $univ->jumlah }}% Complete</span>
+                                                                    <span class="sr-only">{{ $univ->jumlah }}%
+                                                                        Complete</span>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -52,10 +54,14 @@
                                                     </tr>
                                                 @endforeach
                                                 <tr class="text-center">
-                                                    <td colspan="2"><dt>Total</dt></td>
-                                                    <td><dt>{{ $total }}</dt></td>
+                                                    <td colspan="2">
+                                                        <dt>Total</dt>
+                                                    </td>
+                                                    <td>
+                                                        <dt>{{ $total }}</dt>
+                                                    </td>
                                                 </tr>
-                                            
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -65,9 +71,34 @@
                         </div>
                     </div>
 
+                    <div class="col-5 d-flex">
+                        <div class="row">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-primary"><i class="far fa-user"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Mahasiswa Magang Aktif</span>
+                                    <span class="info-box-number">{{ $magangaktif }}</span>
+                                </div>
+                            </div>
+                            <div class="info-box">
+                                <span class="info-box-icon bg-success"><i class="far fa-user"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Mahasiswa Magang Lulus</span>
+                                    <span class="info-box-number">{{ $maganglulus }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+
+                    </div>
+
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
 @endsection
 

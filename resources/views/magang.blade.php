@@ -158,12 +158,10 @@
                                                                                 <label for="exampleInputFile">Surat
                                                                                     Balasan</label>
                                                                                 <div class="input-group">
-                                                                                    
                                                                                         <input type="file"
                                                                                             class="form-control"
                                                                                             id="exampleInputFile"
                                                                                             name="surat_balasan">
-                                                                                        
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -188,6 +186,29 @@
                                                                             </div>
                                                                         </div>
                                                                     @endif
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputFile">Surat
+                                                                                Keterangan</label>
+                                                                            <div class="input-group">
+                                                                                    <input type="file"
+                                                                                        class="form-control"
+                                                                                        id="exampleInputFile"
+                                                                                        name="surat_balasan">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputFile">Sertifikat Magang</label>
+                                                                            <div class="input-group">
+                                                                                    <input type="file"
+                                                                                        class="form-control"
+                                                                                        id="exampleInputFile"
+                                                                                        name="surat_balasan">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
 
                                                                     <div class="col-lg-12">
                                                                         <label for="status"

@@ -77,8 +77,19 @@ class BerandaController extends Controller
 
     public function index_pegawai()
     {
+        $dinas_id = auth()->user()->dinas_id;
+        $magangaktif = User::where('status', 1)
+        ->where('role', 'mahasiswa')
+        ->where('dinas_id', $dinas_id)
+        ->count();
+
+        $maganglulus = PendaftarMahasiswa::where('penerimaan', 'lulus')
+        ->count();
+        
         return view('pegawai.beranda_pegawai', [
-            'tittle' => 'Beranda'
+            'tittle' => 'Beranda',
+            'magangaktif' => $magangaktif,
+            'maganglulus' => $maganglulus
         ]);
     }
 

@@ -246,7 +246,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/tugas" method="POST" enctype="multipart/form-data">
+                    <form action="/tugas/tambah" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="row">

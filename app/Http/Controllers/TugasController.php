@@ -107,6 +107,29 @@ class TugasController extends Controller
         return redirect('/tugas')->with('success', 'Data tugas berhasil ditambahkan.');
     }
 
+    public function tambah(Request $request)
+    {   
+        $user = Auth::user();
+        $validatedData = $request->validate([
+            'tugas' => 'required|max:255',
+            'dinas_id' => 'required',
+            'user_id' => 'required',
+            'tgl_diberikan' => 'required',
+            'tgl_dikumpulkan' => 'required',
+            'lampiran' => 'mimes:jpg,png,doc,docx,pdf|max:4096',
+            'status' => 'required',
+        ]);
+
+        if($request->file('lampiran')){
+            $lampiranPath = $request->file('lampiran')->store('lampiran');
+            $validatedData['lampiran'] = $lampiranPath;
+        }
+
+        $validatedData['dinas_id'] = $user->dinas_id;
+        Tugas::create($validatedData);
+        return redirect('/tugas_pegawai')->with('success', 'Data tugas berhasil ditambahkan.');
+    }
+
     /**
      * Display the specified resource.
      */

@@ -186,7 +186,7 @@
                                                                             </div>
                                                                         </div>
                                                                     @endif
-                                                                    <div class="col-lg-12">
+                                                                    {{-- <div class="col-lg-12">
                                                                         <div class="form-group">
                                                                             <label for="exampleInputFile">Surat
                                                                                 Keterangan</label>
@@ -208,7 +208,7 @@
                                                                                         name="surat_balasan">
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                    </div> --}}
 
                                                                     <div class="col-lg-12">
                                                                         <label for="status"

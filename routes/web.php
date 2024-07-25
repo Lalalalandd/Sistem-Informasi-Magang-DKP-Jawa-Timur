@@ -58,6 +58,7 @@ Route::post('/dinas/store', [DinasController::class, 'store'])->middleware('auth
 Route::delete('/dinas/{id}', [DinasController::class, 'destroy'])->middleware('auth');
 Route::put('/dinas/update/{id}', [DinasController::class, 'update'])->middleware('auth');
 Route::put('/tugas/kerjakan/{id}', [TugasController::class, 'kerjakan'])->middleware('auth');
+Route::post('/tugas/tambah', [TugasController::class, 'tambah'])->middleware('auth');
 
 // Preview
 Route::get('/logbook/preview/{id}', [LogbookController::class, 'preview'])->middleware('auth');

@@ -16,11 +16,11 @@ class ProfilController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $dinas =  Dinas::where('id', $user->dinas_id)->first();
+        
         return view("/profil", [
             "tittle" => "Profil",
             "user" => $user,
-            "dinas" => $dinas
+            "dinas" => $user->dinas
         ]);
     }
 

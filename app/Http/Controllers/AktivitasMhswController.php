@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Logbook;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AktivitasMhswController extends Controller
 {
@@ -19,9 +20,29 @@ class AktivitasMhswController extends Controller
         $query->when($request->status, function ($query) use ($request) {
             return $query->where('status', $request->status);
         });
-
-        $logbook = $query->with('user')->paginate(7);
+        $logbook = $query->with('user')
+        ->paginate(7);
         return view('aktivitas_mhsw',[
+            'tittle' => 'Aktivitas Mahasiswa',
+            'logbook' => $logbook,
+            'status' => $request->status
+        ]);
+    }
+
+    public function index_pegawai(Request $request){
+        $query = Logbook::query();
+
+        // Filter berdasarkan status
+        $query->when($request->status, function ($query) use ($request) {
+            return $query->where('status', $request->status);
+        });
+
+        $logbook = $query->with('user')
+        ->whereHas('user', function ($query) {
+            $query->where('dinas_id', Auth::user()->dinas_id);
+        })
+        ->paginate(7);
+        return view('pegawai.aktivitas_mhsw_pegawai',[
             'tittle' => 'Aktivitas Mahasiswa',
             'logbook' => $logbook,
             'status' => $request->status

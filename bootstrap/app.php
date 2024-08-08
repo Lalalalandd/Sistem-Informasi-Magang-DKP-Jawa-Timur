@@ -15,7 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // $middleware->append(CheckLogbookDate::class);
         $middleware->alias([
-            'CheckLogbookDate' => \App\Http\Middleware\CheckLogbookDate::class,
+            'checkRole' => \App\Http\Middleware\checkRole::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

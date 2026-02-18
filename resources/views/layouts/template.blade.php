@@ -4,89 +4,137 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $tittle }} • CIIS</title>
+    <title>{{ $tittle ?? 'CIIS' }} • CIIS</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Twitter Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="template/plugins/fontawesome-free/css/all.min.css">
-    <!-- IonIcons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="template/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="template/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="template/plugins/toastr/toastr.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="template/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="template/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-    <link rel="stylesheet" href="template/dist/css/adminlte.min.css?v=3.2.0">
+    <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <style>
-        * {
-            font-family: "Ubuntu", sans-serif;
-
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --sidebar-bg: #1e293b;
+            --sidebar-hover: #334155;
+            --light-bg: #f3f4f6;
         }
 
-        .sidebar-dark-primary {
-            background-color: #212833;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
         }
 
-        [class*="sidebar-dark"] .user-panel {
-            border-bottom: 0px solid #4f5962;
-        }
-
-        .gambar {
-            float: none !important;
-            margin-left: 28% !important;
-        }
-
-        .card {
-            border-radius: 8px;
-        }
-
-        .p:hover {
-            background-color: #c72f3e !important;
+        /* Sidebar Styling */
+        .main-sidebar {
+            background-color: var(--sidebar-bg) !important;
+            box-shadow: none !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .brand-link {
+            background-color: transparent !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+            padding: 20px 15px !important;
+        }
+
+        .brand-text {
+            color: white !important;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-sidebar .nav-item .nav-link {
+            color: #cbd5e1 !important;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+        }
+
+        .nav-sidebar .nav-item .nav-link:hover,
+        .nav-sidebar .nav-item .nav-link.active {
+            background-color: var(--primary-color) !important;
+            color: white !important;
+            box-shadow: 0 4px 6px -1px rgba(13, 110, 253, 0.2);
+        }
+
+        .nav-sidebar .nav-icon {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Navbar Styling */
+        .main-header {
             border-bottom: none !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            background-color: white !important;
+            padding: 10px 0;
         }
 
-        .pengguna {
-            border: #f4f6f9 1px solid;
+        .navbar-nav .nav-link {
+            color: #64748b !important;
+            font-weight: 500;
         }
 
-        .btn {
-            border-radius: 11px !important;
-        }
-
+        /* Content Styling */
         .content-wrapper {
-            background-color: rgb(252, 252, 252) !important;
+            background-color: var(--light-bg) !important;
+            padding-top: 20px;
         }
 
-        .label {
-            padding: 8px;
-            border-radius: 6px;
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-bottom: 20px;
         }
 
-        .profile-user-img {
-            width: 150px;
-            height: 150px;
+        .card-header {
+            background-color: transparent;
+            border-bottom: 1px solid #f1f5f9;
+            padding: 20px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 8px;
+            padding: 8px 16px;
+        }
+
+        .user-panel img {
             object-fit: cover;
         }
 
-        .vertical-line {
-            border-left: 2px solid #000; /* Mengatur garis */
-            height: 100%; /* Mengatur tinggi garis */
-            margin: 0 15px; /* Mengatur jarak */
+        .sidebar-user-info {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 15px;
         }
-    </style>
+
+        .sidebar-user-name {
+            color: white;
+            font-weight: 600;
+            display: block;
+        }
+
+        .sidebar-user-role {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 
@@ -96,158 +144,134 @@
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <h4 class="ml-2">{{ $tittle }}</h4>
+                    <span class="nav-link text-dark fw-bold">{{ $tittle ?? 'Dashboard' }}</span>
                 </li>
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Notifications Dropdown Menu -->
-                {{-- <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li> --}}
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                @php
-                    $image = auth()->user()->image;
-                @endphp
-                <li class="nav-item dropdown user-menu">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        @if (auth()->user()->image == null)
-                            <img src="template/img/user-image.png" class="user-image img-circle elevation-1 pengguna"
-                                alt="User Image">
+                {{-- User Dropdown --}}
+                @auth
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        @if (auth()->user()->image)
+                        <img src="{{ asset('storage/' . auth()->user()->image) }}" class="rounded-circle me-2"
+                            alt="User Image" style="width: 30px; height: 30px; object-fit: cover;">
                         @else
-                            <img src="{{ asset('storage/' . $image) }}" class="user-image img-circle elevation-1"
-                                alt="User Image">
+                        <img src="{{ asset('template/img/user-image.png') }}" class="rounded-circle me-2"
+                            alt="User Image" style="width: 30px; height: 30px;">
                         @endif
-                        <span class="d-none d-md-inline"> {{ auth()->user()->name }}</span>
+                        <span class="d-none d-md-inline text-dark">{{ auth()->user()->name }}</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <!-- User image -->
-                        <li class="user-header bg-primary">
-                            @if (auth()->user()->image == null)
-                                <img src="template/img/user-image.png" class="img-circle elevation-2" alt="User Image">
-                            @else
-                                <img src="{{ asset('storage/' . $image) }}" class="img-circle elevation-2"
-                                    alt="User Image">
-                            @endif
-                            <p>
-                                {{ auth()->user()->name }}
-                                <small> {{ auth()->user()->dinas['dinas'] }}</small>
-                            </p>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0"
+                        style="border-radius: 12px; padding: 10px;">
+                        <li>
+                            <div class="px-3 py-2">
+                                <p class="mb-0 fw-bold">{{ auth()->user()->name }}</p>
+                                <small class="text-muted">{{ auth()->user()->role }}</small>
+                            </div>
                         </li>
-                        <!-- Menu Body -->
-                        <!-- Menu Footer-->
-                        <li class="user-footer d-flex justify-content-between">
-                            <a href="/profil" class="btn btn-default">Profile</a>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item rounded" href="/profil"><i
+                                    class="fas fa-user me-2 text-secondary"></i> Profile</a></li>
+                        <li>
                             <form action="/logout" method="POST">
-                                {{ csrf_field() }}
-                                <button type="submit" class="btn btn-outline-danger btn-flat"
-                                    style="margin-left: 88px;">Sign out</button>
+                                @csrf
+                                <button type="submit" class="dropdown-item rounded text-danger"><i
+                                        class="fas fa-sign-out-alt me-2"></i> Logout</button>
                             </form>
                         </li>
                     </ul>
                 </li>
+                @endauth
             </ul>
         </nav>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-3">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="" class="brand-link" style="background-color: #212833">
-                <img src="template/dist/img/logo.png" alt="CIIS Logo" class="brand-image gambar">
+            <a href="/" class="brand-link">
+                <img src="{{ asset('template/img/dkp.png') }}" alt="CIIS Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8; background: white;">
+                <span class="brand-text font-weight-light">CIIS</span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
+                <!-- Sidebar User (Optional) -->
+                @auth
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        @if (auth()->user()->image)
+                        <img src="{{ asset('storage/' . auth()->user()->image) }}" class="img-circle elevation-2"
+                            alt="User Image" style="width: 34px; height: 34px; object-fit: cover;">
+                        @else
+                        <img src="{{ asset('template/img/user-image.png') }}" class="img-circle elevation-2"
+                            alt="User Image">
+                        @endif
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+                    </div>
+                </div>
+                @endauth
 
                 <!-- Sidebar Menu -->
-                @if (auth()->user()->role == 'admin')
-                    @include('layouts.adminsidebar')
-                @elseif(auth()->user()->role == 'pegawai')
-                    @include('layouts.pegawaisidebar')
-                @elseif(auth()->user()->role == 'mahasiswa')
-                    @include('layouts.mahasiswasidebar')
-                @endif
-
-
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        @if (auth()->check())
+                        @if (auth()->user()->role == 'admin')
+                        @include('layouts.adminsidebar')
+                        @elseif(auth()->user()->role == 'pegawai')
+                        @include('layouts.pegawaisidebar')
+                        @elseif(auth()->user()->role == 'mahasiswa')
+                        @include('layouts.mahasiswasidebar')
+                        @endif
+                        @endif
+                    </ul>
+                </nav>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
 
-
-
         @yield('content')
 
 
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
-
-        <!-- Main Footer -->
-        {{-- <footer class="main-footer small">
-    <strong>Copyright &copy; 2024 <a href="beranda">CIIS</a>.</strong>
-    All rights reserved.
-   
-  </footer> --}}
     </div>
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
-    <script src="template/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->
-    <script src="template/dist/js/adminlte.js"></script>
-    <!-- bs-custom-file-input -->
-    <script src="template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-    <!-- OPTIONAL SCRIPTS -->
-    <script src="template/plugins/select2/js/select2.full.min.js"></script>
-    <script src="template/plugins/chart.js/Chart.min.js"></script>
-    <script src="template/plugins/toastr/toastr.min.js"></script>
+    <script src="{{ asset('template/dist/js/adminlte.js') }}"></script>
+    <!-- Toastr -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     @stack('scripts')
     <script>
         toastr.options = {
-        "closeButton": true,
-        "progressBar": true,
-        "positionClass": "toast-top-right",
-    };
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
     </script>
+</body>
 
 </html>

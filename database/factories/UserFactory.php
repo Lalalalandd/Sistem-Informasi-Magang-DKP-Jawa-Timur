@@ -28,6 +28,10 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'image' => 'profile.jpg',
+            'role' => fake()->randomElement(['admin', 'pegawai', 'mahasiswa']),
+            'status' => fake()->boolean(),
+            'dinas_id' => \App\Models\Dinas::factory(),
             'remember_token' => Str::random(10),
         ];
     }
